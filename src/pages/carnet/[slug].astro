@@ -1,0 +1,361 @@
+---
+// ============================================================
+// Page dynamique d'un article du Carnet
+// Astro génère une page par fichier .md de src/content/carnet/
+// ============================================================
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+// Génère une route par article publié (les drafts sont exclus)
+export async function getStaticPaths() {
+  const articles = await getCollection("carnet", ({ data }) => !data.draft);
+  return articles.map((article) => ({
+    params: { slug: article.id.replace(/\.md$/, "") },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+
+const dateFr = article.data.date.toLocaleDateString("fr-FR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
+// Liste tous les autres articles pour proposer "Lire aussi" en bas
+const tous = await getCollection("carnet", ({ data }) => !data.draft);
+const autres = tous
+  .filter((a) => a.id !== article.id)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2);
+---
+
+<BaseLayout
+  title={`${article.data.titre} — Carnet de François Valcour`}
+  description={article.data.extrait}
+  current="/carnet"
+>
+  <article class="article-page">
+    <!-- ===== EN-TÊTE ARTICLE ===== -->
+    <header class="article-header">
+      <a href="/carnet" class="retour">← Retour au Carnet</a>
+      <div class="meta-top">
+        <span class="rubrique">{article.data.rubrique}</span>
+        <span class="separateur">·</span>
+        <time>{dateFr}</time>
+      </div>
+      <h1>{article.data.titre}</h1>
+      <p class="extrait-lead">{article.data.extrait}</p>
+      <span class="filet"></span>
+    </header>
+
+    {article.data.image && (
+      <figure class="article-image">
+        <div
+          class="article-image-bg"
+          style={`background-image: url('${article.data.image}'); background-position: ${article.data.imagePos};`}
+        ></div>
+      </figure>
+    )}
+
+    <!-- ===== CORPS ARTICLE ===== -->
+    <div class="article-body">
+      <Content />
+    </div>
+
+    <!-- ===== SIGNATURE ===== -->
+    <div class="signature">
+      <span class="signature-tirets">—</span>
+      <span class="signature-nom">François Valcour</span>
+    </div>
+
+    <!-- ===== COMMENTAIRES (Giscus) ===== -->
+    <section class="commentaires">
+      <h2>Vos retours</h2>
+      <p class="commentaires-intro">
+        Les discussions sont propulsées par <a href="https://giscus.app" target="_blank" rel="noopener">Giscus</a>
+        (commentaires via GitHub). Pour commenter, il vous faut un compte GitHub gratuit.
+      </p>
+      <div id="giscus-placeholder">
+        <em>Les commentaires Giscus seront branchés au mouvement 4, une fois le dépôt GitHub créé.</em>
+      </div>
+    </section>
+
+    <!-- ===== AUTRES ARTICLES ===== -->
+    {autres.length > 0 && (
+      <aside class="lire-aussi">
+        <h2>Lire aussi</h2>
+        <div class="autres-grid">
+          {autres.map((a) => (
+            <a href={`/carnet/${a.id.replace(/\.md$/, "")}`} class="autre-card">
+              <div class="autre-rubrique">{a.data.rubrique}</div>
+              <h3>{a.data.titre}</h3>
+              <p>{a.data.extrait}</p>
+              <span class="autre-link">Lire →</span>
+            </a>
+          ))}
+        </div>
+      </aside>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  /* ===== EN-TÊTE ARTICLE ===== */
+  .article-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .retour {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+  }
+  .meta-top {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+  .separateur { margin: 0 0.5rem; }
+  .article-header h1 {
+    font-size: 3rem;
+    line-height: 1.15;
+    font-weight: 500;
+    color: var(--encre);
+    margin-bottom: 1.5rem;
+  }
+  .extrait-lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--encre-doux);
+    line-height: 1.5;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .filet {
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: var(--or);
+    margin: 2rem auto 0;
+  }
+
+  /* ===== IMAGE ===== */
+  .article-image {
+    margin: 0 -2rem 3rem;
+  }
+  .article-image-bg {
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+    filter: sepia(0.1);
+  }
+
+  /* ===== CORPS ARTICLE (rendu Markdown) ===== */
+  .article-body {
+    font-size: 1.18rem;
+    line-height: 1.85;
+    color: var(--encre);
+  }
+  .article-body :global(p) {
+    margin-bottom: 1.5rem;
+    color: var(--encre-doux);
+  }
+  .article-body :global(p:first-of-type::first-letter) {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    float: left;
+    line-height: 0.9;
+    padding-right: 0.7rem;
+    padding-top: 0.4rem;
+    color: var(--sang);
+    font-weight: 500;
+  }
+  .article-body :global(h2) {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 500;
+    color: var(--encre);
+    margin: 3rem 0 1.2rem;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .article-body :global(h2::before) {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--or);
+    font-size: 1rem;
+    top: 0.5rem;
+  }
+  .article-body :global(h3) {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--sang);
+    margin: 2rem 0 0.8rem;
+  }
+  .article-body :global(strong) { color: var(--encre); font-weight: 600; }
+  .article-body :global(em) { color: var(--encre); font-style: italic; }
+  .article-body :global(a) {
+    color: var(--sang);
+    border-bottom: 1px solid var(--sang);
+    padding-bottom: 1px;
+  }
+  .article-body :global(blockquote) {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--sang);
+    line-height: 1.6;
+    margin: 2rem 0;
+    padding: 1.5rem 2rem;
+    border-left: 3px solid var(--or);
+    background: var(--ivoire-fonce);
+  }
+  .article-body :global(blockquote p) { color: var(--sang); margin-bottom: 0; }
+  .article-body :global(ul), .article-body :global(ol) {
+    margin: 1rem 0 1.5rem 1.8rem;
+  }
+  .article-body :global(li) {
+    margin-bottom: 0.6rem;
+    color: var(--encre-doux);
+  }
+  .article-body :global(code) {
+    font-family: 'Courier New', monospace;
+    background: var(--ivoire-fonce);
+    padding: 0.15rem 0.4rem;
+    font-size: 0.95rem;
+    color: var(--sang);
+  }
+  .article-body :global(hr) {
+    border: none;
+    height: 1px;
+    background: var(--filet);
+    margin: 3rem auto;
+    width: 80px;
+  }
+
+  /* ===== SIGNATURE ===== */
+  .signature {
+    text-align: right;
+    margin: 4rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+  }
+  .signature-tirets { font-size: 1.5rem; margin-right: 0.6rem; }
+  .signature-nom { font-size: 1.2rem; }
+
+  /* ===== COMMENTAIRES ===== */
+  .commentaires {
+    margin: 5rem 0 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--filet);
+  }
+  .commentaires h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--encre);
+    font-weight: 500;
+  }
+  .commentaires-intro {
+    text-align: center;
+    color: var(--encre-doux);
+    font-size: 0.98rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  #giscus-placeholder {
+    background: var(--ivoire-fonce);
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--or);
+    border-left: 3px solid var(--or);
+  }
+
+  /* ===== LIRE AUSSI ===== */
+  .lire-aussi {
+    padding-top: 3rem;
+    border-top: 1px solid var(--filet);
+  }
+  .lire-aussi h2 {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--encre);
+    font-weight: 500;
+  }
+  .autres-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .autre-card {
+    display: block;
+    padding: 2rem;
+    background: var(--ivoire-fonce);
+    border-top: 2px solid var(--or);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s;
+  }
+  .autre-card:hover {
+    border-top-color: var(--sang);
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+  .autre-rubrique {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .autre-card h3 {
+    font-size: 1.3rem;
+    color: var(--encre);
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+    font-weight: 500;
+  }
+  .autre-card p {
+    color: var(--encre-doux);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  .autre-link {
+    font-style: italic;
+    color: var(--sang);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 860px) {
+    .article-header h1 { font-size: 2.2rem; }
+    .extrait-lead { font-size: 1.15rem; }
+    .article-image-bg { height: 250px; }
+    .article-body { font-size: 1.08rem; }
+    .autres-grid { grid-template-columns: 1fr; }
+  }
+</style>

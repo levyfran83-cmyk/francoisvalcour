@@ -1,0 +1,19 @@
+---
+// Titre de section composé : surtitre italique + titre + filet doré
+// Utilisation :
+//   <SectionTitle surtitre="L'œuvre" titre="Une fresque française" />
+const { surtitre, titre, align = "center" } = Astro.props;
+---
+
+{align === "left" ? (
+  <>
+    <div class="section-surtitre" style="text-align:left">{surtitre}</div>
+    <h2 class="section-title" style="text-align:left">{titre}</h2>
+  </>
+) : (
+  <>
+    <div class="section-surtitre">{surtitre}</div>
+    <h2 class="section-title">{titre}</h2>
+    <span class="filet"></span>
+  </>
+)}

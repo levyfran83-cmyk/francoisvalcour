@@ -1,0 +1,233 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+
+// Les 4 cycles, version étendue pour la page dédiée
+const cycles = [
+  {
+    num: "I",
+    titre: "L'Ascension",
+    periode: "1793 — 1811",
+    accroche: "De la Terreur au baptême du Roi de Rome",
+    tomes: "Tomes I à IV",
+    description: `Le cycle fondateur. Une nuit de septembre 1793, dans une ruelle de Toulon,
+    une jeune aristocrate fuit un monde condamné — son nom devenu une menace. Elle croise
+    un lieutenant républicain venu de rien. Ce qui se noue ce soir-là portera la maison Moreau
+    de Paris à l'Italie, d'Égypte aux salons du Consulat, jusqu'aux palais de l'Empire et
+    au berceau du Roi de Rome.`,
+  },
+  {
+    num: "II",
+    titre: "La Chute",
+    periode: "1811 — 1815",
+    accroche: "De la campagne de Russie aux Cent-Jours",
+    tomes: "Tomes V à VII",
+    description: `Le cycle des grandes catastrophes. Moscou en flammes, la Bérézina, la
+    campagne de Saxe, la disgrâce, Elbe, les Cent-Jours, Waterloo. Pour la maison Moreau,
+    quatre années où tout ce qui a été bâti pendant vingt ans est mis à l'épreuve — la
+    fidélité, le nom, l'honneur militaire — et où chaque survie se paie d'un renoncement.`,
+  },
+  {
+    num: "III",
+    titre: "La Restauration",
+    periode: "1815 — 1848",
+    accroche: "Du retour des Bourbons à la chute de Louis-Philippe",
+    tomes: "Tomes VIII à X",
+    description: `Le cycle de la deuxième génération. Henri Moreau, Éléonore Moreau et leurs
+    cousins entrent en âge d'agir. La France des Bourbons, puis celle de Louis-Philippe,
+    pose à chacun la même question — sous des formes nouvelles : que vaut un nom impérial
+    dans un royaume restauré ? Quel honneur dans une bourgeoisie de finance ?`,
+  },
+  {
+    num: "IV",
+    titre: "Le Second Empire",
+    periode: "1848 — 1870",
+    accroche: "De la Deuxième République à Sedan",
+    tomes: "Tomes XI et XII",
+    description: `Le cycle de clôture. Un arrière-petit-fils de Julian et Sarah Moreau
+    traverse la Deuxième République, la prise de pouvoir de Louis-Napoléon, les fastes du
+    Second Empire. À Sedan, en septembre 1870, il paiera une dernière fois le prix du nom —
+    fermant un siècle entier d'histoire familiale qui aura traversé toutes les Frances.`,
+  },
+];
+---
+
+<BaseLayout
+  title="La saga — Le Prix du Nom"
+  description="Le Prix du Nom : douze tomes en quatre cycles, de la Terreur à Sedan. Quatre générations de la maison Moreau traversent quatre-vingts ans d'histoire de France."
+  current="/saga"
+>
+  <PageHeader
+    surtitre="L'œuvre"
+    titre="Une fresque française"
+    accroche="Douze tomes, quatre cycles, quatre générations. De la Terreur à Sedan, l'histoire de France traversée à hauteur d'homme."
+  />
+
+  <section class="intro">
+    <p class="intro-p">
+      <em>Le Prix du Nom</em> n'est pas une saga d'aventures héroïques. C'est l'histoire d'une
+      maison — les Moreau — et de ceux qui l'entourent : les Vernay, les Mareuil, les La
+      Roche-Aymon. Quatre familles tissées par les armes, les mariages, les exils.
+      Quatre-vingts ans qui voient passer Napoléon, Louis XVIII, Charles X, Louis-Philippe,
+      la Deuxième République, le Second Empire. Une seule question, répétée à chaque génération :
+    </p>
+    <blockquote class="citation-saga">
+      « Jusqu'où peut-on s'élever sans payer le prix de ce qu'on porte ? »
+    </blockquote>
+  </section>
+
+  <section class="cycles">
+    {cycles.map((c) => (
+      <article class="cycle-card">
+        <div class="cycle-marker">
+          <div class="cycle-num">{c.num}</div>
+          <div class="cycle-periode">{c.periode}</div>
+        </div>
+        <div class="cycle-body">
+          <h2>{c.titre}</h2>
+          <div class="cycle-accroche">{c.accroche}</div>
+          <p>{c.description}</p>
+          <div class="cycle-meta">{c.tomes}</div>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="cta-final">
+    <h2>Commencer la lecture</h2>
+    <p>
+      Le Tome I, <em>La Ruelle</em>, ouvre le premier cycle. Il couvre les années 1793 à 1804
+      et paraît aux Éditions du Quai en juin 2026.
+    </p>
+    <div class="cta-bloc">
+      <a href="/tomes/la-ruelle" class="btn">Découvrir le Tome I</a>
+      <a href="/newsletter" class="btn secondary">Suivre l'écriture</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    padding: 4rem 2rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .intro-p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--encre-doux);
+    margin-bottom: 2.5rem;
+  }
+  .citation-saga {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--sang);
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--or);
+    border-bottom: 1px solid var(--or);
+    line-height: 1.5;
+  }
+
+  .cycles {
+    padding: 3rem 2rem 5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .cycle-card {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 3rem;
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--filet);
+  }
+  .cycle-card:last-child { border-bottom: none; }
+  .cycle-marker {
+    text-align: center;
+    position: sticky;
+    top: 100px;
+  }
+  .cycle-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 400;
+    color: var(--or);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .cycle-periode {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--encre-doux);
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .cycle-body h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.3rem;
+    color: var(--encre);
+    font-weight: 500;
+  }
+  .cycle-accroche {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--sang);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  .cycle-body p {
+    color: var(--encre-doux);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin-bottom: 1.2rem;
+  }
+  .cycle-meta {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cta-final {
+    background: var(--encre);
+    color: var(--ivoire);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+  .cta-final h2 {
+    color: var(--ivoire);
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+  .cta-final p {
+    color: rgba(245, 241, 232, 0.75);
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+  .cta-bloc {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-final .btn { background: var(--or); border-color: var(--or); color: var(--encre); }
+  .cta-final .btn:hover { background: var(--sang); border-color: var(--sang); color: var(--ivoire); }
+  .cta-final .btn.secondary { background: transparent; color: var(--ivoire); border-color: var(--ivoire); }
+  .cta-final .btn.secondary:hover { background: var(--ivoire); color: var(--encre); }
+
+  @media (max-width: 860px) {
+    .cycle-card {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .cycle-marker { position: static; }
+    .cycle-num { font-size: 3.5rem; }
+    .cycle-body h2 { font-size: 2rem; }
+  }
+</style>

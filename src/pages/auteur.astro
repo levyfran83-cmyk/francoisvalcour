@@ -1,0 +1,155 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+---
+
+<BaseLayout
+  title="L'auteur — François Valcour"
+  description="François Valcour, romancier, né en 1959 à Marseille. Auteur du Prix du Nom, saga romanesque française de 1793 à 1870."
+  current="/auteur"
+>
+  <PageHeader
+    surtitre="Rencontrer l'auteur"
+    titre="François Valcour"
+    accroche="Romancier né en 1959 à Marseille. Premier roman : Le Prix du Nom."
+  />
+
+  <section class="auteur-page">
+    <div class="auteur-page-inner">
+      <div class="photo-col">
+        <div class="auteur-photo" style="background-image: url('/assets/photo_auteur.jpg');"></div>
+        <div class="photo-caption">François Valcour · 2026</div>
+      </div>
+
+      <div class="bio-col">
+        <h2>Le parcours</h2>
+        <p>
+          François Valcour est né en 1959 à Marseille. Passionné d'histoire depuis le lycée
+          — où un professeur du Sacré-Cœur a marqué durablement son regard —, il a grandi
+          dans le Sud de la France.
+        </p>
+        <p>
+          Son œuvre explore les grandes périodes historiques à travers le destin des individus,
+          en privilégiant l'incarnation et la complexité humaine. <em>Le Prix du Nom</em>
+          est son premier roman.
+        </p>
+
+        <h2>La méthode</h2>
+        <p>
+          Cinq ans de recherche en archives. Quatre générations de personnages, douze tomes
+          prévus, quatre cycles historiques. Pour chaque scène, un travail méthodique : croiser
+          les sources contemporaines, vérifier les dates, les lieux, les usages, avant de laisser
+          la fiction reprendre la main.
+        </p>
+        <p>
+          La règle n'a pas varié depuis le premier chapitre : <em>aucun raccourci sur l'Histoire,
+          aucune complaisance sur les hommes</em>. Les personnages réels — Bonaparte, Talleyrand,
+          Davout, Joséphine — ont la place que les archives leur donnent. Les personnages
+          inventés y vivent en silence, à hauteur d'homme.
+        </p>
+
+        <h2>L'écriture au quotidien</h2>
+        <p>
+          Un chapitre se construit mouvement par mouvement, jamais d'un seul jet. Une fiche
+          de personnage, une note de cadrage historique, parfois une carte de circulation
+          des informations entre les protagonistes — chaque scène est préparée comme une
+          partition. La rédaction elle-même reste classique : un texte dicté ou écrit, relu
+          le lendemain, retouché jusqu'à ce qu'il sonne juste.
+        </p>
+
+        <div class="cta-bloc">
+          <a href="/saga" class="btn">Découvrir la saga</a>
+          <a href="/newsletter" class="btn secondary">Suivre l'écriture</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .auteur-page {
+    padding: 5rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .auteur-page-inner {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .photo-col { position: sticky; top: 100px; }
+  .auteur-photo {
+    width: 260px;
+    height: 340px;
+    background-size: cover;
+    background-position: center top;
+    border: 1px solid var(--filet);
+    box-shadow: 0 20px 45px -15px rgba(28, 28, 26, 0.4);
+  }
+  .photo-caption {
+    margin-top: 1rem;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+  }
+  .bio-col h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    margin-top: 2.5rem;
+    color: var(--encre);
+    font-weight: 500;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  .bio-col h2:first-child { margin-top: 0; }
+  .bio-col h2::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--or);
+    font-size: 1rem;
+    top: 0.4rem;
+  }
+  .bio-col p {
+    color: var(--encre-doux);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+  }
+  .bio-col p:first-of-type::first-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    float: left;
+    line-height: 0.9;
+    padding-right: 0.6rem;
+    padding-top: 0.4rem;
+    color: var(--sang);
+    font-weight: 500;
+  }
+  .cta-bloc {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 860px) {
+    .auteur-page-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .photo-col {
+      position: static;
+      text-align: center;
+    }
+    .auteur-photo {
+      margin: 0 auto;
+      width: 200px;
+      height: 260px;
+    }
+  }
+</style>

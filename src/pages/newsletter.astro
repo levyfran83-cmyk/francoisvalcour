@@ -1,0 +1,197 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+---
+
+<BaseLayout
+  title="La Lettre de l'écritoire — François Valcour"
+  description="La Lettre de l'écritoire : une fois par mois, un mot depuis le chantier d'écriture du Prix du Nom. Avancement, extrait inédit, image d'archive."
+  current="/newsletter"
+>
+  <PageHeader
+    surtitre="La Lettre de l'écritoire"
+    titre="Recevoir des nouvelles"
+    accroche="Une fois par mois, un mot depuis le chantier. Aucune publicité, désinscription en un clic."
+  />
+
+  <section class="newsletter-page">
+    <div class="newsletter-content">
+      <div class="left">
+        <h2>Ce que vous y trouverez</h2>
+        <ul class="features">
+          <li>
+            <span class="ico">✦</span>
+            <div>
+              <strong>L'avancement du chantier</strong> — où en est le tome en cours,
+              les paliers franchis, les obstacles rencontrés.
+            </div>
+          </li>
+          <li>
+            <span class="ico">✦</span>
+            <div>
+              <strong>Un extrait inédit</strong> — quelques paragraphes qui ne paraîtront
+              pas ailleurs, parfois retirés du roman, parfois écrits exprès.
+            </div>
+          </li>
+          <li>
+            <span class="ico">✦</span>
+            <div>
+              <strong>Une image d'archive</strong> — un portrait, une carte, un document
+              historique qui a inspiré une scène.
+            </div>
+          </li>
+          <li>
+            <span class="ico">✦</span>
+            <div>
+              <strong>Une question d'écriture</strong> — un dilemme posé au lecteur,
+              une décision narrative ouverte au débat.
+            </div>
+          </li>
+        </ul>
+
+        <div class="promesse">
+          <p>
+            <strong>Engagement de François Valcour :</strong> aucune publicité,
+            aucun partage de votre adresse, désinscription en un clic. Fréquence :
+            une lettre par mois, jamais plus.
+          </p>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="form-card">
+          <h3>S'inscrire</h3>
+          <form class="form-newsletter" id="form-newsletter">
+            <label>
+              <span>Prénom</span>
+              <input type="text" name="firstname" placeholder="optionnel" />
+            </label>
+            <label>
+              <span>Adresse e-mail</span>
+              <input type="email" name="email" required placeholder="vous@exemple.fr" />
+            </label>
+            <button type="submit" class="btn">S'inscrire à la lettre</button>
+            <p class="form-help">
+              <em>L'inscription sera connectée à Buttondown au mouvement 4 — le formulaire est encore une maquette.</em>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .newsletter-page {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .newsletter-content {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .left h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+  .features {
+    list-style: none;
+    margin-bottom: 3rem;
+  }
+  .features li {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 1rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--filet);
+  }
+  .features li:last-child { border-bottom: none; }
+  .features .ico {
+    color: var(--or);
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  .features strong { color: var(--encre); display: block; margin-bottom: 0.3rem; }
+  .features div { color: var(--encre-doux); line-height: 1.6; font-size: 1.05rem; }
+
+  .promesse {
+    background: var(--ivoire-fonce);
+    padding: 1.5rem 2rem;
+    border-left: 3px solid var(--or);
+    font-size: 0.98rem;
+    color: var(--encre-doux);
+    line-height: 1.6;
+  }
+
+  .right { position: sticky; top: 100px; }
+  .form-card {
+    background: var(--encre);
+    color: var(--ivoire);
+    padding: 3rem 2.5rem;
+    box-shadow: 0 25px 50px -15px rgba(0,0,0,0.3);
+  }
+  .form-card h3 {
+    color: var(--ivoire);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 500;
+  }
+  .form-newsletter label {
+    display: block;
+    margin-bottom: 1.2rem;
+  }
+  .form-newsletter span {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or-pale);
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.08em;
+  }
+  .form-newsletter input {
+    width: 100%;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid rgba(168, 139, 92, 0.3);
+    background: rgba(245, 241, 232, 0.05);
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: var(--ivoire);
+  }
+  .form-newsletter input::placeholder { color: rgba(245, 241, 232, 0.4); }
+  .form-newsletter input:focus {
+    outline: none;
+    border-color: var(--or);
+    background: rgba(245, 241, 232, 0.08);
+  }
+  .form-newsletter .btn {
+    width: 100%;
+    margin-top: 0.8rem;
+    background: var(--or);
+    border-color: var(--or);
+    color: var(--encre);
+  }
+  .form-newsletter .btn:hover {
+    background: var(--sang);
+    border-color: var(--sang);
+    color: var(--ivoire);
+  }
+  .form-help {
+    margin-top: 1rem;
+    text-align: center;
+    color: rgba(245, 241, 232, 0.5);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 860px) {
+    .newsletter-content { grid-template-columns: 1fr; gap: 3rem; }
+    .right { position: static; }
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+// Pied de page commun à toutes les pages
+const annee = new Date().getFullYear();
+---
+
+<footer>
+  <div class="footer-brand">
+    François Valcour · <em>Le Prix du Nom</em>
+  </div>
+  <ul class="footer-links">
+    <li><a href="/saga">La saga</a></li>
+    <li><a href="/tomes">Les tomes</a></li>
+    <li><a href="/carnet">Carnet</a></li>
+    <li><a href="/newsletter">Newsletter</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/rss.xml">RSS</a></li>
+  </ul>
+  <div class="copyright">
+    Publié aux Éditions du Quai · © MMXXVI François Valcour — Tous droits réservés
+    <br>
+    <a href="/mentions-legales">Mentions légales</a> ·
+    <a href="/confidentialite">Politique de confidentialité</a>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background: var(--encre);
+    color: rgba(245, 241, 232, 0.7);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--or-pale);
+    margin-bottom: 1rem;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+  }
+  .footer-links a { color: rgba(245, 241, 232, 0.7); }
+  .footer-links a:hover { color: var(--or); }
+  .copyright {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: rgba(245, 241, 232, 0.4);
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(168, 139, 92, 0.2);
+  }
+  .copyright a { color: rgba(245, 241, 232, 0.5); }
+  .copyright a:hover { color: var(--or); }
+</style>

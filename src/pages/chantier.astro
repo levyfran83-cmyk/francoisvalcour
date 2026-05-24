@@ -1,0 +1,247 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+
+// Source canonique du chantier — même données qu'en accueil
+const cycles = [
+  {
+    num: "I", titre: "L'Ascension",
+    periode: "1793 — 1811 · de la Terreur au baptême du Roi de Rome",
+    tomes: [
+      { roman: "I",   label: "La Ruelle — à l'impression", statut: "imprime" },
+      { roman: "II",  label: "Le Maréchal — finalisé",     statut: "finalise" },
+      { roman: "III", label: "en retouches",                statut: "retouches" },
+      { roman: "IV",  label: "en retouches",                statut: "retouches" },
+    ],
+  },
+  {
+    num: "II", titre: "La Chute",
+    periode: "1811 — 1815 · de la campagne de Russie aux Cent-Jours",
+    tomes: [
+      { roman: "V",   label: "en retouches", statut: "retouches" },
+      { roman: "VI",  label: "en retouches", statut: "retouches" },
+      { roman: "VII", label: "en retouches", statut: "retouches" },
+    ],
+  },
+  {
+    num: "III", titre: "La Restauration",
+    periode: "1815 — 1848 · du retour des Bourbons à la chute de Louis-Philippe",
+    tomes: [
+      { roman: "VIII", label: "en retouches", statut: "retouches" },
+      { roman: "IX",   label: "à écrire",     statut: "a-ecrire" },
+      { roman: "X",    label: "à écrire",     statut: "a-ecrire" },
+    ],
+  },
+  {
+    num: "IV", titre: "Le Second Empire",
+    periode: "1848 — 1870 · de la Deuxième République à Sedan",
+    tomes: [
+      { roman: "XI",  label: "à écrire", statut: "a-ecrire" },
+      { roman: "XII", label: "à écrire", statut: "a-ecrire" },
+    ],
+  },
+];
+
+const dateMaj = "24 mai 2026";
+---
+
+<BaseLayout
+  title="Le chantier — Le Prix du Nom"
+  description="État d'avancement de la saga Le Prix du Nom : douze tomes en quatre cycles. Mise à jour publique du chantier d'écriture."
+  current="/chantier"
+>
+  <PageHeader
+    surtitre="État d'avancement"
+    titre="Le chantier"
+    accroche="Douze tomes prévus. Huit écrits, dont deux finalisés. Quatre encore à venir. Mise à jour publique, en toute transparence."
+  />
+
+  <section class="stats">
+    <div class="stat-card"><div class="stat-num">12</div><div class="stat-label">tomes prévus</div></div>
+    <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">finalisés</div></div>
+    <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">en retouches</div></div>
+    <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">à écrire</div></div>
+  </section>
+
+  <section class="chantier-detail">
+    <div class="maj">Dernière mise à jour : {dateMaj}</div>
+    <div class="chantier-list">
+      {cycles.map((cycle) => (
+        <div class="cycle-block">
+          <div class="cycle-header">
+            <div class="cycle-num">{cycle.num}</div>
+            <div class="cycle-title">
+              <h2>{cycle.titre}</h2>
+              <div class="periode">{cycle.periode}</div>
+            </div>
+          </div>
+          <div class="tomes-pastilles">
+            {cycle.tomes.map((t) => (
+              <span class={`tome-pastille ${t.statut}`}>
+                <span class="dot"></span>
+                <span class="roman">{t.roman}</span> {t.label}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="legende">
+      <span><span class="dot" style="background: var(--sang); box-shadow: 0 0 8px var(--sang);"></span>À l'impression</span>
+      <span><span class="dot" style="background: #8BB58B;"></span>Finalisé</span>
+      <span><span class="dot" style="background: var(--or);"></span>En retouches</span>
+      <span><span class="dot" style="background: rgba(168, 139, 92, 0.4);"></span>À écrire</span>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .stats {
+    padding: 3rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  .stat-card {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: var(--ivoire-fonce);
+    border-top: 2px solid var(--or);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    color: var(--sang);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  .stat-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--encre-doux);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+
+  .chantier-detail {
+    padding: 3rem 2rem 5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .maj {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    margin-bottom: 2rem;
+  }
+
+  .cycle-block {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--filet);
+  }
+  .cycle-block:last-child { border-bottom: none; }
+  .cycle-header {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2rem;
+    align-items: baseline;
+    margin-bottom: 1.5rem;
+  }
+  .cycle-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: var(--or);
+    line-height: 1;
+    font-weight: 400;
+    text-align: center;
+  }
+  .cycle-title h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
+    color: var(--encre);
+    font-weight: 500;
+  }
+  .cycle-title .periode {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--encre-doux);
+    font-size: 1rem;
+  }
+  .tomes-pastilles {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    padding-left: 112px;
+  }
+  .tome-pastille {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--filet);
+    border-radius: 30px;
+    font-size: 0.95rem;
+    color: var(--encre-doux);
+    background: var(--ivoire);
+  }
+  .tome-pastille .roman {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    color: var(--or);
+  }
+  .tome-pastille .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .tome-pastille.imprime {
+    border-color: var(--sang);
+    background: rgba(122, 46, 31, 0.06);
+    color: var(--encre);
+  }
+  .tome-pastille.imprime .dot {
+    background: var(--sang);
+    box-shadow: 0 0 8px var(--sang);
+  }
+  .tome-pastille.imprime .roman { color: var(--sang); }
+  .tome-pastille.finalise .dot { background: #8BB58B; }
+  .tome-pastille.retouches .dot { background: var(--or); }
+  .tome-pastille.a-ecrire { opacity: 0.6; }
+  .tome-pastille.a-ecrire .dot { background: rgba(168, 139, 92, 0.4); }
+
+  .legende {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--filet);
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+    color: var(--encre-doux);
+  }
+  .legende > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .legende .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 860px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .cycle-header { grid-template-columns: 60px 1fr; gap: 1rem; }
+    .cycle-num { font-size: 2.2rem; }
+    .cycle-title h2 { font-size: 1.4rem; }
+    .tomes-pastilles { padding-left: 0; }
+  }
+</style>

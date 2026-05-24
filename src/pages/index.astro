@@ -1,0 +1,561 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import Separator from "../components/Separator.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import ArticleCard from "../components/ArticleCard.astro";
+import { getCollection } from "astro:content";
+
+// ============================================================
+// Données du chantier (4 cycles, 12 tomes)
+// Source : 00_Bible_Saga/Structure_saga/Structure_de_la_saga.docx
+// ============================================================
+const cycles = [
+  {
+    num: "I",
+    titre: "L'Ascension",
+    periode: "1793 — 1811 · de la Terreur au baptême du Roi de Rome",
+    count: "4 tomes",
+    tomes: [
+      { roman: "I",   label: "La Ruelle — à l'impression", statut: "imprime" },
+      { roman: "II",  label: "Le Maréchal — finalisé",     statut: "finalise" },
+      { roman: "III", label: "en retouches",                statut: "retouches" },
+      { roman: "IV",  label: "en retouches",                statut: "retouches" },
+    ],
+  },
+  {
+    num: "II",
+    titre: "La Chute",
+    periode: "1811 — 1815 · de la campagne de Russie aux Cent-Jours",
+    count: "3 tomes",
+    tomes: [
+      { roman: "V",   label: "en retouches", statut: "retouches" },
+      { roman: "VI",  label: "en retouches", statut: "retouches" },
+      { roman: "VII", label: "en retouches", statut: "retouches" },
+    ],
+  },
+  {
+    num: "III",
+    titre: "La Restauration",
+    periode: "1815 — 1848 · du retour des Bourbons à la chute de Louis-Philippe",
+    count: "3 tomes",
+    tomes: [
+      { roman: "VIII", label: "en retouches", statut: "retouches" },
+      { roman: "IX",   label: "à écrire",     statut: "a-ecrire" },
+      { roman: "X",    label: "à écrire",     statut: "a-ecrire" },
+    ],
+  },
+  {
+    num: "IV",
+    titre: "Le Second Empire",
+    periode: "1848 — 1870 · de la Deuxième République à Sedan",
+    count: "2 tomes",
+    tomes: [
+      { roman: "XI",  label: "à écrire", statut: "a-ecrire" },
+      { roman: "XII", label: "à écrire", statut: "a-ecrire" },
+    ],
+  },
+];
+
+// ============================================================
+// 3 derniers articles du Carnet (depuis src/content/carnet/)
+// ============================================================
+const tousLesArticles = await getCollection("carnet", ({ data }) => !data.draft);
+const articles = tousLesArticles
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3)
+  .map((a) => ({
+    href: `/carnet/${a.id.replace(/\.md$/, "")}`,
+    image: a.data.image,
+    imagePos: a.data.imagePos,
+    rubrique: a.data.rubrique,
+    date: a.data.date.toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }),
+    titre: a.data.titre,
+    extrait: a.data.extrait,
+  }));
+---
+
+<BaseLayout current="/">
+  <Hero />
+  <Separator />
+
+  <!-- ===================== LA SAGA ===================== -->
+  <section id="saga">
+    <SectionTitle surtitre="L'œuvre" titre="Une fresque française" />
+    <p class="section-intro">
+      <em>Le Prix du Nom</em> suit la famille Moreau à travers les bouleversements de l'histoire
+      de France, depuis la Terreur jusqu'à Sedan. Quatre générations traverseront la Révolution,
+      l'Empire, la Restauration et le Second Empire, payant chacune, à sa manière, le prix d'un
+      nom hérité. Douze tomes. Quatre cycles.
+    </p>
+    <div class="saga-grid">
+      <div class="saga-pilier">
+        <h3>L'Histoire</h3>
+        <div class="annee">1793 — 1870</div>
+        <p>De la Terreur à la défaite de Sedan, la France traversée à hauteur d'homme.
+        Faits avérés, personnages réels, archives respectées.</p>
+      </div>
+      <div class="saga-pilier">
+        <h3>Les personnages</h3>
+        <div class="annee">Quatre générations</div>
+        <p>Les Moreau et leurs alliés — les Vernay, les Mareuil, les La Roche-Aymon.
+        Et autour d'eux, Bonaparte, Talleyrand, Davout, jusqu'aux derniers feux du Second Empire.</p>
+      </div>
+      <div class="saga-pilier">
+        <h3>L'enjeu</h3>
+        <div class="annee">Porter un nom</div>
+        <p>Que paie-t-on pour mériter son nom, le faire vivre, le transmettre ? Question politique
+        au temps de la noblesse d'Empire, question intime à chaque génération.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TOME I ===================== -->
+  <section id="tome1" class="tome-feature">
+    <div class="tome-feature-inner">
+      <img src="/assets/cover_tome1.png" alt="Couverture Tome I La Ruelle" />
+      <div>
+        <SectionTitle surtitre="Tome I · Cycle de l'Ascension" titre="La Ruelle" align="left" />
+        <div class="sous-titre">1793 — 1804 · De la Terreur au Consulat</div>
+        <p class="resume">
+          <strong>1793.</strong> Dans la nuit de la Terreur, Sarah de La Roche-Aymon fuit un
+          monde condamné, son nom devenu une menace. Julian Moreau, homme de registres et
+          de guerre, apprend à servir l'Histoire sans se laisser dévorer par elle. De Paris
+          à l'Italie, de l'Égypte aux salons du Consulat, leur amour bâtit une maison au
+          milieu des départs, des deuils et des ambitions. Mais lorsque Bonaparte devient
+          Empereur, ce qu'ils ont sauvé — un nom, une famille, une fidélité — entre à son
+          tour dans l'orbite du pouvoir.
+        </p>
+        <div class="meta">
+          <span>📖 <strong>46 chapitres</strong></span>
+          <span>📅 <strong>1793 – 1804</strong></span>
+          <span>🏛 <strong>Éditions du Quai</strong></span>
+        </div>
+        <div class="hero-cta">
+          <a href="/newsletter" class="btn">Être prévenu de la sortie</a>
+          <a href="/tomes/la-ruelle" class="btn secondary">Lire un extrait</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CHANTIER ===================== -->
+  <section class="chantier" id="chantier">
+    <div class="chantier-wrapper">
+      <SectionTitle surtitre="État d'avancement" titre="Le chantier" />
+      <p class="section-intro">
+        Douze tomes prévus, organisés en quatre cycles. Huit déjà écrits, dont deux finalisés
+        et six en retouches. Quatre tomes restent à écrire pour mener Sarah, Julian et leur
+        descendance jusqu'à Sedan.
+      </p>
+
+      <div class="chantier-list">
+        {cycles.map((cycle) => (
+          <div class="cycle-block">
+            <div class="cycle-header">
+              <div class="cycle-num">{cycle.num}</div>
+              <div class="cycle-title">
+                <h4>{cycle.titre}</h4>
+                <div class="periode">{cycle.periode}</div>
+              </div>
+              <div class="cycle-count">{cycle.count}</div>
+            </div>
+            <div class="tomes-pastilles">
+              {cycle.tomes.map((t) => (
+                <span class={`tome-pastille ${t.statut}`}>
+                  <span class="dot"></span>
+                  <span class="roman">{t.roman}</span> {t.label}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="legende-chantier">
+        <span><span class="dot" style="background: var(--sang); box-shadow: 0 0 8px var(--sang);"></span>À l'impression</span>
+        <span><span class="dot" style="background: #8BB58B;"></span>Finalisé</span>
+        <span><span class="dot" style="background: var(--or);"></span>En retouches</span>
+        <span><span class="dot" style="background: rgba(168, 139, 92, 0.4);"></span>À écrire</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== L'AUTEUR ===================== -->
+  <section class="auteur" id="auteur">
+    <SectionTitle surtitre="L'auteur" titre="François Valcour" />
+    <div class="auteur-inner">
+      <div class="auteur-photo has-image" style="background-image: url('/assets/photo_auteur.jpg');"></div>
+      <div class="auteur-text">
+        <div class="nom-plume">Romancier · Sud de la France</div>
+        <p>
+          François Valcour est né en 1959 à Marseille. Passionné d'histoire depuis le lycée
+          — où un professeur du Sacré-Cœur a marqué durablement son regard —,
+          il a grandi dans le Sud de la France.
+        </p>
+        <p>
+          Son œuvre explore les grandes périodes historiques à travers le destin des individus,
+          en privilégiant l'incarnation et la complexité humaine. <em>Le Prix du Nom</em>
+          est son premier roman.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Separator />
+
+  <!-- ===================== CARNET ===================== -->
+  <section id="carnet">
+    <SectionTitle surtitre="Coulisses d'écriture" titre="Le Carnet" />
+    <p class="section-intro">
+      Tous les quinze jours, une note depuis l'écritoire : un personnage, une scène, une difficulté,
+      une trouvaille d'archive. La fabrique du roman, ouverte aux lecteurs.
+    </p>
+    <div class="carnet-grid">
+      {articles.map((a) => <ArticleCard {...a} />)}
+    </div>
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="/carnet" class="btn secondary">Tous les articles</a>
+    </div>
+  </section>
+
+  <!-- ===================== NEWSLETTER ===================== -->
+  <section id="newsletter" class="newsletter">
+    <div class="newsletter-inner">
+      <SectionTitle surtitre="La Lettre de l'écritoire" titre="Recevoir des nouvelles" />
+      <p>
+        Une fois par mois, une lettre depuis le chantier : où en est le tome en cours,
+        un extrait inédit, une image d'archive, une question d'écriture. Aucune publicité,
+        désinscription en un clic.
+      </p>
+      <form class="newsletter-form" id="newsletter-form">
+        <input type="email" placeholder="votre adresse e-mail" required />
+        <button type="submit" class="btn">S'inscrire</button>
+      </form>
+      <p class="newsletter-help">
+        L'inscription sera connectée à Buttondown au mouvement 4.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ===== LA SAGA ===== */
+  .saga-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+  .saga-pilier { text-align: center; }
+  .saga-pilier h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: var(--sang);
+  }
+  .saga-pilier .annee {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  .saga-pilier p {
+    color: var(--encre-doux);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* ===== TOME I (tome-feature) ===== */
+  .tome-feature {
+    background: var(--ivoire-fonce);
+    margin: 4rem 0;
+    padding: 5rem 2rem;
+    max-width: none;
+  }
+  .tome-feature-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .tome-feature img {
+    width: 100%;
+    max-width: 340px;
+    box-shadow: 0 25px 50px -15px rgba(0,0,0,0.4);
+  }
+  .tome-feature .sous-titre {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+  .tome-feature .resume {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--encre-doux);
+    margin-bottom: 1.5rem;
+  }
+  .tome-feature .meta {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    color: var(--encre-doux);
+    flex-wrap: wrap;
+  }
+  .tome-feature .meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .tome-feature .meta strong { color: var(--encre); }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* ===== CHANTIER ===== */
+  .chantier {
+    background: var(--encre);
+    color: var(--ivoire);
+    padding: 5rem 2rem;
+    max-width: none;
+  }
+  .chantier-wrapper { max-width: 1100px; margin: 0 auto; }
+  .chantier :global(.section-title) { color: var(--ivoire); }
+  .chantier :global(.section-surtitre) { color: var(--or-pale); }
+  .chantier .section-intro { color: rgba(245, 241, 232, 0.75); }
+  .chantier-list { max-width: 800px; margin: 0 auto; }
+
+  .cycle-block {
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(168, 139, 92, 0.2);
+  }
+  .cycle-block:last-child { border-bottom: none; }
+  .cycle-header {
+    display: grid;
+    grid-template-columns: 70px 1fr auto;
+    gap: 2rem;
+    align-items: baseline;
+    margin-bottom: 1.2rem;
+  }
+  .cycle-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    color: var(--or-pale);
+    line-height: 1;
+    font-weight: 400;
+  }
+  .cycle-title h4 {
+    color: var(--ivoire);
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+  }
+  .cycle-title .periode {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or-pale);
+    font-size: 1rem;
+  }
+  .cycle-count {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or-pale);
+    font-size: 0.95rem;
+  }
+  .tomes-pastilles {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    padding-left: 102px;
+  }
+  .tome-pastille {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(168, 139, 92, 0.3);
+    border-radius: 30px;
+    font-size: 0.88rem;
+    color: rgba(245, 241, 232, 0.85);
+    font-family: 'EB Garamond', serif;
+  }
+  .tome-pastille .roman {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    color: var(--or-pale);
+  }
+  .tome-pastille .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .tome-pastille.imprime {
+    border-color: var(--sang);
+    background: rgba(122, 46, 31, 0.15);
+  }
+  .tome-pastille.imprime .dot {
+    background: var(--sang);
+    box-shadow: 0 0 8px var(--sang);
+  }
+  .tome-pastille.finalise .dot { background: #8BB58B; }
+  .tome-pastille.retouches .dot { background: var(--or); }
+  .tome-pastille.a-ecrire { opacity: 0.55; }
+  .tome-pastille.a-ecrire .dot { background: rgba(168, 139, 92, 0.4); }
+
+  .legende-chantier {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(168, 139, 92, 0.2);
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+    color: rgba(245, 241, 232, 0.7);
+  }
+  .legende-chantier > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .legende-chantier .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  /* ===== L'AUTEUR ===== */
+  .auteur {
+    padding: 5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .auteur-inner {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 3.5rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+  .auteur-photo {
+    width: 220px;
+    height: 280px;
+    background-color: var(--ivoire-fonce);
+    background-size: cover;
+    background-position: center top;
+    border: 1px solid var(--filet);
+    box-shadow: 0 15px 35px -15px rgba(28, 28, 26, 0.35);
+  }
+  .auteur-text .nom-plume {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+  .auteur-text p {
+    color: var(--encre-doux);
+    font-size: 1.08rem;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .auteur-text p:first-of-type::first-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.2rem;
+    float: left;
+    line-height: 0.9;
+    padding-right: 0.5rem;
+    padding-top: 0.3rem;
+    color: var(--sang);
+    font-weight: 500;
+  }
+
+  /* ===== CARNET ===== */
+  .carnet-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin-top: 2rem;
+  }
+
+  /* ===== NEWSLETTER ===== */
+  .newsletter {
+    background: var(--ivoire-fonce);
+    padding: 5rem 2rem;
+    text-align: center;
+    max-width: none;
+  }
+  .newsletter-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .newsletter p {
+    color: var(--encre-doux);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  .newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 480px;
+    margin: 0 auto 1rem;
+  }
+  .newsletter-form input {
+    flex: 1;
+    padding: 0.95rem 1.2rem;
+    border: 1px solid var(--filet);
+    background: var(--ivoire);
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: var(--encre);
+  }
+  .newsletter-form input:focus {
+    outline: none;
+    border-color: var(--or);
+  }
+  .newsletter-help {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--or);
+    margin-top: 1rem;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 860px) {
+    .saga-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .tome-feature-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      text-align: center;
+    }
+    .tome-feature img { max-width: 240px; margin: 0 auto; }
+    .tome-feature .meta { justify-content: center; }
+    .carnet-grid { grid-template-columns: 1fr; }
+    .cycle-header { grid-template-columns: 50px 1fr; }
+    .cycle-count {
+      grid-column: 1 / -1;
+      padding-left: 70px;
+    }
+    .tomes-pastilles { padding-left: 0; }
+    .newsletter-form { flex-direction: column; }
+    .auteur-inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 2rem;
+    }
+    .auteur-photo {
+      margin: 0 auto;
+      width: 170px;
+      height: 220px;
+    }
+  }
+</style>

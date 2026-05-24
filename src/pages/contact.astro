@@ -1,0 +1,156 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+---
+
+<BaseLayout
+  title="Contact — François Valcour"
+  description="Écrire à François Valcour, auteur du Prix du Nom. Pour la presse, les libraires, les lecteurs."
+  current="/contact"
+>
+  <PageHeader
+    surtitre="Écrire à l'auteur"
+    titre="Contact"
+    accroche="Lecteurs, libraires, presse, partenaires — toutes les demandes passent par les Éditions du Quai."
+  />
+
+  <section class="contact-page">
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">✉</div>
+        <h3>Lecteurs et lectrices</h3>
+        <p>
+          Vos retours, questions, suggestions — ils ne resteront pas sans réponse.
+          Les lettres de lecteurs sont la nourriture du chantier.
+        </p>
+        <a href="mailto:lecteurs@editionsduquai.fr" class="contact-link">
+          lecteurs@editionsduquai.fr
+        </a>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">📚</div>
+        <h3>Libraires et bibliothèques</h3>
+        <p>
+          Commandes en gros, services de presse, demandes d'événements en librairie
+          ou en bibliothèque.
+        </p>
+        <a href="mailto:libraires@editionsduquai.fr" class="contact-link">
+          libraires@editionsduquai.fr
+        </a>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">📰</div>
+        <h3>Presse et médias</h3>
+        <p>
+          Interviews, services de presse, demandes de visuels haute définition,
+          interventions radio ou télévision.
+        </p>
+        <a href="mailto:presse@editionsduquai.fr" class="contact-link">
+          presse@editionsduquai.fr
+        </a>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">🤝</div>
+        <h3>Partenariats</h3>
+        <p>
+          Salons du livre, festivals d'histoire, partenariats culturels, écoles
+          et universités.
+        </p>
+        <a href="mailto:partenariats@editionsduquai.fr" class="contact-link">
+          partenariats@editionsduquai.fr
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-postal">
+      <h3>Adresse postale</h3>
+      <p>
+        Éditions du Quai<br>
+        À l'attention de François Valcour<br>
+        Paris · MMXXVI
+      </p>
+      <p class="note">
+        <em>Adresse complète à venir au moment de la parution.</em>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-page {
+    padding: 4rem 2rem 6rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  .contact-card {
+    background: var(--ivoire-fonce);
+    padding: 2.5rem 2rem;
+    border-top: 2px solid var(--or);
+    transition: all 0.3s;
+  }
+  .contact-card:hover {
+    border-top-color: var(--sang);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px -15px rgba(0,0,0,0.15);
+  }
+  .contact-icon {
+    font-size: 2rem;
+    color: var(--or);
+    margin-bottom: 1rem;
+  }
+  .contact-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--encre);
+    font-weight: 500;
+  }
+  .contact-card p {
+    color: var(--encre-doux);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  .contact-link {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--sang);
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--sang);
+    padding-bottom: 2px;
+  }
+
+  .contact-postal {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--filet);
+  }
+  .contact-postal h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--encre);
+    font-weight: 500;
+  }
+  .contact-postal p {
+    color: var(--encre-doux);
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  .contact-postal .note {
+    color: var(--or);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 860px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>

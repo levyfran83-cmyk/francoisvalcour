@@ -1,0 +1,76 @@
+---
+// Navigation principale du site
+// La prop `current` permet de marquer la page courante si on veut un état actif plus tard.
+const { current = "" } = Astro.props;
+
+const links = [
+  { href: "/saga",       label: "La saga" },
+  { href: "/tomes",      label: "Les tomes" },
+  { href: "/chantier",   label: "Le chantier" },
+  { href: "/auteur",     label: "L'auteur" },
+  { href: "/carnet",     label: "Carnet" },
+  { href: "/newsletter", label: "Newsletter" },
+];
+---
+
+<nav class="top">
+  <div class="nav-inner">
+    <a href="/" class="brand">
+      François Valcour <em>—</em> <span class="italic">Le Prix du Nom</span>
+    </a>
+    <ul class="nav-links">
+      {links.map((l) => (
+        <li>
+          <a href={l.href} class={current === l.href ? "active" : ""}>{l.label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  nav.top {
+    position: sticky;
+    top: 0;
+    background: rgba(245, 241, 232, 0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--filet);
+    z-index: 100;
+    padding: 0.9rem 2rem;
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--encre);
+  }
+  .brand:hover { opacity: 1; color: var(--encre); }
+  .brand em { color: var(--or); font-style: normal; }
+  .brand .italic { font-style: italic; }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    font-size: 0.95rem;
+  }
+  .nav-links a {
+    color: var(--encre-doux);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.82rem;
+  }
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--sang); }
+
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+  }
+</style>

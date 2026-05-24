@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import ArticleCard from "../components/ArticleCard.astro";
+import { getCollection } from "astro:content";
+
+// Tous les articles publiés, triés du plus récent au plus ancien
+const tous = await getCollection("carnet", ({ data }) => !data.draft);
+const articles = tous
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .map((a) => ({
+    href: `/carnet/${a.id.replace(/\.md$/, "")}`,
+    image: a.data.image,
+    imagePos: a.data.imagePos,
+    rubrique: a.data.rubrique,
+    date: a.data.date.toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }),
+    titre: a.data.titre,
+    extrait: a.data.extrait,
+  }));
+
+const rubriques = [
+  { slug: "Personnage", label: "Personnage" },
+  { slug: "Histoire & fiction", label: "Histoire & fiction" },
+  { slug: "Le chantier", label: "Le chantier" },
+];
+---
+
+<BaseLayout
+  title="Le Carnet — François Valcour"
+  description="Le Carnet de François Valcour : coulisses d'écriture du Prix du Nom. Personnages, scènes, archives, et la fabrique du roman."
+  current="/carnet"
+>
+  <PageHeader
+    surtitre="Coulisses d'écriture"
+    titre="Le Carnet"
+    accroche="Une note depuis l'écritoire, tous les quinze jours. La fabrique du roman, ouverte aux lecteurs."
+  />
+
+  <section class="carnet-page">
+    <nav class="rubriques">
+      <a href="/carnet" class="rubrique active">Tous les articles</a>
+      {rubriques.map((r) => (
+        <a href={`/carnet?r=${r.slug}`} class="rubrique">{r.label}</a>
+      ))}
+    </nav>
+
+    <div class="carnet-grid">
+      {articles.map((a) => <ArticleCard {...a} />)}
+    </div>
+
+    <div class="carnet-footer">
+      <p>
+        D'autres articles paraîtront tous les quinze jours.
+        <a href="/newsletter">Inscrivez-vous à la Lettre de l'écritoire</a>
+        pour les recevoir en avant-première.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .carnet-page {
+    padding: 4rem 2rem 5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .rubriques {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--filet);
+  }
+  .rubrique {
+    padding: 0.6rem 1.4rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--encre-doux);
+    border: 1px solid var(--filet);
+    border-radius: 30px;
+    background: var(--ivoire);
+    transition: all 0.25s;
+  }
+  .rubrique:hover, .rubrique.active {
+    background: var(--encre);
+    color: var(--ivoire);
+    border-color: var(--encre);
+    opacity: 1;
+  }
+
+  .carnet-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .carnet-footer {
+    text-align: center;
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--filet);
+  }
+  .carnet-footer p {
+    color: var(--encre-doux);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  @media (max-width: 860px) {
+    .carnet-grid { grid-template-columns: 1fr; }
+  }
+</style>

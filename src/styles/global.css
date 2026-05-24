@@ -1,0 +1,116 @@
+/* ============================================================
+   Le Prix du Nom — Site auteur François Valcour
+   Styles globaux : palette, typographie, base
+   ============================================================ */
+
+:root {
+  --ivoire: #F5F1E8;
+  --ivoire-fonce: #EBE5D4;
+  --encre: #1C1C1A;
+  --encre-doux: #3A3A36;
+  --sang: #7A2E1F;
+  --or: #A88B5C;
+  --or-pale: #C9B488;
+  --filet: #D6CBAD;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'EB Garamond', Garamond, serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--encre);
+  background-color: var(--ivoire);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Cormorant Garamond', 'EB Garamond', serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--encre);
+}
+
+a { color: var(--sang); text-decoration: none; transition: opacity 0.2s; }
+a:hover { opacity: 0.7; }
+
+/* ============================================================
+   Composants génériques de section
+   ============================================================ */
+
+section {
+  padding: 5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+.section-surtitre {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--or);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.section-intro {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 4rem;
+  font-size: 1.15rem;
+  color: var(--encre-doux);
+  line-height: 1.7;
+}
+
+.filet {
+  display: block;
+  width: 80px;
+  height: 1px;
+  background: var(--or);
+  margin: 1.5rem auto 2rem;
+}
+
+/* ============================================================
+   Boutons
+   ============================================================ */
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.8rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid var(--encre);
+  background: var(--encre);
+  color: var(--ivoire);
+  transition: all 0.25s;
+}
+.btn:hover { background: var(--sang); border-color: var(--sang); color: var(--ivoire); opacity: 1; }
+.btn.secondary { background: transparent; color: var(--encre); }
+.btn.secondary:hover { background: var(--encre); color: var(--ivoire); }
+
+/* ============================================================
+   Séparateur ✦ ✦ ✦
+   ============================================================ */
+
+.seperator {
+  text-align: center;
+  padding: 3rem 0 2rem;
+  color: var(--or);
+  font-size: 1.5rem;
+  letter-spacing: 1rem;
+}

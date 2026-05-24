@@ -1,0 +1,135 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+---
+
+<BaseLayout
+  title="Politique de confidentialité — François Valcour"
+  description="Politique de confidentialité du site officiel de François Valcour. Données personnelles, cookies, droits RGPD."
+  current=""
+>
+  <PageHeader surtitre="Vie privée" titre="Politique de confidentialité" />
+
+  <section class="legal">
+    <p class="intro">
+      Le présent site collecte le strict minimum de données nécessaires à son fonctionnement.
+      Aucune publicité, aucun pistage commercial, aucun partage avec des tiers à fin commerciale.
+    </p>
+
+    <h2>Données collectées</h2>
+    <p>
+      <strong>Inscription à la newsletter.</strong> Si vous vous inscrivez à <em>La Lettre
+      de l'écritoire</em>, nous collectons votre adresse e-mail et, optionnellement, votre
+      prénom. Ces données sont stockées par notre prestataire d'envoi
+      (<a href="https://buttondown.com" target="_blank" rel="noopener">Buttondown</a>),
+      uniquement pour vous adresser la lettre mensuelle.
+    </p>
+    <p>
+      <strong>Commentaires sous les articles du Carnet.</strong> Si vous laissez un commentaire,
+      celui-ci est géré par <a href="https://giscus.app" target="_blank" rel="noopener">Giscus</a>
+      via votre compte GitHub. Aucune donnée n'est stockée sur notre site.
+    </p>
+    <p>
+      <strong>Statistiques de fréquentation.</strong> Nous n'utilisons aucun outil de tracking
+      tiers (pas de Google Analytics). L'hébergeur Netlify peut conserver les logs d'accès
+      anonymisés pour des raisons techniques.
+    </p>
+
+    <h2>Cookies</h2>
+    <p>
+      Ce site n'utilise <strong>aucun cookie publicitaire ni de pistage</strong>. Seuls les
+      cookies techniques strictement nécessaires au fonctionnement du site sont éventuellement
+      utilisés (sauvegarde de votre préférence d'affichage, par exemple).
+    </p>
+
+    <h2>Vos droits</h2>
+    <p>
+      Conformément au Règlement général sur la protection des données (RGPD) et à la loi
+      Informatique et Libertés, vous disposez d'un droit d'accès, de rectification,
+      d'effacement, d'opposition et de portabilité concernant les données vous concernant.
+    </p>
+    <p>
+      Pour exercer ces droits :
+    </p>
+    <ul>
+      <li>
+        <strong>Newsletter</strong> : un lien de désinscription figure en pied de chaque envoi.
+        Cliquez dessus et vos données sont effacées immédiatement.
+      </li>
+      <li>
+        <strong>Autre demande</strong> : écrivez à
+        <a href="mailto:rgpd@editionsduquai.fr">rgpd@editionsduquai.fr</a>. Réponse sous 30 jours.
+      </li>
+    </ul>
+
+    <h2>Durée de conservation</h2>
+    <p>
+      Adresses e-mail de la newsletter : conservées tant que vous restez inscrit·e, supprimées
+      immédiatement à votre désinscription.
+    </p>
+
+    <h2>Modification de la politique</h2>
+    <p>
+      La présente politique pourra être modifiée pour s'adapter à l'évolution réglementaire.
+      Toute modification substantielle vous sera notifiée par la newsletter si vous y êtes inscrit·e.
+    </p>
+
+    <p class="maj">
+      <em>Dernière mise à jour : 24 mai 2026</em>
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal {
+    padding: 4rem 2rem 6rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .intro {
+    font-size: 1.15rem;
+    color: var(--encre-doux);
+    font-style: italic;
+    line-height: 1.7;
+    padding: 1.5rem;
+    background: var(--ivoire-fonce);
+    border-left: 3px solid var(--or);
+    margin-bottom: 3rem;
+  }
+  .legal h2 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--encre);
+    font-weight: 500;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .legal h2::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--or);
+    font-size: 0.85rem;
+    top: 0.5rem;
+  }
+  .legal p {
+    color: var(--encre-doux);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+  }
+  .legal ul { margin: 1rem 0 1rem 1.5rem; }
+  .legal ul li {
+    color: var(--encre-doux);
+    line-height: 1.75;
+    margin-bottom: 0.8rem;
+    font-size: 1.05rem;
+  }
+  .legal strong { color: var(--encre); }
+  .maj {
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--or) !important;
+  }
+</style>

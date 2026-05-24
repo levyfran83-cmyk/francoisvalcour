@@ -1,0 +1,181 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+
+// Liste des 12 tomes. Les statuts sont source de vérité unique :
+//   "imprime"   : Tome I — paraît juin 2026
+//   "finalise"  : Tome II — terminé, en attente d'édition
+//   "retouches" : Tomes III à VIII — écrits, en révision
+//   "a-ecrire"  : Tomes IX à XII — pas encore écrits
+const tomes = [
+  { num: "I",    titre: "La Ruelle",  periode: "1793 — 1804", cycle: "L'Ascension",       statut: "imprime",    href: "/tomes/la-ruelle",
+    resume: "Sarah de La Roche-Aymon, Julian Moreau, et la naissance d'une maison sous la Révolution, le Consulat et l'Empire naissant." },
+  { num: "II",   titre: "Le Maréchal", periode: "1804 — 1811", cycle: "L'Ascension",      statut: "finalise",   href: null,
+    resume: "Les grandes campagnes : Austerlitz, Iéna, Eylau, Friedland. Julian Moreau, devenu maréchal, et Sarah, qui tient seule la maison de Paris." },
+  { num: "III",  titre: "(en révision)", periode: "1811 — 1812", cycle: "L'Ascension",    statut: "retouches", href: null,
+    resume: "Le mariage autrichien, le baptême du Roi de Rome, et les premiers nuages venus d'Espagne." },
+  { num: "IV",   titre: "(en révision)", periode: "1812",        cycle: "L'Ascension",    statut: "retouches", href: null,
+    resume: "Russie. La Moskova, l'incendie de Moscou, la retraite, la Bérézina. Le cycle se ferme dans la neige." },
+  { num: "V",    titre: "(en révision)", periode: "1813",        cycle: "La Chute",       statut: "retouches", href: null,
+    resume: "La campagne d'Allemagne. Lützen, Bautzen, Leipzig. Le 8ᵉ corps polonais-saxon, et la défection." },
+  { num: "VI",   titre: "(en révision)", periode: "1814",        cycle: "La Chute",       statut: "retouches", href: null,
+    resume: "La campagne de France. Vauchamps, Montmirail, Arcis-sur-Aube. L'abdication. Theresia." },
+  { num: "VII",  titre: "(en révision)", periode: "1814 — 1815", cycle: "La Chute",       statut: "retouches", href: null,
+    resume: "La Première Restauration, les Cent-Jours, Waterloo. Continuer à servir ?" },
+  { num: "VIII", titre: "(en révision)", periode: "1815 — 1820", cycle: "La Restauration", statut: "retouches", href: null,
+    resume: "Le retour des Bourbons, la Terreur blanche, la nouvelle place des anciens maréchaux d'Empire dans une France royale." },
+  { num: "IX",   titre: "(à écrire)",    periode: "1820 — 1830", cycle: "La Restauration", statut: "a-ecrire",  href: null,
+    resume: "L'avènement de Charles X, les Trois Glorieuses, le passage de témoin à la deuxième génération Moreau." },
+  { num: "X",    titre: "(à écrire)",    periode: "1830 — 1848", cycle: "La Restauration", statut: "a-ecrire",  href: null,
+    resume: "La monarchie de Juillet, le monde du Roi-Citoyen, jusqu'à la chute de février 1848." },
+  { num: "XI",   titre: "(à écrire)",    periode: "1848 — 1860", cycle: "Le Second Empire", statut: "a-ecrire", href: null,
+    resume: "La Deuxième République, le coup d'État, le Second Empire dans ses fastes." },
+  { num: "XII",  titre: "(à écrire)",    periode: "1860 — 1870", cycle: "Le Second Empire", statut: "a-ecrire", href: null,
+    resume: "La guerre franco-prussienne. Sedan. La dernière fois où un Moreau paiera le prix du nom." },
+];
+
+const statutLabel = {
+  imprime:   "À paraître · juin 2026",
+  finalise:  "Finalisé",
+  retouches: "En retouches",
+  "a-ecrire":"À écrire",
+};
+---
+
+<BaseLayout
+  title="Les tomes — Le Prix du Nom"
+  description="Les douze tomes de la saga Le Prix du Nom, organisés en quatre cycles : L'Ascension, La Chute, La Restauration, Le Second Empire."
+  current="/tomes"
+>
+  <PageHeader
+    surtitre="L'œuvre, tome par tome"
+    titre="Les douze tomes"
+    accroche="Quatre cycles, douze volumes, quatre-vingts ans d'histoire de France. État du chantier au 24 mai 2026."
+  />
+
+  <section class="tomes-grid">
+    {tomes.map((t) => (
+      <article class={`tome-card statut-${t.statut}`}>
+        <div class="tome-roman">{t.num}</div>
+        <div class="tome-content">
+          <div class="tome-cycle">Cycle · {t.cycle}</div>
+          <h2>{t.titre}</h2>
+          <div class="tome-periode">{t.periode}</div>
+          <p>{t.resume}</p>
+          <div class="tome-footer">
+            <span class={`statut-badge ${t.statut}`}>{statutLabel[t.statut]}</span>
+            {t.href && <a href={t.href} class="tome-link">En savoir plus →</a>}
+          </div>
+        </div>
+      </article>
+    ))}
+  </section>
+</BaseLayout>
+
+<style>
+  .tomes-grid {
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .tome-card {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 2rem;
+    padding: 2rem 2.5rem;
+    background: var(--ivoire);
+    border: 1px solid var(--filet);
+    border-left: 4px solid var(--or);
+    transition: all 0.3s;
+  }
+  .tome-card:hover {
+    border-left-color: var(--sang);
+    box-shadow: 0 15px 35px -15px rgba(28, 28, 26, 0.15);
+    transform: translateY(-2px);
+  }
+  .tome-card.statut-imprime { border-left-color: var(--sang); background: rgba(122, 46, 31, 0.04); }
+  .tome-card.statut-a-ecrire { opacity: 0.7; border-left-color: rgba(168, 139, 92, 0.3); }
+  .tome-card.statut-a-ecrire:hover { opacity: 1; }
+
+  .tome-roman {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--or);
+    font-weight: 400;
+    text-align: center;
+    align-self: center;
+  }
+  .tome-card.statut-imprime .tome-roman { color: var(--sang); }
+
+  .tome-cycle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .tome-content h2 {
+    font-size: 1.9rem;
+    margin-bottom: 0.3rem;
+    color: var(--encre);
+    font-weight: 500;
+  }
+  .tome-card.statut-a-ecrire h2,
+  .tome-card.statut-retouches h2 { color: var(--encre-doux); }
+  .tome-periode {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--encre-doux);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .tome-content p {
+    color: var(--encre-doux);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+  }
+  .tome-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .statut-badge {
+    display: inline-block;
+    padding: 0.35rem 0.9rem;
+    border-radius: 30px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid;
+  }
+  .statut-badge.imprime { background: var(--sang); color: var(--ivoire); border-color: var(--sang); }
+  .statut-badge.finalise { background: #E8F0E5; color: #3F6B3A; border-color: #8BB58B; }
+  .statut-badge.retouches { background: rgba(168, 139, 92, 0.1); color: var(--or); border-color: var(--or); }
+  .statut-badge.a-ecrire { background: transparent; color: var(--encre-doux); border-color: var(--filet); }
+
+  .tome-link {
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--sang);
+  }
+
+  @media (max-width: 860px) {
+    .tome-card {
+      grid-template-columns: 60px 1fr;
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+    .tome-roman { font-size: 2.8rem; }
+    .tome-content h2 { font-size: 1.5rem; }
+  }
+</style>

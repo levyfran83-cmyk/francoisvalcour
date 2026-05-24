@@ -1,0 +1,346 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Tome I — La Ruelle | Le Prix du Nom"
+  description="Le Prix du Nom, Tome I : La Ruelle. 1793-1804, de la Terreur au Consulat. Paraît aux Éditions du Quai en juin 2026."
+  current="/tomes"
+>
+  <!-- ===== HERO TOME I ===== -->
+  <header class="tome-hero">
+    <div class="tome-hero-inner">
+      <div class="tome-hero-cover">
+        <div class="badge-parution">Juin 2026</div>
+        <img src="/assets/cover_tome1.png" alt="Couverture Le Prix du Nom — Tome I, La Ruelle" />
+      </div>
+      <div class="tome-hero-text">
+        <div class="surtitre">Tome I · Cycle de l'Ascension</div>
+        <h1>La Ruelle</h1>
+        <div class="sous-titre">1793 — 1804 · De la Terreur au Consulat</div>
+        <blockquote class="citation">
+          « Jusqu'où peut-on s'élever sans payer le prix de ce qu'on porte ? »
+        </blockquote>
+        <div class="cta-bloc">
+          <a href="/newsletter" class="btn">Être prévenu de la sortie</a>
+          <a href="#extrait" class="btn secondary">Lire un extrait</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== RÉSUMÉ ===== -->
+  <section class="resume">
+    <div class="resume-inner">
+      <h2>Le récit</h2>
+      <p class="lead">
+        <strong>1793.</strong> Dans la nuit de la Terreur, Sarah de La Roche-Aymon fuit un
+        monde condamné, son nom devenu une menace. Julian Moreau, homme de registres et
+        de guerre, apprend à servir l'Histoire sans se laisser dévorer par elle.
+      </p>
+      <p>
+        De Paris à l'Italie, de l'Égypte aux salons du Consulat, leur amour bâtit une maison
+        au milieu des départs, des deuils et des ambitions. Mais lorsque Bonaparte devient
+        Empereur, ce qu'ils ont sauvé — un nom, une famille, une fidélité — entre à son tour
+        dans l'orbite du pouvoir.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== INFOS PRATIQUES ===== -->
+  <section class="infos">
+    <div class="infos-grid">
+      <div class="info-card">
+        <div class="info-label">Éditeur</div>
+        <div class="info-value">Éditions du Quai</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Parution</div>
+        <div class="info-value">Juin 2026</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Format</div>
+        <div class="info-value">Broché · A5 · environ 600 pages</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Période couverte</div>
+        <div class="info-value">1793 — 1804</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Chapitres</div>
+        <div class="info-value">46 chapitres</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">ISBN</div>
+        <div class="info-value">à venir</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EXTRAIT ===== -->
+  <section class="extrait" id="extrait">
+    <div class="extrait-inner">
+      <div class="surtitre-section">L'incipit</div>
+      <h2>Une ruelle de Toulon</h2>
+      <span class="filet"></span>
+      <div class="extrait-placeholder">
+        <p>
+          <em>L'extrait du premier chapitre sera disponible ici dès l'approche de la parution.</em>
+        </p>
+        <p>
+          Inscrivez-vous à la Lettre de l'écritoire pour le recevoir en avant-première,
+          accompagné d'une note de l'auteur sur la genèse du chapitre.
+        </p>
+        <a href="/newsletter" class="btn" style="margin-top: 1.5rem;">Recevoir l'extrait</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTEXTE HISTORIQUE ===== -->
+  <section class="contexte">
+    <div class="contexte-inner">
+      <div class="surtitre-section">Repères</div>
+      <h2>Le contexte historique</h2>
+      <span class="filet"></span>
+      <p>
+        Le Tome I s'ouvre en septembre 1793, dans la ville de Toulon assiégée par les troupes
+        républicaines. Il se referme en mai 1804, à la veille du sacre de Napoléon, dans
+        un Paris du Consulat finissant. Entre ces deux bornes, onze années qui voient la
+        France passer de la Terreur jacobine à la stabilisation consulaire, en passant par
+        le Directoire, les campagnes d'Italie et d'Égypte, le 18 Brumaire.
+      </p>
+      <p>
+        Tous les événements historiques évoqués — sièges, batailles, dates, décrets — sont
+        documentés. Les personnages réels (Bonaparte, Joséphine, Talleyrand, Murat, Davout)
+        n'apparaissent que là où les archives autorisent qu'ils paraissent. Les personnages
+        fictifs — Julian Moreau, Sarah de La Roche-Aymon, les Vernay, les Mareuil — vivent
+        dans l'interstice, à hauteur d'homme.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CTA FINAL ===== -->
+  <section class="cta-final">
+    <h2>Ne pas manquer la sortie</h2>
+    <p>
+      La parution est fixée à juin 2026. Inscrivez-vous à la Lettre de l'écritoire pour
+      recevoir l'extrait, la date exacte et les premières chroniques de lecture.
+    </p>
+    <a href="/newsletter" class="btn">S'inscrire à la lettre</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .tome-hero {
+    padding: 5rem 2rem;
+    background: linear-gradient(180deg, var(--ivoire) 0%, var(--ivoire-fonce) 100%);
+  }
+  .tome-hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .tome-hero-cover {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .tome-hero-cover img {
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 30px 60px -20px rgba(28, 28, 26, 0.5);
+    transform: rotate(-2deg);
+  }
+  .badge-parution {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: var(--sang);
+    color: var(--ivoire);
+    padding: 0.7rem 1.4rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transform: rotate(8deg);
+    box-shadow: 0 6px 14px -4px rgba(0,0,0,0.3);
+    z-index: 2;
+  }
+  .surtitre {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .tome-hero-text h1 {
+    font-size: 4.5rem;
+    line-height: 1.05;
+    font-weight: 500;
+    color: var(--encre);
+    margin-bottom: 0.5rem;
+  }
+  .sous-titre {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--sang);
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+  }
+  .citation {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--encre-doux);
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--or);
+  }
+  .cta-bloc { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .resume {
+    padding: 5rem 2rem;
+  }
+  .resume-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .resume h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 500;
+  }
+  .resume p {
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: var(--encre-doux);
+    margin-bottom: 1.5rem;
+  }
+  .resume .lead {
+    font-size: 1.25rem;
+    color: var(--encre);
+  }
+  .resume .lead strong { color: var(--sang); }
+
+  .infos {
+    padding: 4rem 2rem;
+    background: var(--ivoire-fonce);
+  }
+  .infos-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+  .info-card {
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid var(--filet);
+    background: var(--ivoire);
+  }
+  .info-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  .info-value {
+    font-size: 1.1rem;
+    color: var(--encre);
+  }
+
+  .extrait, .contexte {
+    padding: 5rem 2rem;
+  }
+  .extrait-inner, .contexte-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .surtitre-section {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  .extrait h2, .contexte h2 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  .filet {
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: var(--or);
+    margin: 1.5rem auto 2.5rem;
+  }
+  .extrait-placeholder {
+    background: var(--ivoire-fonce);
+    padding: 3rem 2rem;
+    border-left: 3px solid var(--or);
+    border-right: 3px solid var(--or);
+  }
+  .extrait-placeholder p {
+    color: var(--encre-doux);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .contexte p {
+    text-align: left;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--encre-doux);
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-final {
+    background: var(--encre);
+    color: var(--ivoire);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+  .cta-final h2 {
+    color: var(--ivoire);
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+  .cta-final p {
+    color: rgba(245, 241, 232, 0.75);
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+  .cta-final .btn { background: var(--or); border-color: var(--or); color: var(--encre); }
+  .cta-final .btn:hover { background: var(--sang); border-color: var(--sang); color: var(--ivoire); }
+
+  @media (max-width: 860px) {
+    .tome-hero-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      text-align: center;
+    }
+    .tome-hero-cover img { max-width: 280px; }
+    .citation { text-align: left; }
+    .tome-hero-text h1 { font-size: 3rem; }
+    .sous-titre { font-size: 1.1rem; }
+    .infos-grid { grid-template-columns: 1fr; }
+    .cta-bloc { justify-content: center; }
+  }
+</style>

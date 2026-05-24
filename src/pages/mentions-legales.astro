@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+---
+
+<BaseLayout
+  title="Mentions légales — François Valcour"
+  description="Mentions légales du site officiel de François Valcour."
+  current=""
+>
+  <PageHeader surtitre="Informations légales" titre="Mentions légales" />
+
+  <section class="legal">
+    <h2>Éditeur du site</h2>
+    <p>
+      Le présent site <strong>francoisvalcour.fr</strong> est édité par
+      les <strong>Éditions du Quai</strong>, pour le compte de François Valcour,
+      auteur du <em>Prix du Nom</em>.
+    </p>
+    <p>
+      Adresse postale complète à venir au moment de la parution du Tome I (juin 2026).
+    </p>
+
+    <h2>Directeur de la publication</h2>
+    <p>François Valcour, en qualité d'auteur.</p>
+
+    <h2>Hébergement</h2>
+    <p>
+      Le site est hébergé par <strong>Netlify, Inc.</strong>
+      — 44 Montgomery Street, Suite 300, San Francisco, California 94104, USA.
+    </p>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>
+      L'ensemble des contenus diffusés sur ce site (textes, citations, extraits du roman,
+      illustrations de couverture, photographies, visuels d'archives) est protégé par
+      le droit d'auteur. Toute reproduction, représentation, adaptation, traduction ou
+      modification, partielle ou intégrale, faite sans l'autorisation préalable et écrite
+      de l'auteur ou de son éditeur est illicite.
+    </p>
+    <p>
+      Les couvertures et illustrations restent la propriété des Éditions du Quai.
+    </p>
+
+    <h2>Liens hypertextes</h2>
+    <p>
+      Les liens hypertextes mis en place dans le cadre du présent site en direction d'autres
+      ressources présentes sur Internet ne sauraient engager la responsabilité de l'auteur
+      quant au contenu des sites en question.
+    </p>
+
+    <h2>Crédits</h2>
+    <p>
+      Site conçu et développé en mai 2026, sur la base du travail typographique du Tome I
+      (EB Garamond, mise en page memoir LaTeX).
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal {
+    padding: 4rem 2rem 6rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .legal h2 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--encre);
+    font-weight: 500;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .legal h2:first-child { margin-top: 0; }
+  .legal h2::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--or);
+    font-size: 0.85rem;
+    top: 0.5rem;
+  }
+  .legal p {
+    color: var(--encre-doux);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+  }
+  .legal strong { color: var(--encre); }
+</style>
