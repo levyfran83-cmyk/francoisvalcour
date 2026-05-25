@@ -76,12 +76,13 @@ il n'est jugé sur rien d'autre que ce qu'il fait dans l'instant.
 
 ### Sarah — l'amour foudroyant de la ruelle
 
-Tout commence un soir de septembre 1793, à Toulon. Dans une ruelle, l'officier républicain
-qu'il est croise une jeune aristocrate en fuite — il pourrait la dénoncer, il ne le fait pas.
-**Ils tombent l'un dans l'autre à cet instant exact.** L'instant n'a duré que quelques minutes
-mais n'a jamais cessé. Devant Sarah — et seulement devant elle — le masque glisse. Les
-épaules descendent d'un centimètre. Et parfois il dit quelque chose qui ressemble à ce que
-le jeune homme de la ruelle aurait dit s'il avait eu le temps de vivre autrement.
+Tout commence un soir d'hiver 1793-1794, dans une rue de Paris sous la Terreur. Un contrôle
+de papiers, une patrouille, une mèche auburn qui s'échappe d'un bonnet — et l'officier
+républicain qu'il est choisit, pour la première fois, de désobéir sans bruit. **L'instant
+n'a duré que quelques minutes. Il n'a jamais cessé.** Devant Sarah — et seulement devant
+elle — le masque glisse. Les épaules descendent d'un centimètre. Et parfois il dit quelque
+chose qui ressemble à ce que le jeune homme de la ruelle aurait dit s'il avait eu le temps
+de vivre autrement.
 
 ### Bonaparte — le miroir
 

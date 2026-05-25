@@ -21,9 +21,9 @@ Un personnage qui ne peut pas commencer par *je* est obligé de regarder les cho
 avant de se regarder lui-même. Il pèse, il évalue, il décide — puis il agit. Sa parole
 suit son geste, elle ne le précède pas. Il ne s'écoute pas penser à haute voix.
 
-Cela change tout. La phrase « *Je crois qu'il faudra reprendre Toulon avant l'hiver* » n'est
-pas du tout la même que « *Toulon devra être reprise avant l'hiver* ». La première porte un
-locuteur ; la seconde porte un fait. Julian appartient à la seconde.
+Cela change tout. La phrase « *Je crois qu'il faudra renforcer le flanc droit avant l'aube* »
+n'est pas du tout la même que « *Le flanc droit devra être renforcé avant l'aube* ». La
+première porte un locuteur ; la seconde porte un fait. Julian appartient à la seconde.
 
 Et comme il commande des hommes, comme il rédige des rapports, comme il dicte à ses aides
 de camp pendant que d'autres parlent — la règle est cohérente avec sa fonction. Un maréchal
