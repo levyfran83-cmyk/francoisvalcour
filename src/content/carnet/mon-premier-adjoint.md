@@ -3,8 +3,8 @@ titre: "Mon premier adjoint"
 date: 2026-05-26
 rubrique: "Le chantier"
 extrait: "Comment l'intelligence artificielle m'a servi d'adjoint, de contradicteur et de premier critique littéraire pendant l'écriture du Prix du Nom."
-image: "/assets/photo_auteur.jpg"
-imagePos: "center 20%"
+image: "/assets/chantier.jpg"
+imagePos: "center 55%"
 ---
 
 Il y a, sur mon bureau, plusieurs choses qui reviennent toujours : une tasse trop vite refroidie, des carnets ouverts à moitié, des fichiers de recherche, des idées à développer, des essais de scènes à insérer, des dates griffonnées, des noms de personnages entourés trois fois parce qu'ils refusent de rester à leur place. Et, depuis l'écriture du *Prix du Nom*, il y a autre chose.
