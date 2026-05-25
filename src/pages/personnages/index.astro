@@ -1,0 +1,164 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { getCollection } from "astro:content";
+
+const tous = await getCollection("personnages", ({ data }) => !data.draft);
+const personnages = tous.sort((a, b) => a.data.ordre - b.data.ordre);
+---
+
+<BaseLayout
+  title="Les personnages — Le Prix du Nom"
+  description="Fiches des personnages principaux du Prix du Nom, saga romanesque de François Valcour. Versions lecteur sans spoilers."
+  current="/personnages"
+>
+  <PageHeader
+    surtitre="Les figures du roman"
+    titre="Personnages"
+    accroche="Les fiches qui suivent sont des versions lecteur, limitées à ce que chaque tome publié dévoile. Elles s'enrichiront au fil des parutions."
+  />
+
+  <section class="personnages-grid">
+    {personnages.map((p) => (
+      <a href={`/personnages/${p.id.replace(/\.md$/, "")}`} class="perso-card">
+        <div
+          class="perso-portrait"
+          style={`background-image: url('${p.data.portrait}'); background-position: ${p.data.portraitPos};`}
+        ></div>
+        <div class="perso-body">
+          <div class="perso-statut">{p.data.statut}</div>
+          <h2>{p.data.titre}</h2>
+          <div class="perso-naissance">Né{p.data.titre.startsWith("Sarah") ? "e" : ""} en {p.data.naissance} · {p.data.lieuNaissance}</div>
+          <p class="perso-accroche">« {p.data.accroche} »</p>
+          <span class="perso-link">Lire la fiche →</span>
+        </div>
+      </a>
+    ))}
+  </section>
+
+  <section class="info-spoilers">
+    <div class="info-inner">
+      <h2>Pourquoi ces fiches sont volontairement incomplètes</h2>
+      <p>
+        Une saga de douze tomes traverse les personnages sur quarante, cinquante, parfois
+        soixante-dix ans. Les révéler entièrement dès le premier volume reviendrait à dévoiler
+        le voyage que le lecteur s'apprête à faire.
+      </p>
+      <p>
+        Chaque fiche présente le personnage tel qu'il apparaît dans le tome déjà publié.
+        À chaque nouvelle parution, ces pages s'enrichissent d'une couche supplémentaire :
+        ce que la nouvelle traversée a révélé, ce qui s'est défait, ce qui s'est noué.
+        C'est une façon de garder l'amour de la lecture intact — et d'inviter les lecteurs
+        à revenir à chaque tome.
+      </p>
+      <p>
+        Pour suivre ces enrichissements en avant-première,
+        <a href="/newsletter">inscrivez-vous à la Lettre de l'écritoire</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .personnages-grid {
+    padding: 4rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+  .perso-card {
+    display: block;
+    background: var(--ivoire);
+    border: 1px solid var(--filet);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s;
+    overflow: hidden;
+  }
+  .perso-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(0,0,0,0.18);
+    border-color: var(--or);
+    opacity: 1;
+  }
+  .perso-portrait {
+    width: 100%;
+    height: 320px;
+    background-size: cover;
+    filter: sepia(0.1) saturate(0.95);
+  }
+  .perso-body {
+    padding: 2rem 2.2rem 2.5rem;
+  }
+  .perso-statut {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .perso-card h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--encre);
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  .perso-naissance {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--encre-doux);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .perso-accroche {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--sang);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    padding-left: 1.2rem;
+    border-left: 2px solid var(--or);
+  }
+  .perso-link {
+    font-style: italic;
+    color: var(--sang);
+    font-size: 0.98rem;
+  }
+
+  .info-spoilers {
+    background: var(--encre);
+    color: var(--ivoire);
+    padding: 5rem 2rem;
+  }
+  .info-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .info-spoilers h2 {
+    color: var(--ivoire);
+    font-size: 1.9rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 500;
+  }
+  .info-spoilers p {
+    color: rgba(245, 241, 232, 0.8);
+    font-size: 1.08rem;
+    line-height: 1.75;
+    margin-bottom: 1.2rem;
+  }
+  .info-spoilers a { color: var(--or-pale); border-bottom: 1px solid var(--or-pale); }
+  .info-spoilers a:hover { color: var(--ivoire); }
+
+  @media (max-width: 860px) {
+    .personnages-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .perso-portrait { height: 280px; }
+    .perso-card h2 { font-size: 1.6rem; }
+  }
+</style>

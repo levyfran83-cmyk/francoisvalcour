@@ -26,4 +26,27 @@ const carnet = defineCollection({
   }),
 });
 
-export const collections = { carnet };
+// ----- Collection : Personnages (fiches lecteur) -----
+//
+// Chaque personnage est un fichier .md dans src/content/personnages/
+// Les fiches sont des versions "lecteur" volontairement limitées aux
+// éléments dévoilés dans le tome publié — pas de spoilers des tomes
+// suivants.
+//
+const personnages = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/personnages" }),
+  schema: z.object({
+    titre: z.string(),
+    naissance: z.number(),
+    lieuNaissance: z.string(),
+    statut: z.string(),
+    periode: z.string(),
+    portrait: z.string(),
+    portraitPos: z.string().optional().default("center"),
+    accroche: z.string(),
+    ordre: z.number().default(99),
+    draft: z.boolean().optional().default(false),
+  }),
+});
+
+export const collections = { carnet, personnages };
