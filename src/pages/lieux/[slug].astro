@@ -1,0 +1,275 @@
+---
+// Page dynamique d'une fiche lieu
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const fiches = await getCollection("lieux", ({ data }) => !data.draft);
+  return fiches.map((fiche) => ({
+    params: { slug: fiche.id.replace(/\.md$/, "") },
+    props: { fiche },
+  }));
+}
+
+const { fiche } = Astro.props;
+const { Content } = await render(fiche);
+
+// Autres lieux pour "voir aussi"
+const tous = await getCollection("lieux", ({ data }) => !data.draft);
+const autres = tous
+  .filter((l) => l.id !== fiche.id)
+  .sort((a, b) => a.data.ordre - b.data.ordre);
+---
+
+<BaseLayout
+  title={`${fiche.data.titre} — Lieu du Prix du Nom`}
+  description={fiche.data.accroche}
+  current="/lieux"
+>
+  <article class="fiche">
+    <!-- ===== EN-TÊTE ===== -->
+    <header class="lieu-hero">
+      <div class="lieu-hero-meta">
+        <a href="/lieux" class="retour">← Tous les lieux</a>
+        <div class="lieu-statut">{fiche.data.statut}</div>
+        <h1>{fiche.data.titre}</h1>
+        <div class="lieu-localisation">{fiche.data.localisation}</div>
+        <blockquote class="lieu-accroche">« {fiche.data.accroche} »</blockquote>
+        <div class="lieu-periode">{fiche.data.periode}</div>
+      </div>
+      <figure class="lieu-banniere">
+        <div
+          class="lieu-banniere-img"
+          style={`background-image: url('${fiche.data.image}'); background-position: ${fiche.data.imagePos};`}
+        ></div>
+      </figure>
+    </header>
+
+    <!-- ===== CORPS DE LA FICHE ===== -->
+    <div class="fiche-body">
+      <Content />
+    </div>
+
+    <!-- ===== AUTRES LIEUX ===== -->
+    {autres.length > 0 && (
+      <aside class="autres">
+        <h2>Autres lieux du roman</h2>
+        <div class="autres-grid">
+          {autres.map((a) => (
+            <a href={`/lieux/${a.id.replace(/\.md$/, "")}`} class="autre-card">
+              <div
+                class="autre-image"
+                style={`background-image: url('${a.data.image}'); background-position: ${a.data.imagePos};`}
+              ></div>
+              <div class="autre-body">
+                <h3>{a.data.titre}</h3>
+                <div class="autre-statut">{a.data.localisation}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </aside>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .lieu-hero {
+    background: linear-gradient(180deg, var(--ivoire) 0%, var(--ivoire-fonce) 100%);
+    padding: 4rem 2rem 0;
+  }
+  .lieu-hero-meta {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .retour {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  .lieu-statut {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--sang);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+  .lieu-hero-meta h1 {
+    font-size: 3.4rem;
+    line-height: 1.05;
+    color: var(--encre);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .lieu-localisation {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--encre-doux);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  .lieu-accroche {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--encre-doux);
+    line-height: 1.5;
+    padding: 1rem 1.5rem;
+    border-left: 3px solid var(--or);
+    background: rgba(168, 139, 92, 0.08);
+    margin: 0 auto 1.2rem;
+    max-width: 640px;
+    text-align: left;
+  }
+  .lieu-periode {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 3rem;
+  }
+  .lieu-banniere {
+    max-width: 1100px;
+    margin: 0 auto;
+    transform: translateY(2rem);
+  }
+  .lieu-banniere-img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-size: cover;
+    box-shadow: 0 30px 60px -25px rgba(28, 28, 26, 0.55);
+    filter: sepia(0.12) saturate(0.95);
+  }
+
+  /* ===== CORPS DE LA FICHE ===== */
+  .fiche-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 6rem 2rem 4rem;
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: var(--encre);
+  }
+  .fiche-body :global(p) {
+    margin-bottom: 1.4rem;
+    color: var(--encre-doux);
+  }
+  .fiche-body :global(h2) {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--encre);
+    margin: 3.5rem 0 1.2rem;
+    padding-left: 1.4rem;
+    position: relative;
+    line-height: 1.2;
+  }
+  .fiche-body :global(h2::before) {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--or);
+    font-size: 1.1rem;
+    top: 0.6rem;
+  }
+  .fiche-body :global(strong) { color: var(--encre); font-weight: 600; }
+  .fiche-body :global(em) { color: var(--encre); font-style: italic; }
+  .fiche-body :global(a) {
+    color: var(--sang);
+    border-bottom: 1px solid var(--sang);
+    padding-bottom: 1px;
+  }
+  .fiche-body :global(blockquote) {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--sang);
+    line-height: 1.6;
+    margin: 2rem 0;
+    padding: 1.5rem 2rem;
+    border-left: 3px solid var(--or);
+    background: var(--ivoire-fonce);
+  }
+  .fiche-body :global(blockquote p) { color: var(--sang); margin-bottom: 0; }
+  .fiche-body :global(hr) {
+    border: none;
+    height: 1px;
+    background: var(--filet);
+    margin: 3rem 0;
+  }
+
+  /* ===== AUTRES LIEUX ===== */
+  .autres {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+  .autres h2 {
+    text-align: center;
+    font-size: 1.7rem;
+    margin-bottom: 2rem;
+    color: var(--encre);
+    font-weight: 500;
+  }
+  .autres-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  .autre-card {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    background: var(--ivoire-fonce);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s;
+    border: 1px solid var(--filet);
+  }
+  .autre-card:hover {
+    border-color: var(--or);
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+  .autre-image {
+    width: 140px;
+    height: 140px;
+    background-size: cover;
+    filter: sepia(0.12);
+  }
+  .autre-body {
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .autre-card h3 {
+    font-size: 1.3rem;
+    color: var(--encre);
+    margin-bottom: 0.4rem;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+  .autre-statut {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 860px) {
+    .lieu-hero-meta h1 { font-size: 2.4rem; }
+    .lieu-banniere-img { aspect-ratio: 4 / 3; }
+    .fiche-body { padding-top: 5rem; }
+    .autre-card { grid-template-columns: 110px 1fr; }
+    .autre-image { width: 110px; height: 110px; }
+  }
+</style>
