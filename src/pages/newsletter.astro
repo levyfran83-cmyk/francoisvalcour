@@ -61,18 +61,25 @@ import PageHeader from "../components/PageHeader.astro";
       <div class="right">
         <div class="form-card">
           <h3>S'inscrire</h3>
-          <form class="form-newsletter" id="form-newsletter">
+          <form
+            class="form-newsletter embeddable-buttondown-form"
+            action="https://buttondown.com/api/emails/embed-subscribe/levyfran83"
+            method="post"
+            target="popupwindow"
+            onsubmit="window.open('https://buttondown.com/levyfran83', 'popupwindow')"
+          >
             <label>
               <span>Prénom</span>
-              <input type="text" name="firstname" placeholder="optionnel" />
+              <input type="text" name="metadata__firstname" placeholder="optionnel" />
             </label>
             <label>
               <span>Adresse e-mail</span>
               <input type="email" name="email" required placeholder="vous@exemple.fr" />
             </label>
+            <input type="hidden" value="1" name="embed" />
             <button type="submit" class="btn">S'inscrire à la lettre</button>
             <p class="form-help">
-              <em>L'inscription sera connectée à Buttondown au mouvement 4 — le formulaire est encore une maquette.</em>
+              <em>Une fenêtre de confirmation s'ouvrira après la soumission. Vous pourrez vous désinscrire en un clic à tout moment depuis chaque envoi.</em>
             </p>
           </form>
         </div>

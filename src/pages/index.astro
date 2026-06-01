@@ -232,12 +232,19 @@ const articles = tousLesArticles
         un extrait inédit, une image d'archive, une question d'écriture. Aucune publicité,
         désinscription en un clic.
       </p>
-      <form class="newsletter-form" id="newsletter-form">
-        <input type="email" placeholder="votre adresse e-mail" required />
+      <form
+        class="newsletter-form embeddable-buttondown-form"
+        action="https://buttondown.com/api/emails/embed-subscribe/levyfran83"
+        method="post"
+        target="popupwindow"
+        onsubmit="window.open('https://buttondown.com/levyfran83', 'popupwindow')"
+      >
+        <input type="email" name="email" placeholder="votre adresse e-mail" required />
+        <input type="hidden" value="1" name="embed" />
         <button type="submit" class="btn">S'inscrire</button>
       </form>
       <p class="newsletter-help">
-        L'inscription sera connectée à Buttondown au mouvement 4.
+        Une lettre par mois, jamais plus. Désinscription en un clic.
       </p>
     </div>
   </section>
