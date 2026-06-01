@@ -76,10 +76,28 @@ const autres = tous
       <h2>Vos retours</h2>
       <p class="commentaires-intro">
         Les discussions sont propulsées par <a href="https://giscus.app" target="_blank" rel="noopener">Giscus</a>
-        (commentaires via GitHub). Pour commenter, il vous faut un compte GitHub gratuit.
+        — commentaires via GitHub. Pour réagir, il vous faut un
+        <a href="https://github.com/signup" target="_blank" rel="noopener">compte GitHub gratuit</a>.
       </p>
-      <div id="giscus-placeholder">
-        <em>Les commentaires Giscus seront branchés au mouvement 4, une fois le dépôt GitHub créé.</em>
+
+      <div class="giscus-container">
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="levyfran83-cmyk/francoisvalcour"
+          data-repo-id="R_kgDOSmrYWA"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOSmrYWM4C-Qme"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="light"
+          data-lang="fr"
+          crossorigin="anonymous"
+          async
+          is:inline
+        ></script>
       </div>
     </section>
 
@@ -284,12 +302,17 @@ const autres = tous
     margin-bottom: 2rem;
     line-height: 1.6;
   }
-  #giscus-placeholder {
+  .giscus-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
     background: var(--ivoire-fonce);
-    padding: 3rem 2rem;
-    text-align: center;
-    color: var(--or);
     border-left: 3px solid var(--or);
+    min-height: 200px;
+  }
+  /* Giscus charge un iframe — on s'assure qu'il prend la largeur disponible */
+  .giscus-container :global(.giscus),
+  .giscus-container :global(.giscus-frame) {
+    width: 100% !important;
   }
 
   /* ===== LIRE AUSSI ===== */
