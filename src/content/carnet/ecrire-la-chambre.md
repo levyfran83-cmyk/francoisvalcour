@@ -5,7 +5,6 @@ rubrique: "Le chantier"
 extrait: "Des lecteurs me l'ont écrit, et ils avaient raison : on jure que Julian et Sarah brûlent l'un pour l'autre, et la porte de leur chambre reste close. Voici comment j'ai fini par l'entrouvrir — sans rien trahir."
 image: "/assets/sarah.png"
 imagePos: "center 20%"
-draft: true
 ---
 
 J'ai reçu, ces derniers mois, plusieurs lettres qui disaient toutes, à peu près, la même
