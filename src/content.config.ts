@@ -49,4 +49,26 @@ const personnages = defineCollection({
   }),
 });
 
-export const collections = { carnet, personnages };
+// ----- Collection : Lieux (fiches lecteur) -----
+//
+// Chaque lieu est un fichier .md dans src/content/lieux/
+// Le nom du fichier (sans .md) devient le slug d'URL : /lieux/<slug>
+// Comme les fiches personnages, ce sont des versions "lecteur" limitées
+// aux éléments dévoilés dans le tome publié — pas de spoilers.
+//
+const lieux = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/lieux" }),
+  schema: z.object({
+    titre: z.string(),
+    localisation: z.string(),
+    statut: z.string(),
+    periode: z.string(),
+    image: z.string(),
+    imagePos: z.string().optional().default("center"),
+    accroche: z.string(),
+    ordre: z.number().default(99),
+    draft: z.boolean().optional().default(false),
+  }),
+});
+
+export const collections = { carnet, personnages, lieux };
