@@ -46,6 +46,8 @@ const links = [
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0.6rem 1.5rem;
+    flex-wrap: wrap;
   }
   .brand {
     font-family: 'Cormorant Garamond', serif;
@@ -53,21 +55,26 @@ const links = [
     font-weight: 600;
     letter-spacing: 0.04em;
     color: var(--encre);
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .brand:hover { opacity: 1; color: var(--encre); }
   .brand em { color: var(--or); font-style: normal; }
   .brand .italic { font-style: italic; }
   .nav-links {
     display: flex;
-    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.6rem 1.1rem;
     list-style: none;
     font-size: 0.95rem;
   }
   .nav-links a {
     color: var(--encre-doux);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    font-size: 0.78rem;
+    white-space: nowrap;
   }
   .nav-links a:hover,
   .nav-links a.active { color: var(--sang); }
