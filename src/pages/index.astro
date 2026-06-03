@@ -18,7 +18,7 @@ const cycles = [
     count: "4 tomes",
     tomes: [
       { roman: "I",   label: "La Ruelle — à l'impression", statut: "imprime" },
-      { roman: "II",  label: "Le Maréchal — finalisé",     statut: "finalise" },
+      { roman: "II",  label: "Le Maréchal — en cours de finalisation", statut: "finalise" },
       { roman: "III", label: "en retouches",                statut: "retouches" },
       { roman: "IV",  label: "en retouches",                statut: "retouches" },
     ],
@@ -143,6 +143,33 @@ const articles = tousLesArticles
     </div>
   </section>
 
+  <!-- ===================== TOME II ===================== -->
+  <section id="tome2" class="tome-feature reverse">
+    <div class="tome-feature-inner">
+      <div>
+        <SectionTitle surtitre="Tome II · Cycle de l'Ascension" titre="Le Maréchal" align="left" />
+        <div class="sous-titre">1804 — 1811 · D'Austerlitz à Friedland</div>
+        <span class="tome-statut">En cours de finalisation</span>
+        <p class="resume">
+          Les grandes campagnes de l'Empire — Austerlitz, Iéna, Eylau, Friedland. Julian Moreau,
+          devenu maréchal, porte désormais son nom sous le feu ; Sarah tient seule la maison de
+          Paris, entre les absences, les naissances et les deuils. Ce que le couple a bâti dans
+          l'ombre de la Révolution affronte maintenant la pleine lumière du pouvoir impérial.
+        </p>
+        <div class="meta">
+          <span>📅 <strong>1804 – 1811</strong></span>
+          <span>🏛 <strong>Éditions du Quai</strong></span>
+          <span>✒ <strong>En cours de finalisation</strong></span>
+        </div>
+        <div class="hero-cta">
+          <a href="/newsletter" class="btn">Être prévenu de la sortie</a>
+          <a href="/tomes" class="btn secondary">Voir tous les tomes</a>
+        </div>
+      </div>
+      <img src="/assets/cover_tome2.png" alt="Couverture Tome II — Le Maréchal" />
+    </div>
+  </section>
+
   <!-- ===================== CHANTIER ===================== -->
   <section class="chantier" id="chantier">
     <div class="chantier-wrapper">
@@ -178,7 +205,7 @@ const articles = tousLesArticles
 
       <div class="legende-chantier">
         <span><span class="dot" style="background: var(--sang); box-shadow: 0 0 8px var(--sang);"></span>À l'impression</span>
-        <span><span class="dot" style="background: #8BB58B;"></span>Finalisé</span>
+        <span><span class="dot" style="background: #8BB58B;"></span>En finalisation</span>
         <span><span class="dot" style="background: var(--or);"></span>En retouches</span>
         <span><span class="dot" style="background: rgba(168, 139, 92, 0.4);"></span>À écrire</span>
       </div>
@@ -295,6 +322,7 @@ const articles = tousLesArticles
   .tome-feature img {
     width: 100%;
     max-width: 340px;
+    border: 1px solid var(--or);
     box-shadow: 0 25px 50px -15px rgba(0,0,0,0.4);
   }
   .tome-feature .sous-titre {
@@ -325,6 +353,24 @@ const articles = tousLesArticles
   }
   .tome-feature .meta strong { color: var(--encre); }
   .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* Tome II : disposition inversée (texte à gauche, couverture à droite) */
+  .tome-feature.reverse .tome-feature-inner {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+  .tome-statut {
+    display: inline-block;
+    padding: 0.3rem 0.9rem;
+    margin-bottom: 1.5rem;
+    border-radius: 30px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: #E8F0E5;
+    color: #3F6B3A;
+    border: 1px solid #8BB58B;
+  }
 
   /* ===== CHANTIER ===== */
   .chantier {
@@ -539,12 +585,15 @@ const articles = tousLesArticles
   /* ===== RESPONSIVE ===== */
   @media (max-width: 860px) {
     .saga-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .tome-feature-inner {
+    .tome-feature-inner,
+    .tome-feature.reverse .tome-feature-inner {
       grid-template-columns: 1fr;
       gap: 2.5rem;
       text-align: center;
     }
     .tome-feature img { max-width: 240px; margin: 0 auto; }
+    .tome-feature.reverse .tome-feature-inner > div { order: 2; }
+    .tome-feature.reverse .tome-feature-inner img { order: 1; }
     .tome-feature .meta { justify-content: center; }
     .carnet-grid { grid-template-columns: 1fr; }
     .cycle-header { grid-template-columns: 50px 1fr; }
