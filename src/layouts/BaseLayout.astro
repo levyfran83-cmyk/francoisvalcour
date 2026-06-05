@@ -12,6 +12,7 @@ const {
   title = "François Valcour — Le Prix du Nom",
   description = "Site officiel de François Valcour, auteur du Prix du Nom, saga romanesque française de 1793 à 1870.",
   current = "",
+  noindex = false,
 } = Astro.props;
 ---
 
@@ -22,6 +23,7 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
 
   <!-- OpenGraph / partage social -->
   <meta property="og:type" content="website" />
