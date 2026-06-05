@@ -1,0 +1,137 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import paragraphes from "../data/prologue.json";
+---
+
+<BaseLayout
+  title="Prologue — Le Prix du Nom, Tome I"
+  description="Lisez le prologue du Prix du Nom, Tome I — La Ruelle. « La dernière nuit » : la fuite de Sarah de La Roche-Aymon, Berry, novembre 1793."
+  current="/tomes"
+>
+  <PageHeader
+    surtitre="Le Prix du Nom · Tome I — La Ruelle"
+    titre="Prologue"
+    accroche="« Ce qui fut détruit »"
+  />
+
+  <article class="prologue">
+    <div class="chapitre-tete">
+      <span class="filet"></span>
+      <h2>La dernière nuit</h2>
+      <div class="lieu-date">Le Berry — novembre 1793</div>
+      <span class="orn">❖&nbsp;&nbsp;❖&nbsp;&nbsp;❖</span>
+    </div>
+
+    <div class="corps">
+      {paragraphes.map((p) => (
+        <p class={p.startsWith("—") ? "dialogue" : undefined}>{p}</p>
+      ))}
+    </div>
+
+    <div class="fin">
+      <span class="orn">❦</span>
+      <p class="note">
+        Vous venez de lire le prologue du <em>Prix du Nom</em>, Tome I — <em>La Ruelle</em>.
+        La suite paraît très bientôt.
+      </p>
+      <div class="cta">
+        <a href="/newsletter" class="btn">Être prévenu de la sortie</a>
+        <a href="/tomes/la-ruelle" class="btn secondary">Découvrir le Tome I</a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .prologue {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  .chapitre-tete {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .chapitre-tete .filet {
+    display: block;
+    width: 70px;
+    height: 1px;
+    background: var(--or);
+    margin: 0 auto 1.8rem;
+  }
+  .chapitre-tete h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.1rem;
+    font-weight: 500;
+    color: var(--encre);
+    margin-bottom: 0.4rem;
+  }
+  .chapitre-tete .lieu-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--encre-doux);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+  }
+  .chapitre-tete .orn {
+    color: var(--or);
+    letter-spacing: 0.2em;
+    font-size: 0.9rem;
+  }
+
+  .corps p {
+    font-size: 1.18rem;
+    line-height: 1.85;
+    color: var(--encre);
+    text-align: justify;
+    margin-bottom: 1.4rem;
+    hyphens: auto;
+  }
+  .corps p.dialogue {
+    text-align: left;
+  }
+  .corps p:first-of-type::first-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4.2rem;
+    float: left;
+    line-height: 0.78;
+    padding: 0.1rem 0.6rem 0 0;
+    color: var(--sang);
+    font-weight: 500;
+  }
+
+  .fin {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--filet);
+  }
+  .fin .orn {
+    display: block;
+    color: var(--or);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .fin .note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--encre-doux);
+    line-height: 1.6;
+    max-width: 460px;
+    margin: 0 auto 2.2rem;
+  }
+  .fin .cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 640px) {
+    .corps p { font-size: 1.1rem; text-align: left; }
+    .corps p:first-of-type::first-letter { font-size: 3.4rem; }
+  }
+</style>
