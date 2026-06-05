@@ -1,0 +1,156 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+---
+
+<BaseLayout
+  title="Bienvenue — La Lettre de l'écritoire"
+  description="Votre inscription à la Lettre de l'écritoire est confirmée. Bienvenue dans le monde du Prix du Nom."
+  current="/newsletter"
+  noindex={true}
+>
+  <PageHeader
+    surtitre="La Lettre de l'écritoire"
+    titre="Bienvenue à l'écritoire"
+    accroche="Votre inscription est confirmée. Merci de votre confiance — la prochaine lettre partira bientôt du chantier."
+  />
+
+  <section class="merci">
+    <div class="merci-inner">
+      <div class="confirm">
+        <span class="sceau">✦</span>
+        <p>
+          <strong>Votre adresse est bien enregistrée.</strong> Vous recevrez la Lettre de
+          l'écritoire environ une fois par mois : l'avancement du tome en cours, un extrait
+          inédit, une image d'archive, une question d'écriture. Aucune publicité, aucun
+          partage de votre adresse, désinscription en un clic depuis chaque envoi.
+        </p>
+      </div>
+
+      <p class="astuce">
+        <strong>Un conseil :</strong> ajoutez l'expéditeur de la lettre à votre carnet
+        d'adresses dès le premier envoi, pour qu'elle n'atterrisse pas dans les indésirables.
+      </p>
+
+      <h2>En attendant la première lettre</h2>
+      <div class="liens">
+        <a href="/tomes/la-ruelle" class="lien-card">
+          <span class="num">I</span>
+          <span class="t">Découvrir le Tome I</span>
+          <span class="d"><em>La Ruelle</em> — 1793-1804, de la Terreur au Consulat.</span>
+        </a>
+        <a href="/carnet" class="lien-card">
+          <span class="num">✒</span>
+          <span class="t">Parcourir le Carnet</span>
+          <span class="d">Les coulisses d'écriture, au fil du chantier.</span>
+        </a>
+        <a href="/personnages" class="lien-card">
+          <span class="num">✦</span>
+          <span class="t">Rencontrer les personnages</span>
+          <span class="d">Julian, Sarah, et la maison Moreau.</span>
+        </a>
+      </div>
+
+      <div class="retour">
+        <a href="/" class="btn secondary">Retour à l'accueil</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .merci {
+    padding: 4rem 2rem 5rem;
+  }
+  .merci-inner {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .confirm {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 1.2rem;
+    align-items: start;
+    background: var(--ivoire-fonce);
+    border-left: 3px solid var(--or);
+    padding: 1.8rem 2rem;
+  }
+  .confirm .sceau {
+    color: var(--or);
+    font-size: 1.8rem;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .confirm p {
+    color: var(--encre-doux);
+    line-height: 1.7;
+    font-size: 1.08rem;
+  }
+  .confirm strong { color: var(--encre); }
+
+  .astuce {
+    margin: 1.5rem 0 3.5rem;
+    color: var(--encre-doux);
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+  .astuce strong { color: var(--sang); }
+
+  .merci h2 {
+    font-size: 1.7rem;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .liens {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .lien-card {
+    display: block;
+    background: var(--ivoire);
+    border: 1px solid var(--filet);
+    border-top: 3px solid var(--or);
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  }
+  .lien-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px -15px rgba(28, 28, 26, 0.18);
+    border-top-color: var(--sang);
+  }
+  .lien-card .num {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--or);
+    line-height: 1;
+    margin-bottom: 0.6rem;
+  }
+  .lien-card .t {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    color: var(--encre);
+    margin-bottom: 0.5rem;
+  }
+  .lien-card .d {
+    display: block;
+    color: var(--encre-doux);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .lien-card:hover .t { color: var(--sang); }
+
+  .retour {
+    text-align: center;
+    margin-top: 3.5rem;
+  }
+
+  @media (max-width: 760px) {
+    .liens { grid-template-columns: 1fr; }
+  }
+</style>
