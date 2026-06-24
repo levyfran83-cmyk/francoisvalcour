@@ -3,15 +3,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHeader from "../../components/PageHeader.astro";
 
 // Liste des 12 tomes. Les statuts sont source de vérité unique :
-//   "imprime"   : Tome I — paraît juin 2026
-//   "finalise"  : Tome II — terminé, en attente d'édition
+//   "disponible": Tome I — paru, en vente
+//   "imprime"   : Tome II — à l'impression, paraît juillet 2026
 //   "retouches" : Tomes III à VIII — écrits, en révision
 //   "a-ecrire"  : Tomes IX à XII — pas encore écrits
+const ACHAT_TOME1 = "https://www.thebookedition.com/fr/le-prix-du-nom-tome-1-la-ruelle-p-432861.html";
 const tomes = [
-  { num: "I",    titre: "La Ruelle",  periode: "1793 — 1804", cycle: "L'Ascension",       statut: "imprime",    href: "/tomes/la-ruelle",
+  { num: "I",    titre: "La Ruelle",  periode: "1793 — 1804", cycle: "L'Ascension",       statut: "disponible", href: "/tomes/la-ruelle", achat: ACHAT_TOME1,
     resume: "Sarah de La Roche-Aymon, Julian Moreau, et la naissance d'une maison sous la Révolution, le Consulat et l'Empire naissant." },
-  { num: "II",   titre: "Le Maréchal", periode: "1804 — 1811", cycle: "L'Ascension",      statut: "finalise",   href: null,
-    resume: "Les grandes campagnes : Austerlitz, Iéna, Eylau, Friedland. Julian Moreau, devenu maréchal, et Sarah, qui tient seule la maison de Paris." },
+  { num: "II",   titre: "Le Maréchal", periode: "1804 — 1811", cycle: "L'Ascension",      statut: "imprime",    href: "/tomes/le-marechal",
+    resume: "1804. L'Empire se couronne. Bataille après bataille — Austerlitz, Iéna, Eylau —, Julian gagne le droit d'exister, jusqu'au bâton de maréchal. Mais la gloire menace le secret que Sarah protège seule." },
   { num: "III",  titre: "(en révision)", periode: "1811 — 1812", cycle: "L'Ascension",    statut: "retouches", href: null,
     resume: "Le mariage autrichien, le baptême du Roi de Rome, et les premiers nuages venus d'Espagne." },
   { num: "IV",   titre: "(en révision)", periode: "1812",        cycle: "L'Ascension",    statut: "retouches", href: null,
@@ -35,7 +36,8 @@ const tomes = [
 ];
 
 const statutLabel = {
-  imprime:   "À paraître · juin 2026",
+  disponible:"Disponible",
+  imprime:   "À l'impression · juillet 2026",
   finalise:  "En cours de finalisation",
   retouches: "En retouches",
   "a-ecrire":"À écrire",
@@ -50,7 +52,7 @@ const statutLabel = {
   <PageHeader
     surtitre="L'œuvre, tome par tome"
     titre="Les douze tomes"
-    accroche="Quatre cycles, douze volumes, quatre-vingts ans d'histoire de France. État du chantier au 24 mai 2026."
+    accroche="Quatre cycles, douze volumes, quatre-vingts ans d'histoire de France. État du chantier au 24 juin 2026."
   />
 
   <section class="tomes-grid">
@@ -64,7 +66,10 @@ const statutLabel = {
           <p>{t.resume}</p>
           <div class="tome-footer">
             <span class={`statut-badge ${t.statut}`}>{statutLabel[t.statut]}</span>
-            {t.href && <a href={t.href} class="tome-link">En savoir plus →</a>}
+            <div class="tome-actions">
+              {t.achat && <a href={t.achat} class="tome-achat" target="_blank" rel="noopener">Commander →</a>}
+              {t.href && <a href={t.href} class="tome-link">En savoir plus →</a>}
+            </div>
           </div>
         </div>
       </article>
@@ -96,7 +101,8 @@ const statutLabel = {
     box-shadow: 0 15px 35px -15px rgba(28, 28, 26, 0.15);
     transform: translateY(-2px);
   }
-  .tome-card.statut-imprime { border-left-color: var(--sang); background: rgba(122, 46, 31, 0.04); }
+  .tome-card.statut-disponible { border-left-color: var(--sang); background: rgba(122, 46, 31, 0.04); }
+  .tome-card.statut-imprime { border-left-color: #8BB58B; }
   .tome-card.statut-a-ecrire { opacity: 0.7; border-left-color: rgba(168, 139, 92, 0.3); }
   .tome-card.statut-a-ecrire:hover { opacity: 1; }
 
@@ -109,7 +115,7 @@ const statutLabel = {
     text-align: center;
     align-self: center;
   }
-  .tome-card.statut-imprime .tome-roman { color: var(--sang); }
+  .tome-card.statut-disponible .tome-roman { color: var(--sang); }
 
   .tome-cycle {
     font-family: 'Cormorant Garamond', serif;
@@ -158,11 +164,29 @@ const statutLabel = {
     text-transform: uppercase;
     border: 1px solid;
   }
-  .statut-badge.imprime { background: var(--sang); color: var(--ivoire); border-color: var(--sang); }
+  .statut-badge.disponible { background: var(--sang); color: var(--ivoire); border-color: var(--sang); }
+  .statut-badge.imprime { background: #E8F0E5; color: #3F6B3A; border-color: #8BB58B; }
   .statut-badge.finalise { background: #E8F0E5; color: #3F6B3A; border-color: #8BB58B; }
   .statut-badge.retouches { background: rgba(168, 139, 92, 0.1); color: var(--or); border-color: var(--or); }
   .statut-badge.a-ecrire { background: transparent; color: var(--encre-doux); border-color: var(--filet); }
 
+  .tome-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .tome-achat {
+    display: inline-block;
+    padding: 0.45rem 1.1rem;
+    background: var(--sang);
+    color: var(--ivoire);
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    border: 1px solid var(--sang);
+    transition: all 0.25s;
+  }
+  .tome-achat:hover { background: var(--encre); border-color: var(--encre); color: var(--ivoire); }
   .tome-link {
     font-style: italic;
     font-size: 0.95rem;

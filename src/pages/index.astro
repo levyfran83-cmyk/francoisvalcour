@@ -17,8 +17,8 @@ const cycles = [
     periode: "1793 — 1811 · de la Terreur au baptême du Roi de Rome",
     count: "4 tomes",
     tomes: [
-      { roman: "I",   label: "La Ruelle — à l'impression", statut: "imprime" },
-      { roman: "II",  label: "Le Maréchal — en cours de finalisation", statut: "finalise" },
+      { roman: "I",   label: "La Ruelle — disponible",        statut: "disponible" },
+      { roman: "II",  label: "Le Maréchal — à l'impression",  statut: "imprime" },
       { roman: "III", label: "en retouches",                statut: "retouches" },
       { roman: "IV",  label: "en retouches",                statut: "retouches" },
     ],
@@ -145,7 +145,7 @@ const articles = tousLesArticles
           <span>🏛 <strong>Éditions du Quai</strong></span>
         </div>
         <div class="hero-cta">
-          <a href="/newsletter" class="btn">Être prévenu de la sortie</a>
+          <a href="https://www.thebookedition.com/fr/le-prix-du-nom-tome-1-la-ruelle-p-432861.html" class="btn" target="_blank" rel="noopener">Commander le livre</a>
           <a href="/tomes/la-ruelle" class="btn secondary">Lire un extrait</a>
         </div>
       </div>
@@ -157,25 +157,26 @@ const articles = tousLesArticles
     <div class="tome-feature-inner">
       <div>
         <SectionTitle surtitre="Tome II · Cycle de l'Ascension" titre="Le Maréchal" align="left" />
-        <div class="sous-titre">1804 — 1811 · D'Austerlitz à Friedland</div>
-        <span class="tome-statut">En cours de finalisation</span>
+        <div class="sous-titre">1804 — 1811 · Du sacre aux grandes campagnes</div>
+        <span class="tome-statut">À l'impression · juillet 2026</span>
         <p class="resume">
-          Les grandes campagnes de l'Empire — Austerlitz, Iéna, Eylau, Friedland. Julian Moreau,
-          devenu maréchal, porte désormais son nom sous le feu ; Sarah tient seule la maison de
-          Paris, entre les absences, les naissances et les deuils. Ce que le couple a bâti dans
-          l'ombre de la Révolution affronte maintenant la pleine lumière du pouvoir impérial.
+          1804. L'Empire se couronne, et avec lui s'élèvent des hommes que la naissance n'avait
+          promis à rien. À Austerlitz, à Iéna, dans la neige rouge d'Eylau, Julian Moreau ne
+          gagne pas que des batailles : il gagne le droit d'exister, jusqu'au bâton de maréchal.
+          Pendant qu'il sert l'Empereur, Sarah tient seule la maison et veille sur ce qui ne
+          doit jamais se dire — car la grandeur est parfois le plus sûr moyen de se trahir.
         </p>
         <div class="meta">
           <span>📅 <strong>1804 – 1811</strong></span>
           <span>🏛 <strong>Éditions du Quai</strong></span>
-          <span>✒ <strong>En cours de finalisation</strong></span>
+          <span>✒ <strong>À l'impression</strong></span>
         </div>
         <div class="hero-cta">
           <a href="/newsletter" class="btn">Être prévenu de la sortie</a>
-          <a href="/tomes" class="btn secondary">Voir tous les tomes</a>
+          <a href="/tomes/le-marechal" class="btn secondary">Découvrir le Tome II</a>
         </div>
       </div>
-      <img src="/assets/cover_tome2.png" alt="Couverture Tome II — Le Maréchal" />
+      <img src="/assets/cover_tome2.jpg" alt="Couverture Tome II — Le Maréchal" />
     </div>
   </section>
 
@@ -184,9 +185,9 @@ const articles = tousLesArticles
     <div class="chantier-wrapper">
       <SectionTitle surtitre="État d'avancement" titre="Le chantier" />
       <p class="section-intro">
-        Douze tomes prévus, organisés en quatre cycles. Huit déjà écrits, dont deux finalisés
-        et six en retouches. Quatre tomes restent à écrire pour mener Sarah, Julian et leur
-        descendance jusqu'à Sedan.
+        Douze tomes prévus, organisés en quatre cycles. Le premier est paru, le deuxième est
+        à l'impression ; six autres sont écrits et en retouches. Quatre tomes restent à écrire
+        pour mener Sarah, Julian et leur descendance jusqu'à Sedan.
       </p>
 
       <div class="chantier-list">
@@ -213,8 +214,8 @@ const articles = tousLesArticles
       </div>
 
       <div class="legende-chantier">
-        <span><span class="dot" style="background: var(--sang); box-shadow: 0 0 8px var(--sang);"></span>À l'impression</span>
-        <span><span class="dot" style="background: #8BB58B;"></span>En finalisation</span>
+        <span><span class="dot" style="background: var(--sang); box-shadow: 0 0 8px var(--sang);"></span>Disponible</span>
+        <span><span class="dot" style="background: #8BB58B;"></span>À l'impression</span>
         <span><span class="dot" style="background: var(--or);"></span>En retouches</span>
         <span><span class="dot" style="background: rgba(168, 139, 92, 0.4);"></span>À écrire</span>
       </div>
@@ -458,14 +459,16 @@ const articles = tousLesArticles
     height: 8px;
     border-radius: 50%;
   }
-  .tome-pastille.imprime {
+  .tome-pastille.disponible {
     border-color: var(--sang);
     background: rgba(122, 46, 31, 0.15);
   }
-  .tome-pastille.imprime .dot {
+  .tome-pastille.disponible .dot {
     background: var(--sang);
     box-shadow: 0 0 8px var(--sang);
   }
+  .tome-pastille.imprime { border-color: #8BB58B; }
+  .tome-pastille.imprime .dot { background: #8BB58B; }
   .tome-pastille.finalise .dot { background: #8BB58B; }
   .tome-pastille.retouches .dot { background: var(--or); }
   .tome-pastille.a-ecrire { opacity: 0.55; }
