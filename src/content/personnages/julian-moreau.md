@@ -4,7 +4,7 @@ naissance: 1774
 lieuNaissance: "Gien, Orléanais"
 statut: "Soldat de la République, puis général de Bonaparte"
 periode: "1774 — Tome I s'achève en 1804"
-portrait: "/assets/julian.png"
+portrait: "/assets/julian.webp"
 portraitPos: "center 18%"
 ordre: 1
 accroche: "Un homme qui voulait exister par ses actes — et que la Révolution a écouté."

@@ -3,7 +3,7 @@ titre: "Écrire la chambre : pourquoi j'avais tenu la porte fermée"
 date: 2026-06-01
 rubrique: "Le chantier"
 extrait: "Des lecteurs me l'ont écrit, et ils avaient raison : on jure que Julian et Sarah brûlent l'un pour l'autre, et la porte de leur chambre reste close. Voici comment j'ai fini par l'entrouvrir — sans rien trahir."
-image: "/assets/sarah.png"
+image: "/assets/sarah.webp"
 imagePos: "center 20%"
 ---
 

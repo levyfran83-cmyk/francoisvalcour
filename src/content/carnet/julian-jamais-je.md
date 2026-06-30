@@ -3,7 +3,7 @@ titre: "Pourquoi Julian Moreau ne dit jamais « je » en premier"
 date: 2026-05-12
 rubrique: "Personnage"
 extrait: "Une règle d'écriture que je me suis donnée dès le premier chapitre, et qui a fini par définir le personnage tout entier. Petit voyage dans une contrainte féconde."
-image: "/assets/julian.png"
+image: "/assets/julian.webp"
 imagePos: "center 18%"
 ---
 

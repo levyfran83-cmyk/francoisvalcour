@@ -27,7 +27,15 @@ const {
     </div>
     <div class="hero-cover">
       {badge && <div class="badge-parution">{badge}</div>}
-      <img src={cover} alt={coverAlt} />
+      <img
+        src={cover}
+        alt={coverAlt}
+        width="900"
+        height="1142"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+      />
     </div>
   </div>
 </header>

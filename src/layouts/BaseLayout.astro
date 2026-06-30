@@ -4,6 +4,19 @@
 //   - title       : titre de l'onglet
 //   - description : meta description SEO
 //   - current     : route courante, pour griser l'item actif dans la nav
+// Polices self-hostees (Fontsource) : memes familles/graisses qu'avant,
+// servies depuis le domaine -> plus de requete Google Fonts bloquante.
+import "@fontsource/eb-garamond/400.css";
+import "@fontsource/eb-garamond/500.css";
+import "@fontsource/eb-garamond/600.css";
+import "@fontsource/eb-garamond/400-italic.css";
+import "@fontsource/eb-garamond/500-italic.css";
+import "@fontsource/cormorant-garamond/400.css";
+import "@fontsource/cormorant-garamond/500.css";
+import "@fontsource/cormorant-garamond/600.css";
+import "@fontsource/cormorant-garamond/700.css";
+import "@fontsource/cormorant-garamond/400-italic.css";
+import "@fontsource/cormorant-garamond/500-italic.css";
 import "../styles/global.css";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
@@ -64,13 +77,8 @@ const ogImage = new URL(image, Astro.site).href;
     href="/rss.xml"
   />
 
-  <!-- Polices : EB Garamond + Cormorant Garamond -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
-    rel="stylesheet"
-  />
+  <!-- Polices EB Garamond + Cormorant Garamond : self-hostees via Fontsource
+       (importees dans le frontmatter), plus de requete tierce bloquante. -->
 
   <!-- Mesure d'audience Vercel (sans cookie, anonymisée) -->
   <Analytics />

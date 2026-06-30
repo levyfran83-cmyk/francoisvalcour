@@ -3,7 +3,7 @@ titre: "Sarah, la voie de Bâle et un cousin marquis qui n'existe pas"
 date: 2026-04-28
 rubrique: "Histoire & fiction"
 extrait: "Antoine de La Roche-Aymon est ma seule invention parmi les correspondants berlinois de l'aristocratie française. Voici pourquoi il fallait l'inventer."
-image: "/assets/sarah.png"
+image: "/assets/sarah.webp"
 imagePos: "center 20%"
 ---
 

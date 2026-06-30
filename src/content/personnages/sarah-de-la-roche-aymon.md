@@ -4,7 +4,7 @@ naissance: 1778
 lieuNaissance: "Berry"
 statut: "Aristocrate de la Marche, fugitive sous la Terreur"
 periode: "1778 — Tome I s'achève en 1804"
-portrait: "/assets/sarah.png"
+portrait: "/assets/sarah.webp"
 portraitPos: "center 20%"
 ordre: 2
 accroche: "Une survivante qui a trouvé dans les décombres un amour qu'aucun monde ne pourra défaire."

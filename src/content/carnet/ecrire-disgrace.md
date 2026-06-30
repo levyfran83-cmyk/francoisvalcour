@@ -3,7 +3,7 @@ titre: "Écrire la disgrâce : trois mois sur dix lignes"
 date: 2026-04-15
 rubrique: "Le chantier"
 extrait: "Le palier 11 de l'arc « Continuer à servir ? » m'a tenu l'hiver entier. Récit d'un blocage et de sa résolution par un détail concret."
-image: "/assets/la_grange.png"
+image: "/assets/la_grange.webp"
 imagePos: "center 65%"
 ---
 

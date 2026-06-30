@@ -3,7 +3,7 @@ titre: "Le soir où j'ai écrit la première phrase"
 date: 2026-05-25
 rubrique: "Le chantier"
 extrait: "Un soir, dans une pièce, Sarah de La Roche-Aymon est entrée dans une ruelle de Paris — et toute la saga est sortie de cette minute-là. Récit du moment fondateur."
-image: "/assets/sarah.png"
+image: "/assets/sarah.webp"
 imagePos: "center 20%"
 ---
 
