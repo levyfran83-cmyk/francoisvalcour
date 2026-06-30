@@ -1,11 +1,28 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const jsonld = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  name: "Le Prix du Nom, Tome II : Le Maréchal",
+  author: { "@type": "Person", name: "François Valcour" },
+  inLanguage: "fr",
+  isbn: "979-10-986797-1-1",
+  bookFormat: "https://schema.org/Paperback",
+  datePublished: "2026-07",
+  publisher: { "@type": "Organization", name: "Éditions du Quai" },
+  image: "https://francoisvalcour.fr/assets/cover_tome2.jpg",
+  url: "https://francoisvalcour.fr/tomes/le-marechal/",
+  isPartOf: { "@type": "BookSeries", name: "Le Prix du Nom" },
+};
 ---
 
 <BaseLayout
   title="Tome II — Le Maréchal | Le Prix du Nom"
   description="Le Prix du Nom, Tome II : Le Maréchal. 1804-1811, les grandes campagnes de l'Empire. À l'impression, parution juillet 2026 aux Éditions du Quai."
   current="/tomes"
+  image="/assets/cover_tome2.jpg"
+  jsonld={jsonld}
 >
   <!-- ===== HERO TOME II ===== -->
   <header class="tome-hero">

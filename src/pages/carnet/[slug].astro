@@ -30,12 +30,31 @@ const autres = tous
   .filter((a) => a.id !== article.id)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 2);
+
+// Donnees structurees de l'article (eligibilite resultats enrichis "Article")
+const jsonld = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: article.data.titre,
+  description: article.data.extrait,
+  datePublished: article.data.date.toISOString(),
+  author: { "@type": "Person", name: "François Valcour" },
+  publisher: { "@type": "Person", name: "François Valcour" },
+  inLanguage: "fr",
+  url: new URL(`/carnet/${article.id.replace(/\.md$/, "")}/`, Astro.site).href,
+  ...(article.data.image
+    ? { image: new URL(article.data.image, Astro.site).href }
+    : {}),
+};
 ---
 
 <BaseLayout
   title={`${article.data.titre} — Carnet de François Valcour`}
   description={article.data.extrait}
   current="/carnet"
+  ogType="article"
+  image={article.data.image ?? "/assets/cover_tome1.jpg"}
+  jsonld={jsonld}
 >
   <article class="article-page">
     <!-- ===== EN-TÊTE ARTICLE ===== -->

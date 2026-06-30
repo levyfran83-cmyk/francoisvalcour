@@ -1,11 +1,32 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const jsonld = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  name: "Le Prix du Nom, Tome I : La Ruelle",
+  author: { "@type": "Person", name: "François Valcour" },
+  inLanguage: "fr",
+  isbn: "979-10-986797-0-4",
+  bookFormat: "https://schema.org/Paperback",
+  datePublished: "2026-06",
+  publisher: { "@type": "Organization", name: "Éditions du Quai" },
+  image: "https://francoisvalcour.fr/assets/cover_tome1.jpg",
+  url: "https://francoisvalcour.fr/tomes/la-ruelle/",
+  isPartOf: { "@type": "BookSeries", name: "Le Prix du Nom" },
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/InStock",
+    url: "https://www.thebookedition.com/fr/le-prix-du-nom-tome-1-la-ruelle-p-432861.html",
+  },
+};
 ---
 
 <BaseLayout
   title="Tome I — La Ruelle | Le Prix du Nom"
   description="Le Prix du Nom, Tome I : La Ruelle. 1793-1804, de la Terreur au Consulat. Paru aux Éditions du Quai en juin 2026, disponible à la commande."
   current="/tomes"
+  jsonld={jsonld}
 >
   <!-- ===== HERO TOME I ===== -->
   <header class="tome-hero">

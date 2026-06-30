@@ -6,6 +6,28 @@ import SectionTitle from "../components/SectionTitle.astro";
 import ArticleCard from "../components/ArticleCard.astro";
 import { getCollection } from "astro:content";
 
+// Donnees structurees : identite du site + de l'auteur (eligibilite Knowledge Panel)
+const jsonld = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "François Valcour",
+    url: "https://francoisvalcour.fr/",
+    inLanguage: "fr",
+    description:
+      "Site officiel de François Valcour, auteur du Prix du Nom, saga romanesque française de 1793 à 1870.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "François Valcour",
+    url: "https://francoisvalcour.fr/auteur/",
+    jobTitle: "Romancier",
+    description:
+      "Romancier français, auteur de la saga historique Le Prix du Nom.",
+  },
+];
+
 // ============================================================
 // Données du chantier (4 cycles, 12 tomes)
 // Source : 00_Bible_Saga/Structure_saga/Structure_de_la_saga.docx
@@ -79,7 +101,7 @@ const articles = tousLesArticles
   }));
 ---
 
-<BaseLayout current="/">
+<BaseLayout current="/" jsonld={jsonld}>
   <Hero />
   <Separator />
 

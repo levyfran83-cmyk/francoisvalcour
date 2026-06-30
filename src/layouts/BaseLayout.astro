@@ -14,7 +14,15 @@ const {
   description = "Site officiel de François Valcour, auteur du Prix du Nom, saga romanesque française de 1793 à 1870.",
   current = "",
   noindex = false,
+  image = "/assets/cover_tome1.jpg",
+  ogType = "website",
+  jsonld = null,
 } = Astro.props;
+
+// URLs absolues, requises par les robots et les plateformes de partage social.
+// Astro.site est défini dans astro.config (domaine de production).
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
 ---
 
 <!DOCTYPE html>
@@ -25,13 +33,25 @@ const {
   <title>{title}</title>
   <meta name="description" content={description} />
   {noindex && <meta name="robots" content="noindex, nofollow" />}
+  <link rel="canonical" href={canonical} />
 
   <!-- OpenGraph / partage social -->
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={ogType} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content="/assets/cover_tome1.jpg" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:url" content={canonical} />
   <meta property="og:site_name" content="François Valcour" />
+  <meta property="og:locale" content="fr_FR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Donnees structurees (schema.org) -->
+  {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
