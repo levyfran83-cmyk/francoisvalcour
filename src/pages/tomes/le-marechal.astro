@@ -14,12 +14,21 @@ const jsonld = {
   image: "https://francoisvalcour.fr/assets/cover_tome2.jpg",
   url: "https://francoisvalcour.fr/tomes/le-marechal/",
   isPartOf: { "@type": "BookSeries", name: "Le Prix du Nom" },
+  numberOfPages: 749,
+  offers: {
+    "@type": "Offer",
+    price: "26.80",
+    priceCurrency: "EUR",
+    priceValidUntil: "2026-12-31",
+    availability: "https://schema.org/InStock",
+    url: "https://www.thebookedition.com/fr/le-prix-du-nom-tome-2-le-marechal-p-432870.html",
+  },
 };
 ---
 
 <BaseLayout
   title="Tome II — Le Maréchal | Le Prix du Nom"
-  description="Le Prix du Nom, Tome II : Le Maréchal. 1804-1811, les grandes campagnes de l'Empire. À l'impression, parution juillet 2026 aux Éditions du Quai."
+  description="Le Prix du Nom, Tome II : Le Maréchal. 1804-1811, les grandes campagnes de l'Empire. Paru aux Éditions du Quai en juillet 2026, disponible à la commande."
   current="/tomes"
   image="/assets/cover_tome2.jpg"
   jsonld={jsonld}
@@ -28,7 +37,7 @@ const jsonld = {
   <header class="tome-hero">
     <div class="tome-hero-inner">
       <div class="tome-hero-cover">
-        <div class="badge-parution">Juillet 2026</div>
+        <div class="badge-parution">Disponible</div>
         <img src="/assets/cover_tome2.jpg" alt="Couverture Le Prix du Nom — Tome II, Le Maréchal" width="900" height="1141" fetchpriority="high" loading="eager" decoding="async" />
       </div>
       <div class="tome-hero-text">
@@ -39,7 +48,7 @@ const jsonld = {
           « Que vaut un nom qu'on s'est donné soi-même ? »
         </blockquote>
         <div class="cta-bloc">
-          <a href="/newsletter" class="btn">Être prévenu de la sortie</a>
+          <a href="https://www.thebookedition.com/fr/le-prix-du-nom-tome-2-le-marechal-p-432870.html" class="btn" target="_blank" rel="noopener">Commander le livre</a>
           <a href="#extrait" class="btn secondary">Lire un extrait</a>
         </div>
       </div>
@@ -82,7 +91,7 @@ const jsonld = {
       </div>
       <div class="info-card">
         <div class="info-label">Format</div>
-        <div class="info-value">Broché · A5</div>
+        <div class="info-value">Broché · A5 · 749 pages</div>
       </div>
       <div class="info-card">
         <div class="info-label">Période couverte</div>
@@ -102,18 +111,20 @@ const jsonld = {
   <!-- ===== EXTRAIT ===== -->
   <section class="extrait" id="extrait">
     <div class="extrait-inner">
-      <div class="surtitre-section">Avant-première</div>
-      <h2>Un extrait à venir</h2>
+      <div class="surtitre-section">L'ouverture</div>
+      <h2>Chapitre 47 — L'Été</h2>
       <span class="filet"></span>
       <div class="extrait-placeholder">
         <p>
-          <em>Un extrait du Tome II sera publié ici à l'approche de la sortie.</em>
+          <em>« L'odeur arriva avant le château. »</em>
         </p>
         <p>
-          Inscrivez-vous à la Lettre de l'écritoire pour le recevoir en avant-première,
-          accompagné d'une note de l'auteur sur l'écriture des campagnes de l'Empire.
+          Juillet 1804. Sarah revient au château de La Roche-Aymon, deux ans après le début
+          des travaux : le toit tient, les ardoises sont neuves, les ronces de la cour ont
+          disparu. Henri, quatre ans, descend de la berline pieds nus et traverse en courant
+          la cour de la maison dont on lui a pris le nom.
         </p>
-        <a href="/newsletter" class="btn" style="margin-top: 1.5rem;">Recevoir l'extrait</a>
+        <a href="/extrait-le-marechal" class="btn" style="margin-top: 1.5rem;">Lire les premières pages</a>
       </div>
     </div>
   </section>
@@ -142,12 +153,15 @@ const jsonld = {
 
   <!-- ===== CTA FINAL ===== -->
   <section class="cta-final">
-    <h2>Le Tome II paraît en juillet 2026</h2>
+    <h2>Le Tome II est paru</h2>
     <p>
-      Le manuscrit est à l'impression. Inscrivez-vous à la Lettre de l'écritoire pour recevoir
-      la date exacte de mise en vente, l'extrait et les premières chroniques de lecture.
+      <em>Le Maréchal</em> est disponible à la commande. Inscrivez-vous à la Lettre de l'écritoire
+      pour suivre les chroniques de lecture et l'avancement du Tome III.
     </p>
-    <a href="/newsletter" class="btn">S'inscrire à la lettre</a>
+    <div class="cta-final-bloc">
+      <a href="https://www.thebookedition.com/fr/le-prix-du-nom-tome-2-le-marechal-p-432870.html" class="btn" target="_blank" rel="noopener">Commander le Tome II</a>
+      <a href="/newsletter" class="btn secondary">S'inscrire à la lettre</a>
+    </div>
   </section>
 </BaseLayout>
 
@@ -357,6 +371,12 @@ const jsonld = {
     max-width: 600px;
     margin: 0 auto 2rem;
     line-height: 1.6;
+  }
+  .cta-final-bloc {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .cta-final .btn { background: var(--or); border-color: var(--or); color: var(--encre); }
   .cta-final .btn:hover { background: var(--sang); border-color: var(--sang); color: var(--ivoire); }

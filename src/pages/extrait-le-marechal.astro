@@ -1,0 +1,139 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import paragraphes from "../data/extrait_le_marechal.json";
+
+const ACHAT = "https://www.thebookedition.com/fr/le-prix-du-nom-tome-2-le-marechal-p-432870.html";
+---
+
+<BaseLayout
+  title="Extrait — Le Prix du Nom, Tome II"
+  description="Lisez l'ouverture du Prix du Nom, Tome II — Le Maréchal. « L'Été » : le retour de Sarah au château de La Roche-Aymon, Berry, juillet 1804."
+  current="/tomes"
+>
+  <PageHeader
+    surtitre="Le Prix du Nom · Tome II — Le Maréchal"
+    titre="L'Été"
+    accroche="Les premières pages"
+  />
+
+  <article class="prologue">
+    <div class="chapitre-tete">
+      <span class="filet"></span>
+      <h2>Chapitre 47</h2>
+      <div class="lieu-date">Le Berry — juillet 1804</div>
+      <span class="orn">❖&nbsp;&nbsp;❖&nbsp;&nbsp;❖</span>
+    </div>
+
+    <div class="corps">
+      {paragraphes.map((p) => (
+        <p class={p.startsWith("—") ? "dialogue" : undefined}>{p}</p>
+      ))}
+    </div>
+
+    <div class="fin">
+      <span class="orn">❦</span>
+      <p class="note">
+        Vous venez de lire l'ouverture du <em>Prix du Nom</em>, Tome II — <em>Le Maréchal</em>.
+        Le livre est paru.
+      </p>
+      <div class="cta">
+        <a href={ACHAT} class="btn" target="_blank" rel="noopener">Commander le Tome II</a>
+        <a href="/tomes/le-marechal" class="btn secondary">Découvrir le Tome II</a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .prologue {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  .chapitre-tete {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .chapitre-tete .filet {
+    display: block;
+    width: 70px;
+    height: 1px;
+    background: var(--or);
+    margin: 0 auto 1.8rem;
+  }
+  .chapitre-tete h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.1rem;
+    font-weight: 500;
+    color: var(--encre);
+    margin-bottom: 0.4rem;
+  }
+  .chapitre-tete .lieu-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--encre-doux);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+  }
+  .chapitre-tete .orn {
+    color: var(--or);
+    letter-spacing: 0.2em;
+    font-size: 0.9rem;
+  }
+
+  .corps p {
+    font-size: 1.18rem;
+    line-height: 1.85;
+    color: var(--encre);
+    text-align: justify;
+    margin-bottom: 1.4rem;
+    hyphens: auto;
+  }
+  .corps p.dialogue {
+    text-align: left;
+  }
+  .corps p:first-of-type::first-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4.2rem;
+    float: left;
+    line-height: 0.78;
+    padding: 0.1rem 0.6rem 0 0;
+    color: var(--sang);
+    font-weight: 500;
+  }
+
+  .fin {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--filet);
+  }
+  .fin .orn {
+    display: block;
+    color: var(--or);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .fin .note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--encre-doux);
+    line-height: 1.6;
+    max-width: 460px;
+    margin: 0 auto 2.2rem;
+  }
+  .fin .cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 640px) {
+    .corps p { font-size: 1.1rem; text-align: left; }
+    .corps p:first-of-type::first-letter { font-size: 3.4rem; }
+  }
+</style>

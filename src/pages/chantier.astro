@@ -9,7 +9,7 @@ const cycles = [
     periode: "1793 — 1811 · de la Terreur au baptême du Roi de Rome",
     tomes: [
       { roman: "I",   label: "La Ruelle — disponible",        statut: "disponible" },
-      { roman: "II",  label: "Le Maréchal — à l'impression",  statut: "imprime" },
+      { roman: "II",  label: "Le Maréchal — disponible",      statut: "disponible" },
       { roman: "III", label: "en retouches",                statut: "retouches" },
       { roman: "IV",  label: "en retouches",                statut: "retouches" },
     ],
@@ -42,7 +42,7 @@ const cycles = [
   },
 ];
 
-const dateMaj = "24 juin 2026";
+const dateMaj = "7 août 2026";
 ---
 
 <BaseLayout
@@ -53,12 +53,11 @@ const dateMaj = "24 juin 2026";
   <PageHeader
     surtitre="État d'avancement"
     titre="Le chantier"
-    accroche="Douze tomes prévus. Le premier est paru, le deuxième à l'impression, six en retouches. Quatre encore à venir. Mise à jour publique, en toute transparence."
+    accroche="Douze tomes prévus. Les deux premiers sont parus, six sont en retouches. Quatre encore à venir. Mise à jour publique, en toute transparence."
   />
 
   <section class="stats">
-    <div class="stat-card"><div class="stat-num">1</div><div class="stat-label">paru</div></div>
-    <div class="stat-card"><div class="stat-num">1</div><div class="stat-label">à l'impression</div></div>
+    <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">parus</div></div>
     <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">en retouches</div></div>
     <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">à écrire</div></div>
   </section>
@@ -89,7 +88,6 @@ const dateMaj = "24 juin 2026";
 
     <div class="legende">
       <span><span class="dot" style="background: var(--sang); box-shadow: 0 0 8px var(--sang);"></span>Disponible</span>
-      <span><span class="dot" style="background: #8BB58B;"></span>À l'impression</span>
       <span><span class="dot" style="background: var(--or);"></span>En retouches</span>
       <span><span class="dot" style="background: rgba(168, 139, 92, 0.4);"></span>À écrire</span>
     </div>
@@ -102,7 +100,7 @@ const dateMaj = "24 juin 2026";
     max-width: 900px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
   .stat-card {
