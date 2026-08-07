@@ -90,7 +90,7 @@ const jsonld = {
       </div>
       <div class="info-card">
         <div class="info-label">Format</div>
-        <div class="info-value">Broché · A5 · environ 600 pages</div>
+        <div class="info-value">Broché · A5 · 744 pages</div>
       </div>
       <div class="info-card">
         <div class="info-label">Période couverte</div>
@@ -147,6 +147,25 @@ const jsonld = {
         fictifs — Julian Moreau, Sarah de La Roche-Aymon, les Vernay, les Mareuil — vivent
         dans l'interstice, à hauteur d'homme.
       </p>
+    </div>
+  </section>
+
+  <!-- ===== LE LIVRE AILLEURS ===== -->
+  <section class="contexte">
+    <div class="contexte-inner">
+      <div class="surtitre-section">Le livre ailleurs</div>
+      <h2>En parler, le noter</h2>
+      <span class="filet"></span>
+      <p>
+        <em>La Ruelle</em> est référencé sur les grandes bases de lecteurs francophones.
+        Si vous l'avez lu, c'est là que votre avis servira le plus : pour un roman publié
+        sans maison d'édition, la parole des lecteurs est à peu près le seul chemin qui existe.
+      </p>
+      <div class="liens-fiches">
+        <a href="https://www.babelio.com/livres/Valcour-Le-Prix-du-Nom-Tome-1-La-Ruelle/2087386" class="btn secondary" target="_blank" rel="noopener">Babelio</a>
+        <a href="https://booknode.com/le_prix_du_nom_tome_1_la_ruelle_03721207" class="btn secondary" target="_blank" rel="noopener">Booknode</a>
+        <a href="https://www.gregoiredetours.fr/revolution-xixe-siecle/revolution-empire/francois-valcour-le-prix-du-nom-tome1-la-ruelle/" class="btn secondary" target="_blank" rel="noopener">Grégoire de Tours</a>
+      </div>
     </div>
   </section>
 
@@ -343,6 +362,13 @@ const jsonld = {
     line-height: 1.8;
     color: var(--encre-doux);
     margin-bottom: 1.5rem;
+  }
+
+  .liens-fiches {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.8rem;
   }
 
   .cta-final {
