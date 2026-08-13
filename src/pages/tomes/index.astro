@@ -2,37 +2,38 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHeader from "../../components/PageHeader.astro";
 
+import { ACHAT } from "../../data/achat.js";
+
 // Liste des 12 tomes. Les statuts sont source de vérité unique :
-//   "disponible": Tomes I et II — parus, en vente
-//   "retouches" : Tomes III à VIII — écrits, en révision
-//   "a-ecrire"  : Tomes IX à XII — pas encore écrits
-const ACHAT_TOME1 = "https://www.thebookedition.com/fr/le-prix-du-nom-tome-1-la-ruelle-p-432861.html";
-const ACHAT_TOME2 = "https://www.thebookedition.com/fr/le-prix-du-nom-tome-2-le-marechal-p-432870.html";
+//   "disponible": Tomes I et II — parus, en vente sur Amazon (broché + Kindle)
+//   "retouches" : Tomes III à XI — écrits, en révision avant parution
+//   "a-ecrire"  : Tome XII — en cours d'écriture
+// Périodes et titres relevés sur les manuscrits eux-mêmes (13 août 2026).
 const tomes = [
-  { num: "I",    titre: "La Ruelle",  periode: "1793 — 1804", cycle: "L'Ascension",       statut: "disponible", href: "/tomes/la-ruelle", achat: ACHAT_TOME1,
+  { num: "I",    titre: "La Ruelle",  periode: "1793 — 1804", cycle: "L'Ascension",       statut: "disponible", href: "/tomes/la-ruelle", achat: ACHAT.I,
     resume: "Sarah de La Roche-Aymon, Julian Moreau, et la naissance d'une maison sous la Révolution, le Consulat et l'Empire naissant." },
-  { num: "II",   titre: "Le Maréchal", periode: "1804 — 1811", cycle: "L'Ascension",      statut: "disponible", href: "/tomes/le-marechal", achat: ACHAT_TOME2,
+  { num: "II",   titre: "Le Maréchal", periode: "1804 — 1807", cycle: "L'Ascension",      statut: "disponible", href: "/tomes/le-marechal", achat: ACHAT.II,
     resume: "1804. L'Empire se couronne. Bataille après bataille — Austerlitz, Iéna, Eylau —, Julian gagne le droit d'exister, jusqu'au bâton de maréchal. Mais la gloire menace le secret que Sarah protège seule." },
-  { num: "III",  titre: "(en révision)", periode: "1811 — 1812", cycle: "L'Ascension",    statut: "retouches", href: null,
-    resume: "Le mariage autrichien, le baptême du Roi de Rome, et les premiers nuages venus d'Espagne." },
-  { num: "IV",   titre: "(en révision)", periode: "1812",        cycle: "L'Ascension",    statut: "retouches", href: null,
-    resume: "Russie. La Moskova, l'incendie de Moscou, la retraite, la Bérézina. Le cycle se ferme dans la neige." },
-  { num: "V",    titre: "(en révision)", periode: "1813",        cycle: "La Chute",       statut: "retouches", href: null,
-    resume: "La campagne d'Allemagne. Lützen, Bautzen, Leipzig. Le 8ᵉ corps polonais-saxon, et la défection." },
-  { num: "VI",   titre: "(en révision)", periode: "1814",        cycle: "La Chute",       statut: "retouches", href: null,
-    resume: "La campagne de France. Vauchamps, Montmirail, Arcis-sur-Aube. L'abdication. Theresia." },
-  { num: "VII",  titre: "(en révision)", periode: "1814 — 1815", cycle: "La Chute",       statut: "retouches", href: null,
-    resume: "La Première Restauration, les Cent-Jours, Waterloo. Continuer à servir ?" },
-  { num: "VIII", titre: "(en révision)", periode: "1815 — 1820", cycle: "La Restauration", statut: "retouches", href: null,
-    resume: "Le retour des Bourbons, la Terreur blanche, la nouvelle place des anciens maréchaux d'Empire dans une France royale." },
-  { num: "IX",   titre: "(à écrire)",    periode: "1820 — 1830", cycle: "La Restauration", statut: "a-ecrire",  href: null,
-    resume: "L'avènement de Charles X, les Trois Glorieuses, le passage de témoin à la deuxième génération Moreau." },
-  { num: "X",    titre: "(à écrire)",    periode: "1830 — 1848", cycle: "La Restauration", statut: "a-ecrire",  href: null,
-    resume: "La monarchie de Juillet, le monde du Roi-Citoyen, jusqu'à la chute de février 1848." },
-  { num: "XI",   titre: "(à écrire)",    periode: "1848 — 1860", cycle: "Le Second Empire", statut: "a-ecrire", href: null,
-    resume: "La Deuxième République, le coup d'État, le Second Empire dans ses fastes." },
-  { num: "XII",  titre: "(à écrire)",    periode: "1860 — 1870", cycle: "Le Second Empire", statut: "a-ecrire", href: null,
-    resume: "La guerre franco-prussienne. Sedan. La dernière fois où un Moreau paiera le prix du nom." },
+  { num: "III",  titre: "Le Zénith", periode: "1807 — 1809", cycle: "L'Ascension",    statut: "retouches", href: null,
+    resume: "L'Empire à son plus haut. Le nouveau régime, le pli de Bayonne, l'Espagne qui s'ouvre — et une maison qui apprend à tenir son rang sans se faire voir." },
+  { num: "IV",   titre: "Le Roi de Rome", periode: "1809 — 1811", cycle: "L'Ascension",    statut: "retouches", href: null,
+    resume: "Le divorce, le mariage autrichien, la naissance de l'héritier. La cour se refait, les places changent de mains, et la fortune des Moreau se met à l'abri." },
+  { num: "V",    titre: "Le Niémen", periode: "1812 — 1814", cycle: "La Chute",       statut: "retouches", href: null,
+    resume: "Le fleuve qu'on passe deux fois. Borodino, Moscou, la Bérézina, le vingt-neuvième bulletin — puis l'Allemagne, Leipzig, et la campagne de France jusqu'à Saint-Cloud." },
+  { num: "VI",   titre: "La Place", periode: "1814", cycle: "La Chute",       statut: "retouches", href: null,
+    resume: "Les Cosaques rue du Bac, la Charte, la première Restauration. Ce qu'on perd, ce qu'on reprend, et la place qu'on tient sans la revendiquer." },
+  { num: "VII",  titre: "Les Greniers", periode: "1814 — 1818", cycle: "La Restauration", statut: "retouches", href: null,
+    resume: "Les Cent-Jours, puis l'année sans été : la récolte qui ne vient pas, les greniers qu'on ouvre, la soudure d'un hiver. C'est en nourrissant qu'une maison s'enracine." },
+  { num: "VIII", titre: "Les Sablons", periode: "1818 — 1824", cycle: "La Restauration", statut: "retouches", href: null,
+    resume: "Henri entre aux Ponts, le domaine devient une industrie, un fils se marie. Le nom cesse d'être une dette pour devenir un capital." },
+  { num: "IX",   titre: "Le Nom rendu", periode: "1825 — 1835", cycle: "La Restauration", statut: "retouches",  href: null,
+    resume: "Le sacre de Charles X, le choléra, les Trois Glorieuses. La deuxième génération prend la maison en main, et le nom qu'on avait payé se voit enfin rendu." },
+  { num: "X",    titre: "Les Feux de Noirlac", periode: "1835 — 1840", cycle: "L'Établissement", statut: "retouches",  href: null,
+    resume: "L'acier, les maisons de banque, le fer français contre la barre anglaise. Sous la monarchie de Juillet, une famille apprend le siècle des machines." },
+  { num: "XI",   titre: "La Ligne", periode: "1840 — 1847", cycle: "L'Établissement", statut: "retouches", href: null,
+    resume: "Le retour des cendres, le rail qu'on pose, la ligne qu'on trace. Trois sens d'un même mot : la voie ferrée, la ligne d'un registre, et la lignée." },
+  { num: "XII",  titre: "(en cours d'écriture)",  periode: "1848 — 1870", cycle: "Le Second Empire", statut: "a-ecrire", href: null,
+    resume: "La Deuxième République, le coup d'État, le Second Empire dans ses fastes — jusqu'à Sedan, et la dernière fois où un Moreau paiera le prix du nom." },
 ];
 
 const statutLabel = {
@@ -51,7 +52,7 @@ const statutLabel = {
   <PageHeader
     surtitre="L'œuvre, tome par tome"
     titre="Les douze tomes"
-    accroche="Quatre cycles, douze volumes, quatre-vingts ans d'histoire de France. État du chantier au 24 juin 2026."
+    accroche="Douze volumes, quatre-vingts ans d'histoire de France. Onze sont écrits ; deux sont parus. État du chantier au 13 août 2026."
   />
 
   <section class="tomes-grid">
@@ -66,7 +67,12 @@ const statutLabel = {
           <div class="tome-footer">
             <span class={`statut-badge ${t.statut}`}>{statutLabel[t.statut]}</span>
             <div class="tome-actions">
-              {t.achat && <a href={t.achat} class="tome-achat" target="_blank" rel="noopener">Commander →</a>}
+              {t.achat && (
+                <>
+                  <a href={t.achat.broche} class="tome-achat" target="_blank" rel="noopener">Broché · {t.achat.prixBroche}</a>
+                  <a href={t.achat.kindle} class="tome-achat tome-achat-kindle" target="_blank" rel="noopener">Kindle · {t.achat.prixKindle}</a>
+                </>
+              )}
               {t.href && <a href={t.href} class="tome-link">En savoir plus →</a>}
             </div>
           </div>
@@ -186,6 +192,11 @@ const statutLabel = {
     transition: all 0.25s;
   }
   .tome-achat:hover { background: var(--encre); border-color: var(--encre); color: var(--ivoire); }
+  .tome-achat-kindle {
+    background: transparent;
+    color: var(--sang);
+  }
+  .tome-achat-kindle:hover { background: var(--sang); color: var(--ivoire); }
   .tome-link {
     font-style: italic;
     font-size: 0.95rem;

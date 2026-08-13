@@ -15,14 +15,26 @@ const jsonld = {
   url: "https://francoisvalcour.fr/tomes/le-marechal/",
   isPartOf: { "@type": "BookSeries", name: "Le Prix du Nom" },
   numberOfPages: 749,
-  offers: {
-    "@type": "Offer",
-    price: "26.80",
-    priceCurrency: "EUR",
-    priceValidUntil: "2026-12-31",
-    availability: "https://schema.org/InStock",
-    url: "https://www.thebookedition.com/fr/le-prix-du-nom-tome-2-le-marechal-p-432870.html",
-  },
+  offers: [
+    {
+      "@type": "Offer",
+      name: "Broché",
+      price: "26.90",
+      priceCurrency: "EUR",
+      priceValidUntil: "2026-12-31",
+      availability: "https://schema.org/InStock",
+      url: "https://www.amazon.fr/dp/B0HDJWYBWG",
+    },
+    {
+      "@type": "Offer",
+      name: "Format Kindle",
+      price: "7.99",
+      priceCurrency: "EUR",
+      priceValidUntil: "2026-12-31",
+      availability: "https://schema.org/InStock",
+      url: "https://www.amazon.fr/dp/B0HDYL8X84",
+    },
+  ],
 };
 ---
 
@@ -48,7 +60,8 @@ const jsonld = {
           « Que vaut un nom qu'on s'est donné soi-même ? »
         </blockquote>
         <div class="cta-bloc">
-          <a href="https://www.thebookedition.com/fr/le-prix-du-nom-tome-2-le-marechal-p-432870.html" class="btn" target="_blank" rel="noopener">Commander le livre</a>
+          <a href="https://www.amazon.fr/dp/B0HDJWYBWG" class="btn" target="_blank" rel="noopener">Broché · 26,90 €</a>
+          <a href="https://www.amazon.fr/dp/B0HDYL8X84" class="btn secondary" target="_blank" rel="noopener">Kindle · 7,99 €</a>
           <a href="#extrait" class="btn secondary">Lire un extrait</a>
         </div>
       </div>
@@ -159,7 +172,7 @@ const jsonld = {
       pour suivre les chroniques de lecture et l'avancement du Tome III.
     </p>
     <div class="cta-final-bloc">
-      <a href="https://www.thebookedition.com/fr/le-prix-du-nom-tome-2-le-marechal-p-432870.html" class="btn" target="_blank" rel="noopener">Commander le Tome II</a>
+      <a href="https://www.amazon.fr/dp/B0HDJWYBWG" class="btn" target="_blank" rel="noopener">Commander le Tome II</a>
       <a href="/newsletter" class="btn secondary">S'inscrire à la lettre</a>
     </div>
   </section>
