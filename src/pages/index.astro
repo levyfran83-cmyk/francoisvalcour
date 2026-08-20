@@ -15,7 +15,7 @@ const jsonld = [
     url: "https://francoisvalcour.fr/",
     inLanguage: "fr",
     description:
-      "Site officiel de François Valcour, auteur du Prix du Nom, saga romanesque française de 1793 à 1870.",
+      "Site officiel de François Valcour, auteur du Prix du Nom, saga romanesque française de 1793 à 1874.",
   },
   {
     "@context": "https://schema.org",
@@ -29,55 +29,20 @@ const jsonld = [
 ];
 
 // ============================================================
-// Données du chantier (4 cycles, 12 tomes)
-// Source : 00_Bible_Saga/Structure_saga/Structure_de_la_saga.docx
+// Chantier : source unique dans src/data/saga.js
 // ============================================================
-const cycles = [
-  {
-    num: "I",
-    titre: "L'Ascension",
-    periode: "1793 — 1811 · de la Terreur au baptême du Roi de Rome",
-    count: "4 tomes",
-    tomes: [
-      { roman: "I",   label: "La Ruelle — disponible",        statut: "disponible" },
-      { roman: "II",  label: "Le Maréchal — disponible",      statut: "disponible" },
-      { roman: "III", label: "en retouches",                statut: "retouches" },
-      { roman: "IV",  label: "en retouches",                statut: "retouches" },
-    ],
-  },
-  {
-    num: "II",
-    titre: "La Chute",
-    periode: "1811 — 1815 · de la campagne de Russie aux Cent-Jours",
-    count: "3 tomes",
-    tomes: [
-      { roman: "V",   label: "en retouches", statut: "retouches" },
-      { roman: "VI",  label: "en retouches", statut: "retouches" },
-      { roman: "VII", label: "en retouches", statut: "retouches" },
-    ],
-  },
-  {
-    num: "III",
-    titre: "La Restauration",
-    periode: "1815 — 1848 · du retour des Bourbons à la chute de Louis-Philippe",
-    count: "3 tomes",
-    tomes: [
-      { roman: "VIII", label: "en retouches", statut: "retouches" },
-      { roman: "IX",   label: "à écrire",     statut: "a-ecrire" },
-      { roman: "X",    label: "à écrire",     statut: "a-ecrire" },
-    ],
-  },
-  {
-    num: "IV",
-    titre: "Le Second Empire",
-    periode: "1848 — 1870 · de la Deuxième République à Sedan",
-    count: "2 tomes",
-    tomes: [
-      { roman: "XI",  label: "à écrire", statut: "a-ecrire" },
-      { roman: "XII", label: "à écrire", statut: "a-ecrire" },
-    ],
-  },
-];
+import { ACHAT } from "../data/achat.js";
+import { CYCLES, TOMES, statutLabel } from "../data/saga.js";
+
+const cycles = CYCLES.map((c) => ({
+  ...c,
+  pastilles: TOMES.filter((t) => t.cycle === c.titre).map((t) => ({
+    roman: t.num,
+    label: t.statut === "a-ecrire" ? statutLabel[t.statut]
+         : `${t.titre} — ${statutLabel[t.statut].toLowerCase()}`,
+    statut: t.statut,
+  })),
+}));
 
 // ============================================================
 // 3 derniers articles du Carnet (depuis src/content/carnet/)
@@ -110,15 +75,15 @@ const articles = tousLesArticles
     <SectionTitle surtitre="L'œuvre" titre="Une fresque française" />
     <p class="section-intro">
       <em>Le Prix du Nom</em> suit la famille Moreau à travers les bouleversements de l'histoire
-      de France, depuis la Terreur jusqu'à Sedan. Quatre générations traverseront la Révolution,
-      l'Empire, la Restauration et le Second Empire, payant chacune, à sa manière, le prix d'un
-      nom hérité. Douze tomes. Quatre cycles.
+      de France, depuis la Terreur jusqu'aux dernières années du Second Empire. Quatre
+      générations traversent la Révolution, l'Empire, la Restauration, la monarchie de Juillet
+      et l'Empire du neveu, payant chacune, à sa manière, le prix d'un nom hérité. Six cycles.
     </p>
     <div class="saga-grid">
       <div class="saga-pilier">
         <h3>L'Histoire</h3>
-        <div class="annee">1793 — 1870</div>
-        <p>De la Terreur à la défaite de Sedan, la France traversée à hauteur d'homme.
+        <div class="annee">1793 — 1874</div>
+        <p>De la Terreur aux lendemains de la guerre, la France traversée à hauteur d'homme.
         Faits avérés, personnages réels, archives respectées.</p>
       </div>
       <div class="saga-pilier">
@@ -167,7 +132,7 @@ const articles = tousLesArticles
           <span>🏛 <strong>Éditions du Quai</strong></span>
         </div>
         <div class="hero-cta">
-          <a href="https://www.amazon.fr/dp/B0HDJLF3X2" class="btn" target="_blank" rel="noopener">Commander le livre</a>
+          <a href={ACHAT.I.broche} class="btn" target="_blank" rel="noopener">Commander le livre</a>
           <a href="/tomes/la-ruelle" class="btn secondary">Lire un extrait</a>
         </div>
       </div>
@@ -189,16 +154,71 @@ const articles = tousLesArticles
           doit jamais se dire — car la grandeur est parfois le plus sûr moyen de se trahir.
         </p>
         <div class="meta">
-          <span>📅 <strong>1804 – 1811</strong></span>
+          <span>📅 <strong>1804 – 1807</strong></span>
           <span>🏛 <strong>Éditions du Quai</strong></span>
           <span>✒ <strong>749 pages</strong></span>
         </div>
         <div class="hero-cta">
-          <a href="https://www.amazon.fr/dp/B0HDJWYBWG" class="btn" target="_blank" rel="noopener">Commander le Tome II</a>
+          <a href={ACHAT.II.broche} class="btn" target="_blank" rel="noopener">Commander le Tome II</a>
           <a href="/tomes/le-marechal" class="btn secondary">Découvrir le Tome II</a>
         </div>
       </div>
       <img src="/assets/cover_tome2.jpg" alt="Couverture Tome II — Le Maréchal" />
+    </div>
+  </section>
+
+  <!-- ===================== TOME III ===================== -->
+  <section id="tome3" class="tome-feature">
+    <div class="tome-feature-inner">
+      <img src="/assets/cover_tome3.jpg" alt="Couverture Tome III — Le Zénith" />
+      <div>
+        <SectionTitle surtitre="Tome III · Cycle de l'Ascension" titre="Le Zénith" align="left" />
+        <div class="sous-titre">1807 — 1809 · Du duché d'Empire à Wagram</div>
+        <span class="tome-statut nouveaute">Nouveauté</span>
+        <p class="resume">
+          <strong>1807.</strong> Julian Moreau rentre à Paris avec son bâton de maréchal, et la
+          Cour vient prendre date chez lui. L'année suivante, l'Empereur lui donne davantage :
+          un duché d'Empire, un majorat large comme une principauté, une succession où son fils
+          entre sans savoir ce qu'il reçoit. Ce n'est plus une récompense pour ce qu'il a fait —
+          c'est un titre pour ce qu'il est censé être.
+        </p>
+        <p class="resume">
+          C'est le moment où l'Empire découvre qu'il peut perdre. Bailén, l'Espagne qui s'enlise,
+          Saragosse ; puis, sur le Danube, une défaite que l'Empereur subit en personne. Pendant
+          que Julian tient les convois et les chiffres d'une guerre qui ne finit plus, Sarah met
+          au monde une fille, achève une chapelle et veille sur ce qui ne peut toujours pas se dire.
+        </p>
+        <p class="resume">
+          Au zénith, l'ombre est au plus court. C'est l'heure où plus rien ne s'abrite.
+        </p>
+        <div class="meta">
+          <span>📅 <strong>1807 – 1809</strong></span>
+          <span>🏛 <strong>Éditions du Quai</strong></span>
+          <span>✒ <strong>650 pages</strong></span>
+        </div>
+        <div class="hero-cta">
+          <a href={ACHAT.III.broche} class="btn" target="_blank" rel="noopener">Broché · {ACHAT.III.prixBroche}</a>
+          <a href={ACHAT.III.kindle} class="btn secondary" target="_blank" rel="noopener">Kindle · {ACHAT.III.prixKindle}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TOME IV — À PARAÎTRE ===================== -->
+  <section id="tome4" class="tome-a-paraitre">
+    <div class="a-paraitre-inner">
+      <img src="/assets/cover_tome4.jpg" alt="Couverture Tome IV — Le Roi de Rome" loading="lazy" />
+      <div>
+        <div class="a-paraitre-surtitre">Prochainement</div>
+        <h3>Tome IV — <em>Le Roi de Rome</em></h3>
+        <div class="sous-titre">1809 — 1811</div>
+        <p>
+          Le divorce, le mariage autrichien, la naissance de l'héritier. La cour se refait, les
+          places changent de mains, et la fortune des Moreau se met à l'abri. Le volume est
+          achevé ; la date de mise en vente sera annoncée dans la lettre de l'écritoire.
+        </p>
+        <a href="#newsletter" class="btn secondary">Être prévenu de la parution</a>
+      </div>
     </div>
   </section>
 
@@ -207,9 +227,9 @@ const articles = tousLesArticles
     <div class="chantier-wrapper">
       <SectionTitle surtitre="État d'avancement" titre="Le chantier" />
       <p class="section-intro">
-        Douze tomes prévus, organisés en quatre cycles. Les deux premiers sont parus ; six
-        autres sont écrits et en retouches. Quatre tomes restent à écrire pour mener Sarah,
-        Julian et leur descendance jusqu'à Sedan.
+        Six cycles. Onze tomes sont écrits — trois sont parus, le quatrième est achevé, les
+        sept suivants sont en retouches. Le douzième s'écrit en ce moment, et deux cycles
+        restent à mener pour conduire la maison Moreau jusqu'à son dernier été.
       </p>
 
       <div class="chantier-list">
@@ -224,12 +244,18 @@ const articles = tousLesArticles
               <div class="cycle-count">{cycle.count}</div>
             </div>
             <div class="tomes-pastilles">
-              {cycle.tomes.map((t) => (
+              {cycle.pastilles.map((t) => (
                 <span class={`tome-pastille ${t.statut}`}>
                   <span class="dot"></span>
                   <span class="roman">{t.roman}</span> {t.label}
                 </span>
               ))}
+              {cycle.reste && (
+                <span class="tome-pastille a-ecrire">
+                  <span class="dot"></span>
+                  {cycle.reste}
+                </span>
+              )}
             </div>
           </div>
         ))}
@@ -237,8 +263,9 @@ const articles = tousLesArticles
 
       <div class="legende-chantier">
         <span><span class="dot" style="background: var(--sang); box-shadow: 0 0 8px var(--sang);"></span>Disponible</span>
+        <span><span class="dot" style="background: #8BB58B;"></span>À paraître</span>
         <span><span class="dot" style="background: var(--or);"></span>En retouches</span>
-        <span><span class="dot" style="background: rgba(168, 139, 92, 0.4);"></span>À écrire</span>
+        <span><span class="dot" style="background: rgba(168, 139, 92, 0.4);"></span>En cours d'écriture</span>
       </div>
     </div>
   </section>
@@ -401,6 +428,60 @@ const articles = tousLesArticles
     background: #E8F0E5;
     color: #3F6B3A;
     border: 1px solid #8BB58B;
+  }
+  .tome-statut.nouveaute {
+    background: var(--sang);
+    color: var(--ivoire);
+    border-color: var(--sang);
+  }
+
+  /* ===== TOME À PARAÎTRE ===== */
+  .tome-a-paraitre {
+    padding: 2rem 2rem 5rem;
+  }
+  .a-paraitre-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 2.5rem;
+    background: var(--ivoire-fonce);
+    border: 1px solid var(--filet);
+    border-left: 4px solid var(--or);
+  }
+  .a-paraitre-inner img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--or);
+    box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.45);
+  }
+  .a-paraitre-surtitre {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+  }
+  .a-paraitre-inner h3 {
+    font-size: 1.9rem;
+    font-weight: 500;
+    color: var(--encre);
+    margin-bottom: 0.2rem;
+  }
+  .a-paraitre-inner .sous-titre {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--encre-doux);
+    margin-bottom: 1rem;
+  }
+  .a-paraitre-inner p {
+    color: var(--encre-doux);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
   }
 
   /* ===== CHANTIER ===== */
@@ -625,6 +706,13 @@ const articles = tousLesArticles
       text-align: center;
     }
     .tome-feature img { max-width: 240px; margin: 0 auto; }
+    .a-paraitre-inner {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      text-align: center;
+      padding: 1.8rem;
+    }
+    .a-paraitre-inner img { max-width: 180px; margin: 0 auto; }
     .tome-feature.reverse .tome-feature-inner > div { order: 2; }
     .tome-feature.reverse .tome-feature-inner img { order: 1; }
     .tome-feature .meta { justify-content: center; }

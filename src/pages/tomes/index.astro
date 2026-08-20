@@ -3,62 +3,32 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHeader from "../../components/PageHeader.astro";
 
 import { ACHAT } from "../../data/achat.js";
+import { TOMES, statutLabel, NB_PARUS, DATE_MAJ, enLettres } from "../../data/saga.js";
 
-// Liste des 12 tomes. Les statuts sont source de vérité unique :
-//   "disponible": Tomes I et II — parus, en vente sur Amazon (broché + Kindle)
-//   "retouches" : Tomes III à XI — écrits, en révision avant parution
-//   "a-ecrire"  : Tome XII — en cours d'écriture
-// Périodes et titres relevés sur les manuscrits eux-mêmes (13 août 2026).
-const tomes = [
-  { num: "I",    titre: "La Ruelle",  periode: "1793 — 1804", cycle: "L'Ascension",       statut: "disponible", href: "/tomes/la-ruelle", achat: ACHAT.I,
-    resume: "Sarah de La Roche-Aymon, Julian Moreau, et la naissance d'une maison sous la Révolution, le Consulat et l'Empire naissant." },
-  { num: "II",   titre: "Le Maréchal", periode: "1804 — 1807", cycle: "L'Ascension",      statut: "disponible", href: "/tomes/le-marechal", achat: ACHAT.II,
-    resume: "1804. L'Empire se couronne. Bataille après bataille — Austerlitz, Iéna, Eylau —, Julian gagne le droit d'exister, jusqu'au bâton de maréchal. Mais la gloire menace le secret que Sarah protège seule." },
-  { num: "III",  titre: "Le Zénith", periode: "1807 — 1809", cycle: "L'Ascension",    statut: "retouches", href: null,
-    resume: "L'Empire à son plus haut. Le nouveau régime, le pli de Bayonne, l'Espagne qui s'ouvre — et une maison qui apprend à tenir son rang sans se faire voir." },
-  { num: "IV",   titre: "Le Roi de Rome", periode: "1809 — 1811", cycle: "L'Ascension",    statut: "retouches", href: null,
-    resume: "Le divorce, le mariage autrichien, la naissance de l'héritier. La cour se refait, les places changent de mains, et la fortune des Moreau se met à l'abri." },
-  { num: "V",    titre: "Le Niémen", periode: "1812 — 1814", cycle: "La Chute",       statut: "retouches", href: null,
-    resume: "Le fleuve qu'on passe deux fois. Borodino, Moscou, la Bérézina, le vingt-neuvième bulletin — puis l'Allemagne, Leipzig, et la campagne de France jusqu'à Saint-Cloud." },
-  { num: "VI",   titre: "La Place", periode: "1814", cycle: "La Chute",       statut: "retouches", href: null,
-    resume: "Les Cosaques rue du Bac, la Charte, la première Restauration. Ce qu'on perd, ce qu'on reprend, et la place qu'on tient sans la revendiquer." },
-  { num: "VII",  titre: "Les Greniers", periode: "1814 — 1818", cycle: "La Restauration", statut: "retouches", href: null,
-    resume: "Les Cent-Jours, puis l'année sans été : la récolte qui ne vient pas, les greniers qu'on ouvre, la soudure d'un hiver. C'est en nourrissant qu'une maison s'enracine." },
-  { num: "VIII", titre: "Les Sablons", periode: "1818 — 1824", cycle: "La Restauration", statut: "retouches", href: null,
-    resume: "Henri entre aux Ponts, le domaine devient une industrie, un fils se marie. Le nom cesse d'être une dette pour devenir un capital." },
-  { num: "IX",   titre: "Le Nom rendu", periode: "1825 — 1835", cycle: "La Restauration", statut: "retouches",  href: null,
-    resume: "Le sacre de Charles X, le choléra, les Trois Glorieuses. La deuxième génération prend la maison en main, et le nom qu'on avait payé se voit enfin rendu." },
-  { num: "X",    titre: "Les Feux de Noirlac", periode: "1835 — 1840", cycle: "L'Établissement", statut: "retouches",  href: null,
-    resume: "L'acier, les maisons de banque, le fer français contre la barre anglaise. Sous la monarchie de Juillet, une famille apprend le siècle des machines." },
-  { num: "XI",   titre: "La Ligne", periode: "1840 — 1847", cycle: "L'Établissement", statut: "retouches", href: null,
-    resume: "Le retour des cendres, le rail qu'on pose, la ligne qu'on trace. Trois sens d'un même mot : la voie ferrée, la ligne d'un registre, et la lignée." },
-  { num: "XII",  titre: "(en cours d'écriture)",  periode: "1848 — 1870", cycle: "Le Second Empire", statut: "a-ecrire", href: null,
-    resume: "La Deuxième République, le coup d'État, le Second Empire dans ses fastes — jusqu'à Sedan, et la dernière fois où un Moreau paiera le prix du nom." },
-];
-
-const statutLabel = {
-  disponible:"Disponible",
-  finalise:  "En cours de finalisation",
-  retouches: "En retouches",
-  "a-ecrire":"À écrire",
-};
+// Les tomes, leurs statuts et leurs cycles vivent dans src/data/saga.js.
+const tomes = TOMES.map((t) => ({ ...t, achat: t.achat ? ACHAT[t.achat] : null }));
 ---
 
 <BaseLayout
   title="Les tomes — Le Prix du Nom"
-  description="Les douze tomes de la saga Le Prix du Nom, organisés en quatre cycles : L'Ascension, La Chute, La Restauration, Le Second Empire."
+  description="Les tomes de la saga Le Prix du Nom, organisés en six cycles : L'Ascension, La Chute, La Restauration, L'Établissement, La Relève, Le Nom hérité."
   current="/tomes"
 >
   <PageHeader
     surtitre="L'œuvre, tome par tome"
-    titre="Les douze tomes"
-    accroche="Douze volumes, quatre-vingts ans d'histoire de France. Onze sont écrits ; deux sont parus. État du chantier au 13 août 2026."
+    titre="Les tomes"
+    accroche={`Quatre-vingts ans d'histoire de France en six cycles. Onze tomes sont écrits, ${enLettres(NB_PARUS)} sont parus, le douzième s'écrit. État du chantier au ${DATE_MAJ}.`}
   />
 
   <section class="tomes-grid">
     {tomes.map((t) => (
       <article class={`tome-card statut-${t.statut}`}>
-        <div class="tome-roman">{t.num}</div>
+        <div class="tome-roman">
+          <span class="chiffre">{t.num}</span>
+          {t.couverture && (
+            <img src={t.couverture} alt={`Couverture du tome ${t.num} — ${t.titre}`} width={t.dim[0]} height={t.dim[1]} loading="lazy" />
+          )}
+        </div>
         <div class="tome-content">
           <div class="tome-cycle">Cycle · {t.cycle}</div>
           <h2>{t.titre}</h2>
@@ -93,7 +63,7 @@ const statutLabel = {
   }
   .tome-card {
     display: grid;
-    grid-template-columns: 90px 1fr;
+    grid-template-columns: 120px 1fr;
     gap: 2rem;
     padding: 2rem 2.5rem;
     background: var(--ivoire);
@@ -107,20 +77,31 @@ const statutLabel = {
     transform: translateY(-2px);
   }
   .tome-card.statut-disponible { border-left-color: var(--sang); background: rgba(122, 46, 31, 0.04); }
-  .tome-card.statut-imprime { border-left-color: #8BB58B; }
+  .tome-card.statut-a-paraitre { border-left-color: #8BB58B; }
   .tome-card.statut-a-ecrire { opacity: 0.7; border-left-color: rgba(168, 139, 92, 0.3); }
   .tome-card.statut-a-ecrire:hover { opacity: 1; }
 
   .tome-roman {
+    text-align: center;
+    align-self: center;
+  }
+  .tome-roman .chiffre {
+    display: block;
     font-family: 'Cormorant Garamond', serif;
     font-size: 4rem;
     line-height: 1;
     color: var(--or);
     font-weight: 400;
-    text-align: center;
-    align-self: center;
   }
-  .tome-card.statut-disponible .tome-roman { color: var(--sang); }
+  .tome-roman img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 0.9rem;
+    border: 1px solid var(--or);
+    box-shadow: 0 10px 22px -10px rgba(0, 0, 0, 0.45);
+  }
+  .tome-card.statut-disponible .tome-roman .chiffre { color: var(--sang); }
 
   .tome-cycle {
     font-family: 'Cormorant Garamond', serif;
@@ -170,8 +151,7 @@ const statutLabel = {
     border: 1px solid;
   }
   .statut-badge.disponible { background: var(--sang); color: var(--ivoire); border-color: var(--sang); }
-  .statut-badge.imprime { background: #E8F0E5; color: #3F6B3A; border-color: #8BB58B; }
-  .statut-badge.finalise { background: #E8F0E5; color: #3F6B3A; border-color: #8BB58B; }
+  .statut-badge.a-paraitre { background: #E8F0E5; color: #3F6B3A; border-color: #8BB58B; }
   .statut-badge.retouches { background: rgba(168, 139, 92, 0.1); color: var(--or); border-color: var(--or); }
   .statut-badge.a-ecrire { background: transparent; color: var(--encre-doux); border-color: var(--filet); }
 
@@ -205,11 +185,11 @@ const statutLabel = {
 
   @media (max-width: 860px) {
     .tome-card {
-      grid-template-columns: 60px 1fr;
+      grid-template-columns: 80px 1fr;
       gap: 1rem;
       padding: 1.5rem;
     }
-    .tome-roman { font-size: 2.8rem; }
+    .tome-roman .chiffre { font-size: 2.8rem; }
     .tome-content h2 { font-size: 1.5rem; }
   }
 </style>

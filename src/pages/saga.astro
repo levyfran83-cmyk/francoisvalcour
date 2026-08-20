@@ -2,65 +2,19 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/PageHeader.astro";
 
-// Les 4 cycles, version étendue pour la page dédiée
-const cycles = [
-  {
-    num: "I",
-    titre: "L'Ascension",
-    periode: "1793 — 1811",
-    accroche: "De la Terreur au baptême du Roi de Rome",
-    tomes: "Tomes I à IV",
-    description: `Le cycle fondateur. Un soir d'hiver 1793-1794, dans une rue de Paris sous
-    la Terreur, une jeune aristocrate croise le regard d'un officier républicain lors d'un
-    contrôle de papiers. Il pourrait la livrer. Il ne le fait pas. Ce qui se noue ce soir-là
-    portera la maison Moreau de Paris à l'Italie, d'Égypte aux salons du Consulat, jusqu'aux
-    palais de l'Empire et au berceau du Roi de Rome.`,
-  },
-  {
-    num: "II",
-    titre: "La Chute",
-    periode: "1811 — 1815",
-    accroche: "De la campagne de Russie aux Cent-Jours",
-    tomes: "Tomes V à VII",
-    description: `Le cycle des grandes catastrophes. Moscou en flammes, la Bérézina, la
-    campagne de Saxe, la disgrâce, Elbe, les Cent-Jours, Waterloo. Pour la maison Moreau,
-    quatre années où tout ce qui a été bâti pendant vingt ans est mis à l'épreuve — la
-    fidélité, le nom, l'honneur militaire — et où chaque survie se paie d'un renoncement.`,
-  },
-  {
-    num: "III",
-    titre: "La Restauration",
-    periode: "1815 — 1848",
-    accroche: "Du retour des Bourbons à la chute de Louis-Philippe",
-    tomes: "Tomes VIII à X",
-    description: `Le cycle de la deuxième génération. Henri Moreau, Éléonore Moreau et leurs
-    cousins entrent en âge d'agir. La France des Bourbons, puis celle de Louis-Philippe,
-    pose à chacun la même question — sous des formes nouvelles : que vaut un nom impérial
-    dans un royaume restauré ? Quel honneur dans une bourgeoisie de finance ?`,
-  },
-  {
-    num: "IV",
-    titre: "Le Second Empire",
-    periode: "1848 — 1870",
-    accroche: "De la Deuxième République à Sedan",
-    tomes: "Tomes XI et XII",
-    description: `Le cycle de clôture. Un arrière-petit-fils de Julian et Sarah Moreau
-    traverse la Deuxième République, la prise de pouvoir de Louis-Napoléon, les fastes du
-    Second Empire. À Sedan, en septembre 1870, il paiera une dernière fois le prix du nom —
-    fermant un siècle entier d'histoire familiale qui aura traversé toutes les Frances.`,
-  },
-];
+import { CYCLES as cycles } from "../data/saga.js";
+import { ACHAT } from "../data/achat.js";
 ---
 
 <BaseLayout
   title="La saga — Le Prix du Nom"
-  description="Le Prix du Nom : douze tomes en quatre cycles, de la Terreur à Sedan. Quatre générations de la maison Moreau traversent quatre-vingts ans d'histoire de France."
+  description="Le Prix du Nom : six cycles, de la Terreur à la fin du Second Empire. Quatre générations de la maison Moreau traversent quatre-vingts ans d'histoire de France."
   current="/saga"
 >
   <PageHeader
     surtitre="L'œuvre"
     titre="Une fresque française"
-    accroche="Douze tomes, quatre cycles, quatre générations. De la Terreur à Sedan, l'histoire de France traversée à hauteur d'homme."
+    accroche="Six cycles, quatre générations. De la Terreur aux dernières années du Second Empire, l'histoire de France traversée à hauteur d'homme."
   />
 
   <section class="intro">
@@ -97,11 +51,12 @@ const cycles = [
     <h2>Commencer la lecture</h2>
     <p>
       Le Tome I, <em>La Ruelle</em>, ouvre le premier cycle. Il couvre les années 1793 à 1804
-      et est paru aux Éditions du Quai en juin 2026.
+      et est paru aux Éditions du Quai en juin 2026. Les tomes II, <em>Le Maréchal</em>, et III,
+      <em>Le Zénith</em>, sont parus depuis — le premier cycle est disponible aux trois quarts.
     </p>
     <div class="cta-bloc">
-      <a href="https://www.amazon.fr/dp/B0HDJLF3X2" class="btn" target="_blank" rel="noopener">Commander le Tome I</a>
-      <a href="/tomes/la-ruelle" class="btn secondary">Découvrir le Tome I</a>
+      <a href={ACHAT.I.broche} class="btn" target="_blank" rel="noopener">Commander le Tome I</a>
+      <a href="/tomes" class="btn secondary">Voir tous les tomes</a>
     </div>
   </section>
 </BaseLayout>

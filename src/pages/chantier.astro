@@ -2,64 +2,49 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/PageHeader.astro";
 
-// Source canonique du chantier — même données qu'en accueil
-const cycles = [
-  {
-    num: "I", titre: "L'Ascension",
-    periode: "1793 — 1811 · de la Terreur au baptême du Roi de Rome",
-    tomes: [
-      { roman: "I",   label: "La Ruelle — disponible",        statut: "disponible" },
-      { roman: "II",  label: "Le Maréchal — disponible",      statut: "disponible" },
-      { roman: "III", label: "en retouches",                statut: "retouches" },
-      { roman: "IV",  label: "en retouches",                statut: "retouches" },
-    ],
-  },
-  {
-    num: "II", titre: "La Chute",
-    periode: "1811 — 1815 · de la campagne de Russie aux Cent-Jours",
-    tomes: [
-      { roman: "V",   label: "en retouches", statut: "retouches" },
-      { roman: "VI",  label: "en retouches", statut: "retouches" },
-      { roman: "VII", label: "en retouches", statut: "retouches" },
-    ],
-  },
-  {
-    num: "III", titre: "La Restauration",
-    periode: "1815 — 1848 · du retour des Bourbons à la chute de Louis-Philippe",
-    tomes: [
-      { roman: "VIII", label: "en retouches", statut: "retouches" },
-      { roman: "IX",   label: "à écrire",     statut: "a-ecrire" },
-      { roman: "X",    label: "à écrire",     statut: "a-ecrire" },
-    ],
-  },
-  {
-    num: "IV", titre: "Le Second Empire",
-    periode: "1848 — 1870 · de la Deuxième République à Sedan",
-    tomes: [
-      { roman: "XI",  label: "à écrire", statut: "a-ecrire" },
-      { roman: "XII", label: "à écrire", statut: "a-ecrire" },
-    ],
-  },
+// Source canonique du chantier : src/data/saga.js (partagée avec /, /saga et /tomes)
+import { CYCLES, TOMES, statutLabel, DATE_MAJ, CHAPITRES_ECRITS } from "../data/saga.js";
+
+// Les pastilles de chaque cycle sont déduites de la liste des tomes.
+const cycles = CYCLES.map((c) => ({
+  ...c,
+  pastilles: TOMES.filter((t) => t.cycle === c.titre).map((t) => ({
+    roman: t.num,
+    label: t.statut === "a-ecrire" ? statutLabel[t.statut]
+         : `${t.titre} — ${statutLabel[t.statut].toLowerCase()}`,
+    statut: t.statut,
+  })),
+}));
+
+const compte = (...statuts) => TOMES.filter((t) => statuts.includes(t.statut)).length;
+const stats = [
+  { num: compte("disponible"), label: "parus" },
+  { num: compte("a-paraitre"), label: "à paraître" },
+  { num: compte("retouches"), label: "en retouches" },
+  { num: CHAPITRES_ECRITS, label: "chapitres écrits" },
 ];
 
-const dateMaj = "7 août 2026";
+const dateMaj = DATE_MAJ;
 ---
 
 <BaseLayout
   title="Le chantier — Le Prix du Nom"
-  description="État d'avancement de la saga Le Prix du Nom : douze tomes en quatre cycles. Mise à jour publique du chantier d'écriture."
+  description="État d'avancement de la saga Le Prix du Nom : six cycles, onze tomes écrits, le douzième en cours. Mise à jour publique du chantier d'écriture."
   current="/chantier"
 >
   <PageHeader
     surtitre="État d'avancement"
     titre="Le chantier"
-    accroche="Douze tomes prévus. Les deux premiers sont parus, six sont en retouches. Quatre encore à venir. Mise à jour publique, en toute transparence."
+    accroche="Six cycles. Onze tomes écrits, trois parus, le douzième s'écrit — et deux cycles restent à mener jusqu'au bout. Mise à jour publique, en toute transparence."
   />
 
   <section class="stats">
-    <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">parus</div></div>
-    <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">en retouches</div></div>
-    <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">à écrire</div></div>
+    {stats.map((s) => (
+      <div class="stat-card">
+        <div class="stat-num">{s.num}</div>
+        <div class="stat-label">{s.label}</div>
+      </div>
+    ))}
   </section>
 
   <section class="chantier-detail">
@@ -71,16 +56,23 @@ const dateMaj = "7 août 2026";
             <div class="cycle-num">{cycle.num}</div>
             <div class="cycle-title">
               <h2>{cycle.titre}</h2>
-              <div class="periode">{cycle.periode}</div>
+              <div class="periode">{cycle.periode} · {cycle.accroche.toLowerCase()}</div>
             </div>
+            <div class="cycle-count">{cycle.count}</div>
           </div>
           <div class="tomes-pastilles">
-            {cycle.tomes.map((t) => (
+            {cycle.pastilles.map((t) => (
               <span class={`tome-pastille ${t.statut}`}>
                 <span class="dot"></span>
                 <span class="roman">{t.roman}</span> {t.label}
               </span>
             ))}
+            {cycle.reste && (
+              <span class="tome-pastille a-ecrire">
+                <span class="dot"></span>
+                {cycle.reste}
+              </span>
+            )}
           </div>
         </div>
       ))}
@@ -88,8 +80,9 @@ const dateMaj = "7 août 2026";
 
     <div class="legende">
       <span><span class="dot" style="background: var(--sang); box-shadow: 0 0 8px var(--sang);"></span>Disponible</span>
+      <span><span class="dot" style="background: #8BB58B;"></span>À paraître</span>
       <span><span class="dot" style="background: var(--or);"></span>En retouches</span>
-      <span><span class="dot" style="background: rgba(168, 139, 92, 0.4);"></span>À écrire</span>
+      <span><span class="dot" style="background: rgba(168, 139, 92, 0.4);"></span>En cours d'écriture</span>
     </div>
   </section>
 </BaseLayout>
@@ -100,7 +93,7 @@ const dateMaj = "7 août 2026";
     max-width: 900px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
   }
   .stat-card {
@@ -146,10 +139,19 @@ const dateMaj = "7 août 2026";
   .cycle-block:last-child { border-bottom: none; }
   .cycle-header {
     display: grid;
-    grid-template-columns: 80px 1fr;
+    grid-template-columns: 80px 1fr auto;
     gap: 2rem;
     align-items: baseline;
     margin-bottom: 1.5rem;
+  }
+  .cycle-count {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
   .cycle-num {
     font-family: 'Cormorant Garamond', serif;
@@ -208,9 +210,8 @@ const dateMaj = "7 août 2026";
     box-shadow: 0 0 8px var(--sang);
   }
   .tome-pastille.disponible .roman { color: var(--sang); }
-  .tome-pastille.imprime { border-color: #8BB58B; }
-  .tome-pastille.imprime .dot { background: #8BB58B; }
-  .tome-pastille.finalise .dot { background: #8BB58B; }
+  .tome-pastille.a-paraitre { border-color: #8BB58B; }
+  .tome-pastille.a-paraitre .dot { background: #8BB58B; }
   .tome-pastille.retouches .dot { background: var(--or); }
   .tome-pastille.a-ecrire { opacity: 0.6; }
   .tome-pastille.a-ecrire .dot { background: rgba(168, 139, 92, 0.4); }
@@ -240,6 +241,7 @@ const dateMaj = "7 août 2026";
   @media (max-width: 860px) {
     .stats { grid-template-columns: repeat(2, 1fr); }
     .cycle-header { grid-template-columns: 60px 1fr; gap: 1rem; }
+    .cycle-count { grid-column: 1 / -1; padding-left: 70px; }
     .cycle-num { font-size: 2.2rem; }
     .cycle-title h2 { font-size: 1.4rem; }
     .tomes-pastilles { padding-left: 0; }
