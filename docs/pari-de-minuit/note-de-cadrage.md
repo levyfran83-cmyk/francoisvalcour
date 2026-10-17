@@ -246,17 +246,18 @@ change, c'est le tempo et la lumière.
 - **Philippe et Isabelle**, et leur petite fille.
 - **L'abbé Bernardin**, **Baptiste**, **M. Kowalski**.
 
-### À alléger ⚖️
+### Les anciens (décidé le 17 octobre 2026)
 
-- **Charles et Amélie, Madeleine Perier** : trop de nonagénaires debout. Proposition :
-  ils sont évoqués, ou morts, et leurs branches sont portées par Gabriel et Albert.
+- **Seules Aurélie et Éléonore sont vivantes** parmi les anciens. Charles, Amélie et
+  Madeleine Perier sont morts ; leurs branches sont portées par leurs enfants et par les
+  cousins de Julian. Le détail est dans `arbre-genealogique.md`.
 
 ### À créer ⚖️
 
 - **L'ancienne fiancée de Venise** : sans nom dans le jeu de rôle.
 - **Étienne de Villiers** : antagoniste possible de la Partie III.
 
-### Trois problèmes repérés dans le dossier
+### Problèmes repérés dans le dossier
 
 1. **Le nom de famille de Philippe.** Le dossier appelle sa fille « Madeleine de
    Saint-Aubin ». Or Saint-Aubin est le nom du **mari défunt** d'Hélène ; son frère porte
@@ -267,6 +268,11 @@ change, c'est le tempo et la lumière.
    lecteur. Proposition : garder la plaisanterie avec **deux** Madeleine en scène (la sœur
    et la petite nièce) ⚖️.
 3. **Le père, Jean.** Julian porte le titre ducal, donc Jean est mort. À confirmer ⚖️.
+4. **L'abbé Bernardin.** Dans la saga, Bernardin est le métayer qui a dénoncé le père de
+   Sarah en 1793. Le chapelain de la romance doit changer de nom ⚖️.
+5. **Broglie et Perier.** Le jeu de rôle marie la famille aux vrais Broglie et aux vrais
+   Perier, contre la règle de la saga (« les personnages historiques restent à leur
+   place »). Voir `arbre-genealogique.md`, §5.2 ⚖️.
 
 ---
 
@@ -322,12 +328,15 @@ l'admiration systématique d'Hélène ; les tirades.
 8. Le moment noir : Hélène part-elle ?
 9. La forme du dénouement (piste : le nom au bas d'une page).
 10. L'épilogue : un baptême, ou non.
-11. Le sort de Charles, Amélie et Madeleine Perier.
+11. ~~Le sort de Charles, Amélie et Madeleine Perier.~~ **Décidé** : morts en 1895 ;
+    seules Aurélie et Éléonore restent.
 12. Le nom de jeune fille d'Hélène.
 13. Deux ou trois Madeleine.
 14. La place de Villiers.
 15. **Le calendrier d'écriture** : avant, pendant ou après la fin de la saga (tomes XII
     à XIV encore à écrire).
+16. Le nouveau nom de l'abbé (aujourd'hui Bernardin).
+17. Broglie et Perier : branches inventées, et nouveau prénom pour le cousin « Albert ».
 
 ---
 
