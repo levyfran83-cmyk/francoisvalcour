@@ -1,0 +1,391 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { TOMES } from "../../data/saga.js";
+
+// Le tome IV paraît en ebook Kindle en février 2027 : pas d'ASIN, pas de prix, pas de
+// lien d'achat tant que la fiche Amazon n'existe pas. Le JSON-LD reste donc un `Book`
+// sans `Offer` ni ISBN (l'ebook n'en consomme aucun) ; `datePublished` et l'offre
+// viendront avec la mise en ligne. Date et format de parution : src/data/saga.js.
+const tome = TOMES.find((t) => t.num === "IV");
+
+const jsonld = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  name: "Le Prix du Nom, Tome IV : Le Roi de Rome",
+  author: { "@type": "Person", name: "François Valcour" },
+  inLanguage: "fr",
+  bookFormat: "https://schema.org/EBook",
+  publisher: { "@type": "Organization", name: "Éditions du Quai" },
+  image: "https://francoisvalcour.fr/assets/cover_tome4.jpg",
+  url: "https://francoisvalcour.fr/tomes/le-roi-de-rome/",
+  isPartOf: { "@type": "BookSeries", name: "Le Prix du Nom" },
+  position: 4,
+};
+---
+
+<BaseLayout
+  title="Tome IV — Le Roi de Rome | Le Prix du Nom"
+  description="Le Prix du Nom, Tome IV : Le Roi de Rome. Juillet 1809 - décembre 1811, du retour de Wagram à la veille de la Russie. À paraître en ebook Kindle en février 2027 aux Éditions du Quai."
+  current="/tomes"
+  image="/assets/cover_tome4.jpg"
+  jsonld={jsonld}
+>
+  <!-- ===== HERO TOME IV ===== -->
+  <header class="tome-hero">
+    <div class="tome-hero-inner">
+      <div class="tome-hero-cover">
+        <div class="badge-parution">À paraître · {tome.parution}</div>
+        <img src="/assets/cover_tome4.jpg" alt="Couverture Le Prix du Nom — Tome IV, Le Roi de Rome" width="900" height="1275" fetchpriority="high" loading="eager" decoding="async" />
+      </div>
+      <div class="tome-hero-text">
+        <div class="surtitre">Tome IV · Cycle de l'Ascension</div>
+        <h1>Le Roi de Rome</h1>
+        <div class="sous-titre">Juillet 1809 — décembre 1811 · Du retour de Wagram à la veille de la Russie</div>
+        <blockquote class="citation">
+          « C'est un fils ; l'Empire a son héritier ; le compte vient de commencer. »
+        </blockquote>
+        <div class="cta-bloc">
+          <span class="btn bientot" aria-disabled="true">Bientôt sur Amazon · {tome.format}</span>
+          <a href="/newsletter" class="btn secondary">Être prévenu de la parution</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== RÉSUMÉ ===== -->
+  <section class="resume">
+    <div class="resume-inner">
+      <h2>Le récit</h2>
+      <p class="lead">
+        <strong>1809.</strong> Julian Moreau rentre d'Autriche avec ce que Wagram lui a
+        appris : l'Empire ne tiendra plusieurs guerres à la fois que si ses fusils et ses
+        affûts se fabriquent partout de la même manière. Il porte cette doctrine à
+        Fontainebleau, en obtient le décret, envoie Sévrac à Saint-Étienne — et découvre
+        qu'une norme ne s'impose pas aux ateliers : elle se négocie avec les mains qui
+        fabriquent.
+      </p>
+      <p>
+        Pendant ce temps, l'Empereur répudie Joséphine pour épouser une archiduchesse. Sarah,
+        restée fidèle à l'ancienne Impératrice, se trouve placée au plus près de la nouvelle
+        sans rien lui demander ; Louise Lannes, veuve du maréchal, devient sa dame d'honneur.
+        Dans la nuit du 19 au 20 mars 1811, le canon annonce à Paris que l'Empire a un fils.
+        Le jour du baptême, à Notre-Dame, Sarah comprend que sa place auprès de Marie-Louise
+        se lit désormais comme une position politique.
+      </p>
+      <p>
+        Rue du Bac, la maison s'élargit : Louise et ses fils s'installent dans l'aile droite,
+        près de cinq mille hectares s'ajoutent au domaine, Hottinguer bâtit pour trente ans
+        une assise que les régimes ne pourront pas atteindre, et dans la chapelle ducale de
+        La Grange un compagnon d'armes de Julian épouse une dame de l'entourage de la
+        nouvelle Impératrice. Henri apprend à lire ce qu'il recevra.
+      </p>
+      <p>
+        Puis, en décembre 1811, Julian remet au major général un mémoire sur une campagne
+        que personne ne nomme encore : des hommes, des chevaux, des dépôts, des distances.
+        Caulaincourt l'a prévenu : là-bas, on ne cherchera pas la bataille, on laissera
+        l'espace faire le travail.
+      </p>
+      <p class="chute">
+        L'Empire a son héritier. Il lui reste à apprendre ce qu'il lui coûtera.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== INFOS PRATIQUES ===== -->
+  <section class="infos">
+    <div class="infos-grid">
+      <div class="info-card">
+        <div class="info-label">Éditeur</div>
+        <div class="info-value">Éditions du Quai</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Parution</div>
+        <div class="info-value">Février 2027</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Format</div>
+        <div class="info-value">{tome.format} · 22 chapitres</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Période couverte</div>
+        <div class="info-value">Juillet 1809 — décembre 1811</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Cycle</div>
+        <div class="info-value">L'Ascension</div>
+      </div>
+      <div class="info-card">
+        <div class="info-label">Chapitres</div>
+        <div class="info-value">85 à 106</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTEXTE HISTORIQUE ===== -->
+  <section class="contexte">
+    <div class="contexte-inner">
+      <div class="surtitre-section">Repères</div>
+      <h2>Le contexte historique</h2>
+      <span class="filet"></span>
+      <p>
+        Le Tome IV s'ouvre au retour de la campagne d'Autriche, après Wagram, en juillet 1809,
+        et suit l'Empire jusqu'à la fin de 1811. Le divorce de Joséphine est prononcé en
+        décembre 1809 ; Napoléon épouse l'archiduchesse Marie-Louise en avril 1810 ; le
+        20 mars 1811, cent un coups de canon annoncent à Paris la naissance du Roi de Rome,
+        baptisé à Notre-Dame le 9 juin. Pendant ce temps, la guerre d'Espagne continue, et
+        les derniers mois de 1811 voient se préparer, sans qu'on la nomme encore, la campagne
+        de Russie.
+      </p>
+      <p>
+        Comme pour les tomes précédents, les dates, les décrets et les lieux sont documentés.
+        Les figures réelles — Napoléon, Marie-Louise, Talleyrand, Caulaincourt, Louise Lannes
+        duchesse de Montebello — n'apparaissent que là où les archives le permettent. Les
+        Moreau, les Vernay, les Mareuil vivent dans l'interstice, à hauteur d'homme.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CTA FINAL ===== -->
+  <section class="cta-final">
+    <h2>Le Tome IV paraît en février 2027</h2>
+    <p>
+      <em>Le Roi de Rome</em> paraîtra en ebook Kindle. Inscrivez-vous à la Lettre de
+      l'écritoire pour être prévenu le jour de la mise en ligne ; les trois premiers tomes,
+      eux, sont disponibles dès maintenant.
+    </p>
+    <div class="cta-final-bloc">
+      <a href="/newsletter" class="btn">S'inscrire à la lettre</a>
+      <a href="/tomes" class="btn secondary">Les tomes parus</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tome-hero {
+    padding: 5rem 2rem;
+    background: linear-gradient(180deg, var(--ivoire) 0%, var(--ivoire-fonce) 100%);
+  }
+  .tome-hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .tome-hero-cover {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .tome-hero-cover img {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--or);
+    box-shadow: 0 30px 60px -20px rgba(28, 28, 26, 0.5);
+    transform: rotate(-2deg);
+  }
+  .badge-parution {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: #3F6B3A;
+    color: var(--ivoire);
+    padding: 0.7rem 1.4rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transform: rotate(8deg);
+    box-shadow: 0 6px 14px -4px rgba(0,0,0,0.3);
+    z-index: 2;
+  }
+  .surtitre {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .tome-hero-text h1 {
+    font-size: 4.5rem;
+    line-height: 1.05;
+    font-weight: 500;
+    color: var(--encre);
+    margin-bottom: 0.5rem;
+  }
+  .sous-titre {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--sang);
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+  }
+  .citation {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--encre-doux);
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--or);
+  }
+  .cta-bloc { display: flex; gap: 1rem; flex-wrap: wrap; }
+  /* Bouton inerte tant qu'il n'y a pas de fiche Amazon : ni lien, ni survol. */
+  .btn.bientot,
+  .btn.bientot:hover {
+    background: transparent;
+    color: var(--encre-doux);
+    border-color: var(--filet);
+    cursor: default;
+    opacity: 0.75;
+  }
+
+  .resume {
+    padding: 5rem 2rem;
+  }
+  .resume-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .resume h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 500;
+  }
+  .resume p {
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: var(--encre-doux);
+    margin-bottom: 1.5rem;
+  }
+  .resume .lead {
+    font-size: 1.25rem;
+    color: var(--encre);
+  }
+  .resume .lead strong { color: var(--sang); }
+  .resume .chute {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--sang);
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  .infos {
+    padding: 4rem 2rem;
+    background: var(--ivoire-fonce);
+  }
+  .infos-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+  .info-card {
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid var(--filet);
+    background: var(--ivoire);
+  }
+  .info-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  .info-value {
+    font-size: 1.1rem;
+    color: var(--encre);
+  }
+
+  .contexte {
+    padding: 5rem 2rem;
+  }
+  .contexte-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .surtitre-section {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--or);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  .contexte h2 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  .filet {
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: var(--or);
+    margin: 1.5rem auto 2.5rem;
+  }
+  .contexte p {
+    text-align: left;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--encre-doux);
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-final {
+    background: var(--encre);
+    color: var(--ivoire);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+  .cta-final h2 {
+    color: var(--ivoire);
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+  .cta-final p {
+    color: rgba(245, 241, 232, 0.75);
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+  .cta-final-bloc {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-final .btn { background: var(--or); border-color: var(--or); color: var(--encre); }
+  .cta-final .btn:hover { background: var(--sang); border-color: var(--sang); color: var(--ivoire); }
+  .cta-final .btn.secondary { background: transparent; color: var(--ivoire); border-color: var(--ivoire); }
+  .cta-final .btn.secondary:hover { background: var(--ivoire); color: var(--encre); }
+
+  @media (max-width: 860px) {
+    .tome-hero-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      text-align: center;
+    }
+    .tome-hero-cover img { max-width: 280px; }
+    .citation { text-align: left; }
+    .tome-hero-text h1 { font-size: 3rem; }
+    .sous-titre { font-size: 1.1rem; }
+    .infos-grid { grid-template-columns: 1fr; }
+    .cta-bloc { justify-content: center; }
+  }
+</style>

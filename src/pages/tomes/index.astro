@@ -43,6 +43,12 @@ const tomes = TOMES.map((t) => ({ ...t, achat: t.achat ? ACHAT[t.achat] : null }
                   <a href={t.achat.kindle} class="tome-achat tome-achat-kindle" target="_blank" rel="noopener">Kindle · {t.achat.prixKindle}</a>
                 </>
               )}
+              {!t.achat && t.parution && (
+                <>
+                  <span class="tome-parution">{t.format} · {t.parution}</span>
+                  <span class="tome-achat tome-achat-bientot" aria-disabled="true">Bientôt sur Amazon</span>
+                </>
+              )}
               {t.href && <a href={t.href} class="tome-link">En savoir plus →</a>}
             </div>
           </div>
@@ -177,6 +183,21 @@ const tomes = TOMES.map((t) => ({ ...t, achat: t.achat ? ACHAT[t.achat] : null }
     color: var(--sang);
   }
   .tome-achat-kindle:hover { background: var(--sang); color: var(--ivoire); }
+  /* Tome à paraître : bouton inerte tant qu'il n'y a pas de fiche Amazon. */
+  .tome-achat-bientot,
+  .tome-achat-bientot:hover {
+    background: transparent;
+    color: var(--encre-doux);
+    border-color: var(--filet);
+    cursor: default;
+    opacity: 0.75;
+  }
+  .tome-parution {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: #3F6B3A;
+    font-size: 1rem;
+  }
   .tome-link {
     font-style: italic;
     font-size: 0.95rem;

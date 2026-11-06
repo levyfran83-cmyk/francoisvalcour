@@ -14,6 +14,12 @@
 //     Les bornes de chaque cycle sont désormais l'union exacte des bornes des tomes
 //     qu'il contient — aucun chiffre affiché n'en contredit un autre.
 //
+// Mise à jour du 6 novembre 2026 :
+//   – Le tome IV, « Le Roi de Rome », paraît en ebook Kindle en février 2027 (pas de
+//     broché). Deux champs facultatifs pour un tome à paraître : `parution` (quand) et
+//     `format` (sous quelle forme), lus par l'accueil, /tomes et les pastilles du
+//     chantier. L'ASIN, le prix et le bouton d'achat viendront avec la mise en ligne.
+//
 // ⚠️ Les titres des cycles IV, V et VI (« L'Établissement », « La Relève »,
 //    « Le Nom hérité ») sont des propositions non arbitrées par François.
 
@@ -95,8 +101,9 @@ export const CYCLES = [
   },
 ];
 
-// Statuts : "disponible" (paru, en vente) · "a-paraitre" (achevé, mise en vente proche)
-//           "retouches" (écrit, en révision) · "a-ecrire" (en cours d'écriture)
+// Statuts : "disponible" (paru, en vente) · "a-paraitre" (écrit, parution annoncée :
+//           champs `parution` et `format`) · "retouches" (écrit, en révision) ·
+//           "a-ecrire" (en cours d'écriture)
 export const TOMES = [
   {
     num: "I", titre: "La Ruelle", periode: "1793 — 1804", cycle: "L'Ascension",
@@ -115,7 +122,8 @@ export const TOMES = [
   },
   {
     num: "IV", titre: "Le Roi de Rome", periode: "1809 — 1811", cycle: "L'Ascension",
-    statut: "a-paraitre", href: null, achat: null, couverture: "/assets/cover_tome4.jpg", dim: [900, 1275],
+    statut: "a-paraitre", parution: "février 2027", format: "Ebook Kindle",
+    href: "/tomes/le-roi-de-rome", achat: null, couverture: "/assets/cover_tome4.jpg", dim: [900, 1275],
     resume: "Le divorce, le mariage autrichien, la naissance de l'héritier. La cour se refait, les places changent de mains, et la fortune des Moreau se met à l'abri.",
   },
   {
@@ -181,5 +189,5 @@ const CHIFFRES = ["zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept
 export const enLettres = (n) => CHIFFRES[n] ?? String(n);
 
 // État du chantier, à la main — c'est le seul chiffre que le site ne peut pas déduire.
-export const DATE_MAJ = "20 août 2026";
+export const DATE_MAJ = "6 novembre 2026";
 export const CHAPITRES_ECRITS = 521;

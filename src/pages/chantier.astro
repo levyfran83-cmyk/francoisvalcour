@@ -11,7 +11,7 @@ const cycles = CYCLES.map((c) => ({
   pastilles: TOMES.filter((t) => t.cycle === c.titre).map((t) => ({
     roman: t.num,
     label: t.statut === "a-ecrire" ? statutLabel[t.statut]
-         : `${t.titre} — ${statutLabel[t.statut].toLowerCase()}`,
+         : `${t.titre} — ${statutLabel[t.statut].toLowerCase()}${t.parution ? ` en ${t.parution}` : ""}`,
     statut: t.statut,
   })),
 }));
@@ -35,7 +35,7 @@ const dateMaj = DATE_MAJ;
   <PageHeader
     surtitre="État d'avancement"
     titre="Le chantier"
-    accroche="Six cycles. Onze tomes écrits, trois parus, le douzième s'écrit — et deux cycles restent à mener jusqu'au bout. Mise à jour publique, en toute transparence."
+    accroche="Six cycles. Onze tomes écrits, trois parus, le quatrième à paraître en février 2027, le douzième s'écrit — et deux cycles restent à mener jusqu'au bout. Mise à jour publique, en toute transparence."
   />
 
   <section class="stats">

@@ -39,10 +39,13 @@ const cycles = CYCLES.map((c) => ({
   pastilles: TOMES.filter((t) => t.cycle === c.titre).map((t) => ({
     roman: t.num,
     label: t.statut === "a-ecrire" ? statutLabel[t.statut]
-         : `${t.titre} — ${statutLabel[t.statut].toLowerCase()}`,
+         : `${t.titre} — ${statutLabel[t.statut].toLowerCase()}${t.parution ? ` en ${t.parution}` : ""}`,
     statut: t.statut,
   })),
 }));
+
+// Le tome à paraître : sa date et son format viennent de saga.js, pas d'ici.
+const tome4 = TOMES.find((t) => t.num === "IV");
 
 // ============================================================
 // 3 derniers articles du Carnet (depuis src/content/carnet/)
@@ -207,17 +210,21 @@ const articles = tousLesArticles
   <!-- ===================== TOME IV — À PARAÎTRE ===================== -->
   <section id="tome4" class="tome-a-paraitre">
     <div class="a-paraitre-inner">
-      <img src="/assets/cover_tome4.jpg" alt="Couverture Tome IV — Le Roi de Rome" loading="lazy" />
+      <img src="/assets/cover_tome4.jpg" alt="Couverture Tome IV — Le Roi de Rome" width="900" height="1275" loading="lazy" />
       <div>
-        <div class="a-paraitre-surtitre">Prochainement</div>
+        <div class="a-paraitre-surtitre">À paraître · {tome4.parution}</div>
         <h3>Tome IV — <em>Le Roi de Rome</em></h3>
-        <div class="sous-titre">1809 — 1811</div>
+        <div class="sous-titre">{tome4.periode} · {tome4.format}</div>
         <p>
           Le divorce, le mariage autrichien, la naissance de l'héritier. La cour se refait, les
           places changent de mains, et la fortune des Moreau se met à l'abri. Le volume est
-          achevé ; la date de mise en vente sera annoncée dans la lettre de l'écritoire.
+          écrit : il paraîtra en février 2027, en ebook Kindle. Le lien et la date exacte
+          seront annoncés ici et dans la Lettre de l'écritoire.
         </p>
-        <a href="#newsletter" class="btn secondary">Être prévenu de la parution</a>
+        <div class="hero-cta">
+          <a href="/tomes/le-roi-de-rome" class="btn">Découvrir le Tome IV</a>
+          <a href="#newsletter" class="btn secondary">Être prévenu de la parution</a>
+        </div>
       </div>
     </div>
   </section>
@@ -227,9 +234,10 @@ const articles = tousLesArticles
     <div class="chantier-wrapper">
       <SectionTitle surtitre="État d'avancement" titre="Le chantier" />
       <p class="section-intro">
-        Six cycles. Onze tomes sont écrits — trois sont parus, le quatrième est achevé, les
-        sept suivants sont en retouches. Le douzième s'écrit en ce moment, et deux cycles
-        restent à mener pour conduire la maison Moreau jusqu'à son dernier été.
+        Six cycles. Onze tomes sont écrits — trois sont parus, le quatrième paraît en ebook
+        en février 2027, les sept suivants sont en retouches. Le douzième s'écrit en ce
+        moment, et deux cycles restent à mener pour conduire la maison Moreau jusqu'à son
+        dernier été.
       </p>
 
       <div class="chantier-list">
@@ -569,9 +577,8 @@ const articles = tousLesArticles
     background: var(--sang);
     box-shadow: 0 0 8px var(--sang);
   }
-  .tome-pastille.imprime { border-color: #8BB58B; }
-  .tome-pastille.imprime .dot { background: #8BB58B; }
-  .tome-pastille.finalise .dot { background: #8BB58B; }
+  .tome-pastille.a-paraitre { border-color: #8BB58B; }
+  .tome-pastille.a-paraitre .dot { background: #8BB58B; }
   .tome-pastille.retouches .dot { background: var(--or); }
   .tome-pastille.a-ecrire { opacity: 0.55; }
   .tome-pastille.a-ecrire .dot { background: rgba(168, 139, 92, 0.4); }
