@@ -29,7 +29,6 @@ reste à le relire d'un bout à l'autre, à retoucher ce qui ne tient pas, à v�
 date, un nom, une distance. Je préfère prendre l'hiver que livrer un livre auquel il
 manque une passe.
 
-D'ici là, *Le Roi de Rome* a [sa page sur ce site](/tomes/le-roi-de-rome), avec son
-résumé. Les tomes V à XI sont écrits et en retouches ; le douzième s'écrit.
+D'ici là, *Le Roi de Rome* a [sa page sur ce site](/tomes/le-roi-de-rome), avec son résumé.
 
 ✦ ✦ ✦
